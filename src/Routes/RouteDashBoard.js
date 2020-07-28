@@ -2,16 +2,16 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import Estabelecimentos from '../pages/Estabelecimentos/Estabelecimentos'
-import ListaEstabelecimentos from '../pages/ListaEstabelecimentos/ListaEstabelecimentos'
 import MyHeader from '../componentes/MyHeader'
 import MenuButton from '../componentes/MenuButton'
 import MybackButton from '../componentes/MybackButton'
 import { DrawerActions } from '@react-navigation/native'
-import RouteButton from  '../Routes/RouteBotton'
+import RouteBotton from '../Routes/RouteBotton'
+import DashBoard from '../pages/DashBoard.js/Dashboard'
 
 const Stack = createStackNavigator();
 
-function RouteApp() {
+function RouteDashBoard() {
     return (
         <Stack.Navigator
             initialRouteName={'Estabelecimentos'}
@@ -33,22 +33,13 @@ function RouteApp() {
             }}
         >
             <Stack.Screen
-                name='Estabelecimentos'
-                component={Estabelecimentos}
+                name='DashBoard'
+                component={DashBoard}
                 options={{ headerStyle:{ backgroundColor: '#B32728' } }}
             />
-            <Stack.Screen
-                name='ListaEstabelecimentos'
-                component={ListaEstabelecimentos}
-                options={{ headerStyle:{ backgroundColor: '#B32728' } }}
-            />
-            <Stack.Screen
-                name='RouteButton'
-                component={RouteButton}
-                options={{ headerStyle:{ backgroundColor: '#B32728' } }}
-            />
+            
         </Stack.Navigator>
     )
 }
 
-export default RouteApp
+export default RouteDashBoard

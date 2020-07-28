@@ -7,6 +7,11 @@ export default function ListaEstabelecimentos({ navigation }) {
         <View>
             <TouchableOpacity onPress={() => navigation.navigate('RouteButton')}>
                 <Text>João e Companhia!</Text>
+                <Text>João e Companhia!</Text>
+                <Text>João e Companhia!</Text>
+                <Text>João e Companhia!</Text>
+                <Text>João e Companhia!</Text>
+                <Text>João e Companhia!</Text>
             </TouchableOpacity>
         </View>
     )

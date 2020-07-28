@@ -7,6 +7,10 @@ export default function Estabelecimentos({ navigation }) {
         <View>
             <TouchableOpacity onPress={() => navigation.navigate('ListaEstabelecimentos')}>
                 <Text>Churascaria</Text>
+                <Text>Mercantil</Text>
+                <Text>Pizzaria</Text>
+                <Text>Farmácia</Text>
+                <Text>PetShop</Text>
             </TouchableOpacity>
         </View>
     )
