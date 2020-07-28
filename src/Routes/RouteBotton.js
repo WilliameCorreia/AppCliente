@@ -1,17 +1,17 @@
 import React from 'react'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import RouteDrawer from './RouteDrawer'
+import routeApp from './routeApp'
 
 const Tab = createBottomTabNavigator(); 
 
 
-export default function RouteBottom() {
+export default function RouteBotton() {
     return (
         <Tab.Navigator>
             <Tab.Screen
-                name='RouteDrawer'
-                component={RouteDrawer}
+                name='routeApp'
+                component={routeApp}
             />
         </Tab.Navigator>
     )

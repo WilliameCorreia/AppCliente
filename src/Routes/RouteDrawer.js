@@ -1,6 +1,6 @@
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import RouteApp from './routeApp'
+import RouteBotton from './RouteBotton'
 
 const Drawer = createDrawerNavigator();
 
@@ -8,10 +8,9 @@ export default function RouteDrawer() {
     return (
         <Drawer.Navigator>
             <Drawer.Screen
-                name='RouteApp'
-                component={RouteApp}
+                name='RouteBotton'
+                component={RouteBotton}
             />
         </Drawer.Navigator>
     )
 }
-
