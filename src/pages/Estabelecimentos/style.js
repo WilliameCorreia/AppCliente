@@ -1,20 +1,25 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
+        padding: 10,
+        backgroundColor: '#fff',
     },
-    cardBtn:{
-        width: (Dimensions.get('window').width / 10 * 9),
-        backgroundColor: 'red',
-        alignItems:'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        margin: 10,
-        height: (Dimensions.get('window').height / 6),
-        borderRadius: 10,
-    }
-})
+    cardBtn: {
+        width: (Dimensions.get('window').width),
+        height: Dimensions.get('window').height / 5,
+        marginVertical: 10,
+    },
+    img: {
+        width: '95%',
+        height: '100%',
+        resizeMode: 'stretch',
+    },
+    label: {
+
+    },
+});
 
 export default styles;
