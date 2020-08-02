@@ -1,16 +1,17 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+/* eslint-disable prettier/prettier */
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 
 export default function Dashboard() {
-    return (
-        <View style={styles.container}>
-            <Text>asdfasdfasdfasdfasdf</Text>
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      <Text>asdfasdfasdfasdfasdf</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1
-    }
-})
+  container: {
+    flex: 1,
+  },
+});

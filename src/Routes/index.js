@@ -1,13 +1,10 @@
-import React from 'react'
+/* eslint-disable prettier/prettier */
+import React from 'react';
 
-import RouteDrawer from './RouteDrawer'
+import RouteDrawer from './RouteDrawer';
 
 const Routes = () => {
+  return <RouteDrawer />;
+};
 
-    return(
-       <RouteDrawer/>
-    )
-
-}
-
-export default Routes
+export default Routes;

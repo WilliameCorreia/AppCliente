@@ -1,19 +1,28 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+/* eslint-disable prettier/prettier */
+import React from 'react';
+import { Text, View } from 'react-native';
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import styles from './style';
 
 export default function Estabelecimentos({ navigation }) {
-    return (
-        <View>
-            <TouchableOpacity onPress={() => navigation.navigate('ListaEstabelecimentos')}>
-                <Text>Churascaria</Text>
-                <Text>Mercantil</Text>
-                <Text>Pizzaria</Text>
-                <Text>Farmácia</Text>
-                <Text>PetShop</Text>
-            </TouchableOpacity>
-        </View>
-    )
-}
 
-const styles = StyleSheet.create({})
+  return (
+    <ScrollView style={styles.container}>
+      <TouchableOpacity style={styles.cardBtn}>
+        <Text>Churascaria</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.cardBtn}>
+        <Text>Churascaria</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.cardBtn}>
+        <Text>Churascaria</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.cardBtn}>
+        <Text>Churascaria</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.cardBtn}>
+        <Text>Churascaria</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+}
