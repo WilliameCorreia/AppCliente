@@ -1,25 +1,23 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import MySearch from '../../componentes/MySearchBar';
-import ListEstabelecimentos from '../../componentes/ListEstabelecimentos'
+import CardEstabelecimentos from '../../componentes/CardEstabelecimentos'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function ListaEstabelecimentos({navigation}) {
+export default function ListaEstabelecimentos({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <MySearch/>
-      <ListEstabelecimentos/>
+      <MySearch />
+      <CardEstabelecimentos navigation={navigation} />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   }
 });
