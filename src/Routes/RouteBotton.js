@@ -15,23 +15,22 @@ export default function RouteBotton() {
             tabBarOptions={{
                 tabStyle: { backgroundColor: '#B32728' },
                 showLabel: false,
-
             }}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, size }) => {
 
                     switch (route.name) {
                         case 'Inicio': return <Image source={require('../Assets/images/home.png')}
-                            style={{ width: 40, height: 40 }} />
+                            style={{ width: 40, height: 40, backgroundColor: '#fff', borderRadius: 30, tintColor: color }} />
                             break;
-                        case 'Estabelecimentos': return <Image source={require('../Assets/images/estabelecimentos.png')}
-                            style={{ width: 40, height: 40 }} />
+                        case 'Estabelecimentos': return <Image source={require('../Assets/images/estabelecimento.png')}
+                            style={{ width: 40, height: 40, backgroundColor: '#fff', borderRadius: 30, tintColor: color }} />
                             break;
                         case 'Carrinho': return <Image source={require('../Assets/images/carrinho.png')}
-                            style={{ width: 40, height: 40 }} />
+                            style={{ width: 40, height: 40, backgroundColor: '#fff', borderRadius: 30, tintColor: color }} />
                             break;
-                        case 'Perfil': return <Image source={require('../Assets/images/perfil.png')}
-                            style={{ width: 40, height: 40 }} />
+                        case 'Perfil': return <Image source={require('../Assets/images/user.png')}
+                            style={{ width: 40, height: 40, backgroundColor: '#fff', borderRadius: 30, tintColor: color }} />
                             break;
                     }
                 }
