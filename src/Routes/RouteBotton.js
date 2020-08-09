@@ -13,7 +13,7 @@ export default function RouteBotton() {
         <Tab.Navigator
             initialRouteName={'RouteDashBoard'}
             tabBarOptions={{
-                tabStyle: { backgroundColor: '#B32728' },
+                tabStyle: { backgroundColor: '#B32728', justifyContent: 'center', alignItems: 'center' },
                 showLabel: false,
             }}
             screenOptions={({ route }) => ({
