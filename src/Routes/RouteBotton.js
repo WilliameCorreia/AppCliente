@@ -34,7 +34,6 @@ export default function RouteBotton() {
                             style={{ width: 40, height: 40 }} />
                             break;
                     }
-
                 }
             })}
         >
