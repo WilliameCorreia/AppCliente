@@ -1,20 +1,22 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import Estabelecimentos from '../pages/Estabelecimentos/Estabelecimentos'
 import MyHeader from '../componentes/MyHeader'
 import MenuButton from '../componentes/MenuButton'
 import MybackButton from '../componentes/MybackButton'
 import { DrawerActions } from '@react-navigation/native'
-import RouteBotton from '../Routes/RouteBotton'
 import DashBoard from '../pages/DashBoard.js/Dashboard'
+import PedidoEfetuado from '../pages/PedidoEfetuado/PedidoEfetuado'
+import CadastroLogin from '../pages/Pagamento/Pagamento'
+import Pagamento from '../pages/Pagamento/Pagamento'
+import Categorias from '../pages/Categorias/Categorias'
 
 const Stack = createStackNavigator();
 
 function RouteDashBoard() {
     return (
         <Stack.Navigator
-            initialRouteName={'Estabelecimentos'}
+            initialRouteName={'Pagamento'}
             headerMode={'screen'}
             screenOptions={{
                 header:({ scene, navigation }) =>{
@@ -37,7 +39,17 @@ function RouteDashBoard() {
                 component={DashBoard}
                 options={{ headerStyle:{ backgroundColor: '#B32728' } }}
             />
+            <Stack.Screen
+                name='Categorias'
+                component={Categorias}
+                options={{ headerStyle:{ backgroundColor: '#B32728' } }}
+            />
             
+            <Stack.Screen
+                name='Pagamento'
+                component={Pagamento}
+                options={{ headerStyle:{ backgroundColor: '#B32728' } }}
+            />
         </Stack.Navigator>
     )
 }
