@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Estabelecimentos from '../pages/Estabelecimentos/Estabelecimentos';
 import ListaEstabelecimentos from '../pages/ListaEstabelecimentos/ListaEstabelecimentos';
 import Carrinho from '../pages/Carrinho/Carrinho';
+import DescricaoProduto from '../pages/DescricaoProduto/DescricaoProduto';
 import MyHeader from '../componentes/MyHeader';
 import MenuButton from '../componentes/MenuButton';
 import MybackButton from '../componentes/MybackButton';
@@ -16,7 +17,7 @@ const Stack = createStackNavigator();
 function RouteApp() {
   return (
     <Stack.Navigator
-      initialRouteName={'Carrinho'}
+      initialRouteName={'DescricaoProduto'}
       // initialRouteName={'Estabelecimentos'}
       headerMode={'screen'}
       screenOptions={{
@@ -62,6 +63,14 @@ function RouteApp() {
       <Stack.Screen
         name="Carrinho"
         component={Carrinho}
+        options={{
+          title: 'PLANETA ENTREGAS',
+          headerStyle: { backgroundColor: '#B32728' }
+        }}
+      />
+      <Stack.Screen
+        name="DescricaoProduto"
+        component={DescricaoProduto}
         options={{
           title: 'PLANETA ENTREGAS',
           headerStyle: { backgroundColor: '#B32728' }
