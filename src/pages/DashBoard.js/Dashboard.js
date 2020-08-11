@@ -6,14 +6,14 @@ import CarroselOfetas from '../../componentes/CarroselOfetas';
 import CarroselCategorias from '../../componentes/CarroselCategorias';
 import CarroselProdutos from '../../componentes/CarroselProdutos';
 
-export default function Dashboard() {
+export default function Dashboard({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.box1}>
         <CarroselOfetas />
       </View>
       <View style={styles.box2}>
-        <CarroselCategorias />
+        <CarroselCategorias navigation={navigation} />
       </View>
       <View style={styles.box3}>
         <CarroselProdutos />
