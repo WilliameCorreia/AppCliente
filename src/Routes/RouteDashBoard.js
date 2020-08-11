@@ -8,13 +8,16 @@ import MybackButton from '../componentes/MybackButton'
 import { DrawerActions } from '@react-navigation/native'
 import RouteBotton from '../Routes/RouteBotton'
 import DashBoard from '../pages/DashBoard.js/Dashboard'
+import PedidoEfetuado from '../pages/PedidoEfetuado/PedidoEfetuado'
+import CadastroLogin from '../pages/Pagamento/Pagamento'
+import Pagamento from '../pages/Pagamento/Pagamento'
 
 const Stack = createStackNavigator();
 
 function RouteDashBoard() {
     return (
         <Stack.Navigator
-            initialRouteName={'Estabelecimentos'}
+            initialRouteName={'Pagamento'}
             headerMode={'screen'}
             screenOptions={{
                 header:({ scene, navigation }) =>{
@@ -38,6 +41,11 @@ function RouteDashBoard() {
                 options={{ headerStyle:{ backgroundColor: '#B32728' } }}
             />
             
+            <Stack.Screen
+                name='Pagamento'
+                component={Pagamento}
+                options={{ headerStyle:{ backgroundColor: '#B32728' } }}
+            />
         </Stack.Navigator>
     )
 }

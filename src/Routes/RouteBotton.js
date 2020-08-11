@@ -6,6 +6,7 @@ import ListaEstabelecimentos from '../pages/ListaEstabelecimentos/ListaEstabelec
 import CarrinhoCompras from '../pages/CarrinhoCompras/CarrinhoCompras'
 import PerfilUsuario from '../pages/PerfilUsuario/PerfilUsuario'
 
+
 const Tab = createBottomTabNavigator();
 
 export default function RouteBotton() {
