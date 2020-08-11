@@ -5,7 +5,9 @@ const CarroselCategorias = () => {
     return (
         <View style={styles.container}>
             <View style={styles.box1}>
-                <Text style={styles.textHeader}>CATEGORIAS</Text>
+                <TouchableOpacity >
+                    <Text style={styles.textHeader}>CATEGORIAS</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.box2}>
                 <View style={styles.box2_1}>
