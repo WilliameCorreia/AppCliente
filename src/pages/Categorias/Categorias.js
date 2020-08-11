@@ -23,7 +23,7 @@ export default function Categorias( { navigation } ) {
                     <TouchableOpacity
                         style={styles.btnCategoria}
                         key={item.nome}
-                        onPress={() => navigation.navigate('MeusProdutos', item.id)}
+                        //onPress={() => navigation.navigate('MeusProdutos', item.id)}
                     >
                         <Image
                             source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/categorias/' + item.categoriaPng }}
