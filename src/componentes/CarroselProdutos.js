@@ -2,10 +2,10 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 
-export default function CarroselProdutos() {
+export default function CarroselProdutos({ navigation }) {
     return (
         <ScrollView horizontal={true} style={styles.container}>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Descricao')}>
                 <Image style={styles.img} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSy38JceVlOjblhgzHk2UvN2W4KZHa_wvVKKw&usqp=CAU' }} />
                 <View style={styles.box}>
                     <View style={styles.box1}>
@@ -17,7 +17,7 @@ export default function CarroselProdutos() {
                     </View>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Descricao')}>
                 <Image style={styles.img} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSy38JceVlOjblhgzHk2UvN2W4KZHa_wvVKKw&usqp=CAU' }} />
                 <View style={styles.box}>
                     <View style={styles.box1}>
@@ -29,7 +29,7 @@ export default function CarroselProdutos() {
                     </View>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Descricao')}>
                 <Image style={styles.img} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSy38JceVlOjblhgzHk2UvN2W4KZHa_wvVKKw&usqp=CAU' }} />
                 <View style={styles.box}>
                     <View style={styles.box1}>
@@ -41,7 +41,7 @@ export default function CarroselProdutos() {
                     </View>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Descricao')}>
                 <Image style={styles.img} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSy38JceVlOjblhgzHk2UvN2W4KZHa_wvVKKw&usqp=CAU' }} />
                 <View style={styles.box}>
                     <View style={styles.box1}>
@@ -53,7 +53,7 @@ export default function CarroselProdutos() {
                     </View>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Descricao')}>
                 <Image style={styles.img} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSy38JceVlOjblhgzHk2UvN2W4KZHa_wvVKKw&usqp=CAU' }} />
                 <View style={styles.box}>
                     <View style={styles.box1}>
@@ -65,7 +65,7 @@ export default function CarroselProdutos() {
                     </View>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Descricao')}>
                 <Image style={styles.img} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSy38JceVlOjblhgzHk2UvN2W4KZHa_wvVKKw&usqp=CAU' }} />
                 <View style={styles.box}>
                     <View style={styles.box1}>

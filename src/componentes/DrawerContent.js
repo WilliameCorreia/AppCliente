@@ -22,7 +22,7 @@ export default function DrawerContent() {
             <View style={styles.box3}>
                 <View style={styles.box3_1}>
                     <Image style={styles.imgSair} source={require('../Assets/images/sair.png')} />
-                    <Text style={styles.textItem}>Suporte</Text>
+                    <Text style={styles.textItem}>Sair</Text>
                 </View>
             </View>
 
