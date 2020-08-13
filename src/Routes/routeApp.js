@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Estabelecimentos from '../pages/Estabelecimentos/Estabelecimentos';
 import ListaEstabelecimentos from '../pages/ListaEstabelecimentos/ListaEstabelecimentos';
 import Carrinho from '../pages/Carrinho/Carrinho';
-import DescricaoProduto from '../pages/DescricaoProduto/DescricaoProduto';
+import Produto from '../pages/Produto/Produto';
 import MyHeader from '../componentes/MyHeader';
 import MenuButton from '../componentes/MenuButton';
 import MybackButton from '../componentes/MybackButton';
@@ -69,8 +69,8 @@ function RouteApp() {
         }}
       />
       <Stack.Screen
-        name="DescricaoProduto"
-        component={DescricaoProduto}
+        name="Produto"
+        component={Produto}
         options={{
           title: 'PLANETA ENTREGAS',
           headerStyle: { backgroundColor: '#B32728' }
