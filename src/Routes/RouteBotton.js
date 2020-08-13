@@ -3,7 +3,7 @@ import { Image } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import RouteDashBoard from './RouteDashBoard'
 import ListaEstabelecimentos from '../pages/ListaEstabelecimentos/ListaEstabelecimentos'
-import CarrinhoCompras from '../pages/CarrinhoCompras/CarrinhoCompras'
+import Carrinho from '../pages/Carrinho/Carrinho'
 import PerfilUsuario from '../pages/PerfilUsuario/PerfilUsuario'
 
 
@@ -47,7 +47,7 @@ export default function RouteBotton() {
             />
             <Tab.Screen
                 name='Carrinho'
-                component={CarrinhoCompras}
+                component={Carrinho}
             />
             <Tab.Screen
                 name='Perfil'

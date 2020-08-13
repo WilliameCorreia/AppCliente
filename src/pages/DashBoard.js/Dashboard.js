@@ -16,7 +16,7 @@ export default function Dashboard({ navigation }) {
         <CarroselCategorias navigation={navigation} />
       </View>
       <View style={styles.box3}>
-        <CarroselProdutos />
+        <CarroselProdutos navigation={navigation} />
       </View>
     </View>
   );
