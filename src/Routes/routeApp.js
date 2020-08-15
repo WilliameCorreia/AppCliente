@@ -9,13 +9,14 @@ import MenuButton from '../componentes/MenuButton';
 import MybackButton from '../componentes/MybackButton';
 import { DrawerActions } from '@react-navigation/native';
 import RouteButton from '../Routes/RouteBotton';
+import Produto from '../pages/Produto/Produto';
 
 const Stack = createStackNavigator();
 
 function RouteApp() {
   return (
     <Stack.Navigator
-      initialRouteName={'Estabelecimentos'}
+      initialRouteName={'Produto'}
       headerMode={'screen'}
       screenOptions={{
         header: ({ scene, navigation }) => {
@@ -50,6 +51,11 @@ function RouteApp() {
       <Stack.Screen
         name="Estabelecimentos"
         component={Estabelecimentos}
+        options={{ headerStyle: { backgroundColor: '#B32728' } }}
+      />
+      <Stack.Screen
+        name="Produto"
+        component={Produto}
         options={{ headerStyle: { backgroundColor: '#B32728' } }}
       />
       <Stack.Screen
