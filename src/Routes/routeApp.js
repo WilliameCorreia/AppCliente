@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 function RouteApp() {
   return (
     <Stack.Navigator
-      initialRouteName={'Produto'}
+      initialRouteName={'Estabelecimentos'}
       headerMode={'screen'}
       screenOptions={{
         header: ({ scene, navigation }) => {
