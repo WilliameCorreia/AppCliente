@@ -7,29 +7,32 @@ import Api from '../services/Api'
 
 export default function CardEstabelecimentos({ navigation }) {
 
-    const [estabelecimentos, setEstabelecimentos] = useState();
+    const [estabelecimentos, setEstabelecimentos] = useState([]);
     const [token, setToken] = useState();
 
-    getUser().then(dados => {
-        setToken(dados.token)
-        getEstabelecimentos();
-        console.log("-------------------------------")
-        console.log(token)
-        console.log("-------------------------------")
-    }).catch(error => {
-        console.log(error)
-    })
+    function getToken() {
+        getUser().then(dados => {
+            setToken(dados.token)
+            getEstabelecimentos(dados.token);
+            console.log("-------------------------------")
+            console.log(token)
+            console.log("-------------------------------")
+        }).catch(error => {
+            console.log(error)
+        })
+    }
 
-    function getEstabelecimentos() {
-        console.log(token)
-        if (token) {
+    function getEstabelecimentos(_token) {
+        console.log(_token)
+        if (_token) {
             Api.get('v1/Estabelecimentos', {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${_token}`
                 }
             }).then(response => {
                 console.log("=======================================")
-                console.log(response);
+                console.log(response.data.result);
+                setEstabelecimentos(response.data.result)
                 console.log("=======================================")
             }).catch(error => {
                 console.log("*********************************")
@@ -37,71 +40,28 @@ export default function CardEstabelecimentos({ navigation }) {
                 console.log("*********************************")
             })
         }
-
     }
+
+    useEffect(() => {
+        getToken();
+    }, [])
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}>
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}>
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}>
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}>
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}>
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}>
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
+            {estabelecimentos.map(item => {
+                return (
+                    <TouchableOpacity key={item.id} style={styles.card} onPress={() => navigation.navigate('RouteButton')}>
+                        <View style={styles.box1}>
+                            <Text>{item._Estabelecimento}</Text>
+                            <Text>{item.email}</Text>
+                            <Text>{item.razaoSocial}</Text>
+                        </View>
+                        <View style={styles.box2}>
+                            <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
+                        </View>
+                    </TouchableOpacity>
+                )
+            })}
         </ScrollView>
     )
 }
