@@ -12,47 +12,62 @@ import Descricao from '../pages/DescricaoProduto/DescricaoProduto'
 
 const Stack = createStackNavigator();
 
-function RouteDashBoard() {
+function RouteDashBoard({ route }) {
     return (
         <Stack.Navigator
             initialRouteName={'DashBoard'}
             headerMode={'screen'}
-            screenOptions={{
-                header:({ scene, navigation }) =>{
-                    const { options } = scene.descriptor;
-                    const title = options.headerTitle !== undefined ? options.headerTitle : options.title !== undefined ? options.title : scene.route.name;
-                    const backColor = options.headerStyle.backgroundColor
+        /* screenOptions={{
+            header:({ scene, navigation }) =>{
+                const { options } = scene.descriptor;
+                const Title = "Estabelecimentos"//options.headerTitle !== undefined ? options.headerTitle : options.title !== undefined ? options.title : scene.route.name;
+                const backColor = options.headerStyle.backgroundColor
 
-                    return(
-                        <MyHeader
-                            color={backColor}
-                            leftButton={<MenuButton onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}/>}
-                            rightButton={ title == 'Estabelecimentos' ? null : <MybackButton onPress={() => navigation.goBack()}/>}
-                        />
-                    )
-                }
-            }}
+                console.log(Title);
+
+                return(
+                    <MyHeader
+                        color={backColor}
+                        title={Title}
+                        leftButton={<MenuButton onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}/>}
+                        rightButton={ title == 'Estabelecimentos' ? null : <MybackButton onPress={() => navigation.goBack()}/>}
+                    />
+                )
+            }
+        }} */
         >
             <Stack.Screen
                 name='DashBoard'
                 component={DashBoard}
-                options={{ headerStyle:{ backgroundColor: '#B32728' } }}
+                options={{
+                    header: ({ }) => {
+                        return (
+                            <MyHeader
+                               color={backColor}
+                               title={Title}
+                               leftButton={<MenuButton onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />}
+                               rightButton={title == 'Estabelecimentos' ? null : <MybackButton onPress={() => navigation.goBack()} />}
+                            />
+                        )
+                    }
+                }}
+                initialParams={route.params}
             />
             <Stack.Screen
                 name='Categorias'
                 component={Categorias}
-                options={{ headerStyle:{ backgroundColor: '#B32728' } }}
+                options={{ headerStyle: { backgroundColor: '#B32728' } }}
             />
-            
+
             <Stack.Screen
                 name='Pagamento'
                 component={Pagamento}
-                options={{ headerStyle:{ backgroundColor: '#B32728' } }}
+                options={{ headerStyle: { backgroundColor: '#B32728' } }}
             />
             <Stack.Screen
                 name='Descricao'
                 component={Descricao}
-                options={{ headerStyle:{ backgroundColor: '#B32728' } }}
+                options={{ headerStyle: { backgroundColor: '#B32728' } }}
             />
         </Stack.Navigator>
     )

@@ -1,14 +1,20 @@
-/* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import CarroselOfetas from '../../componentes/CarroselOfetas';
 import CarroselCategorias from '../../componentes/CarroselCategorias';
 import CarroselProdutos from '../../componentes/CarroselProdutos';
+import AuthContext from '../../Contexts/auth';
 
-export default function Dashboard({ navigation }) {
+export default function Dashboard({ navigation, route }) {
+
+  const { token } = useContext(AuthContext);
+
+  const { razaoSocial } = route.params;
+  
   return (
     <View style={styles.container}>
+      <Text>{razaoSocial}</Text>
       <View style={styles.box1}>
         <CarroselOfetas />
       </View>

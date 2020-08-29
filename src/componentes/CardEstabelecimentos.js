@@ -1,56 +1,40 @@
-import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, TouchableOpacity, View, Image, Dimensions } from 'react-native'
+import React, { useState, useEffect, useContext } from 'react';
+import { Text, StyleSheet, TouchableOpacity, View, Image, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import { getUser } from '../utilits'
-import Api from '../services/Api'
+import { getUser } from '../utilits';
+import Api from '../services/Api';
+import AuthContext from '../Contexts/auth';
 
 export default function CardEstabelecimentos({ navigation }) {
 
+    const { token } = useContext(AuthContext);
+
     const [estabelecimentos, setEstabelecimentos] = useState([]);
-    const [token, setToken] = useState();
 
-    function getToken() {
-        getUser().then(dados => {
-            setToken(dados.token)
-            getEstabelecimentos(dados.token);
-            console.log("-------------------------------")
-            console.log(token)
-            console.log("-------------------------------")
-        }).catch(error => {
-            console.log(error)
-        })
-    }
-
-    function getEstabelecimentos(_token) {
-        console.log(_token)
-        if (_token) {
+    function getEstabelecimentos() {
+        if (token) {
             Api.get('v1/Estabelecimentos', {
                 headers: {
-                    'Authorization': `Bearer ${_token}`
+                    'Authorization': `Bearer ${token}`
                 }
             }).then(response => {
-                console.log("=======================================")
-                console.log(response.data.result);
                 setEstabelecimentos(response.data.result)
-                console.log("=======================================")
             }).catch(error => {
-                console.log("*********************************")
                 console.log(error)
-                console.log("*********************************")
             })
         }
     }
 
     useEffect(() => {
-        getToken();
+        getEstabelecimentos();
     }, [])
 
     return (
         <ScrollView style={styles.container}>
             {estabelecimentos.map(item => {
                 return (
-                    <TouchableOpacity key={item.id} style={styles.card} onPress={() => navigation.navigate('RouteButton')}>
+                    <TouchableOpacity key={item.id} style={styles.card} onPress={() => navigation.navigate('RouteButton', item)}>
                         <View style={styles.box1}>
                             <Text>{item._Estabelecimento}</Text>
                             <Text>{item.email}</Text>

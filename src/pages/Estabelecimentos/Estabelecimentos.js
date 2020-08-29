@@ -7,7 +7,6 @@ export default function Estabelecimentos({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.label}>TIPOS DE ESTABELECIMENTOS:</Text>
       <TouchableOpacity style={styles.cardBtn} onPress={() => navigation.navigate('ListaEstabelecimentos')}>
         <Image style={styles.img} source={{uri:'https://appestabelecimentoscliente.s3.us-east-2.amazonaws.com/CategoriasEstabelecimentos/churascaria.png'}}/>
       </TouchableOpacity>
