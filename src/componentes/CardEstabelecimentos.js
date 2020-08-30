@@ -1,70 +1,51 @@
-import React from 'react'
-import { Text, StyleSheet, TouchableOpacity, View, Image, Dimensions } from 'react-native'
+import React, { useState, useEffect, useContext } from 'react';
+import { Text, StyleSheet, TouchableOpacity, View, Image, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { getUser } from '../utilits';
+import Api from '../services/Api';
+import AuthContext from '../Contexts/auth';
+
 export default function CardEstabelecimentos({ navigation }) {
+
+    const { token } = useContext(AuthContext);
+
+    const [estabelecimentos, setEstabelecimentos] = useState([]);
+
+    function getEstabelecimentos() {
+        if (token) {
+            Api.get('v1/Estabelecimentos', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(response => {
+                setEstabelecimentos(response.data.result)
+            }).catch(error => {
+                console.log(error)
+            })
+        }
+    }
+
+    useEffect(() => {
+        getEstabelecimentos();
+    }, [])
+
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}> 
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}> 
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}> 
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}> 
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}> 
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RouteButton')}> 
-                <View style={styles.box1}>
-                    <Text>Super Mercado Estrela</Text>
-                    <Text>(85) 9 8684-9878</Text>
-                    <Text>Rua Ouro Preto, 15a Coqueiral</Text>
-                </View>
-                <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                </View>
-            </TouchableOpacity>
+            {estabelecimentos.map(item => {
+                return (
+                    <TouchableOpacity key={item.id} style={styles.card} onPress={() => navigation.navigate('RouteButton', item)}>
+                        <View style={styles.box1}>
+                            <Text>{item._Estabelecimento}</Text>
+                            <Text>{item.email}</Text>
+                            <Text>{item.razaoSocial}</Text>
+                        </View>
+                        <View style={styles.box2}>
+                            <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
+                        </View>
+                    </TouchableOpacity>
+                )
+            })}
         </ScrollView>
     )
 }
@@ -88,8 +69,8 @@ const styles = StyleSheet.create({
         padding: 10
     },
     box2: {
-       width: '50%',
-       height: '100%',
+        width: '50%',
+        height: '100%',
     },
     cardImg: {
         width: '100%',

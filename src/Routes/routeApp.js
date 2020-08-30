@@ -13,37 +13,22 @@ import PerfilUsuario from '../pages/PerfilUsuario/PerfilUsuario';
 
 const Stack = createStackNavigator();
 
-function RouteApp() {
+function RouteApp({ route }) {
   return (
     <Stack.Navigator
-      initialRouteName={'PerfilUsuario'}
+      initialRouteName={'Estabelecimentos'}
       headerMode={'screen'}
       screenOptions={{
         header: ({ scene, navigation }) => {
           const { options } = scene.descriptor;
-          const title =
-            options.headerTitle !== undefined
-              ? options.headerTitle
-              : options.title !== undefined
-                ? options.title
-                : scene.route.name;
+          const title = options.headerTitle !== undefined ? options.headerTitle : options.title !== undefined ? options.title : scene.route.name;
           const backColor = options.headerStyle.backgroundColor;
 
           return (
             <MyHeader
               color={backColor}
-              leftButton={
-                <MenuButton
-                  onPress={() =>
-                    navigation.dispatch(DrawerActions.toggleDrawer())
-                  }
-                />
-              }
-              rightButton={
-                title === 'Estabelecimentos' ? null : (
-                  <MybackButton onPress={() => navigation.goBack()} />
-                )
-              }
+              leftButton={<MenuButton onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />}
+              rightButton={title === 'Estabelecimentos' ? null : (<MybackButton onPress={() => navigation.goBack()} />)}
             />
           );
         },
@@ -51,7 +36,7 @@ function RouteApp() {
       <Stack.Screen
         name="Estabelecimentos"
         component={Estabelecimentos}
-        options={{ headerStyle: { backgroundColor: '#B32728' } }}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, title:"Tipo de Estabelecimentos" }}
       />
       <Stack.Screen
         name="PerfilUsuario"
@@ -61,7 +46,7 @@ function RouteApp() {
       <Stack.Screen
         name="ListaEstabelecimentos"
         component={ListaEstabelecimentos}
-        options={{ headerStyle: { backgroundColor: '#B32728' } }}
+        options={{ headerStyle: { backgroundColor: '#B32728' },  title:"Lista de Estabelecimentos" }}
       />
       <Stack.Screen
         name="RouteButton"

@@ -33,7 +33,6 @@ const CarroselOfetas = ({  }) => {
     }, [])
 
     const renderItem = ({ item, index }, parallaxProps) => {
-        console.log(item.nome)
         return (
             <TouchableOpacity style={styles.item} onPress={() => mudarState(true)}>
                 <ParallaxImage

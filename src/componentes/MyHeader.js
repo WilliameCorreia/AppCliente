@@ -4,11 +4,12 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Header } from 'react-native-elements'
 
 export default function MyHeader({ title, color, leftButton, rightButton }) {
+    console.log(title);
     return (
         <Header
             statusBarProps={{ barStyle: 'light-content', backgroundColor: color }}
             barStyle="light-content"
-            centerComponent={{ text: title, style: { color: '#fff', fontSize: 20 } }}
+            centerComponent={<View><Text>{title}</Text></View>}
             leftComponent={leftButton}
             rightComponent={rightButton}
             containerStyle={{

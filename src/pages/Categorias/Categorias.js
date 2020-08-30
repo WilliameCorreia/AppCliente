@@ -22,7 +22,7 @@ export default function Categorias( { navigation } ) {
                 return (
                     <TouchableOpacity
                         style={styles.btnCategoria}
-                        key={item.nome}
+                        key={item.id}
                         //onPress={() => navigation.navigate('MeusProdutos', item.id)}
                     >
                         <Image

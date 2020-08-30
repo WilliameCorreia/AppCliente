@@ -9,7 +9,8 @@ import PerfilUsuario from '../pages/PerfilUsuario/PerfilUsuario'
 
 const Tab = createBottomTabNavigator();
 
-export default function RouteBotton() {
+export default function RouteBotton({ route }) {
+    console.log(route);
     return (
         <Tab.Navigator
             initialRouteName={'RouteDashBoard'}
@@ -40,6 +41,7 @@ export default function RouteBotton() {
             <Tab.Screen
                 name='Inicio'
                 component={RouteDashBoard}
+                initialParams={route.params}
             />
             <Tab.Screen
                 name='Estabelecimentos'

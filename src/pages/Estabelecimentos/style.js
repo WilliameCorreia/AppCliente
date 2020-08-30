@@ -17,9 +17,6 @@ const styles = StyleSheet.create({
         height: '100%',
         resizeMode: 'stretch',
     },
-    label: {
-
-    },
 });
 
 export default styles;
