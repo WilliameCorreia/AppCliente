@@ -10,17 +10,27 @@ export default function Produto({ navigation }) {
 
       <ScrollView style={styles.Itens}>
         <View style={styles.Item}>
-          <View style={styles.Pedido}>
-            <Text style={styles.PedidoText}>PEDIDO 1502</Text>
+          <View style={styles.ProdutoEPreco}>
+            <Text style={styles.ProdutoNomeText}>Alcatra Kg</Text>
+            <View style={styles.SimboloEPreco}>
+              <Text style={styles.SimboloText}>R$</Text>
+              <Text style={styles.PrecoText}>22,90</Text>
+            </View>
           </View>
-          <View style={styles.NomeMercantil}>
-            <Text style={styles.PedidoText}>SUPERMERCADO ESTRELA</Text>
+          <View style={styles.ImagemProduto}>
+            <Image style={styles.img} source={{ uri: `https://appmercantilestabelecimento.s3.us-east-2.amazonaws.com/images/8rHnabDY3XMbq3l5Q9jsAh8mYam2/logo2.png` }} />
           </View>
-          <View style={styles.Pedido}>
-            <Text style={styles.PedidoText}>23/07/2020</Text>
+        </View>
+        <View style={styles.Item}>
+          <View style={styles.ProdutoEPreco}>
+            <Text style={styles.ProdutoNomeText}>Alcatra Kg</Text>
+            <View style={styles.SimboloEPreco}>
+              <Text style={styles.SimboloText}>R$</Text>
+              <Text style={styles.PrecoText}>22,90</Text>
+            </View>
           </View>
-          <View style={styles.Status}>
-            <Text style={styles.StatusText}>STATUS</Text>
+          <View style={styles.ImagemProduto}>
+            <Image style={styles.img} source={{ uri: `https://appmercantilestabelecimento.s3.us-east-2.amazonaws.com/images/8rHnabDY3XMbq3l5Q9jsAh8mYam2/logo2.png` }} />
           </View>
         </View>
       </ScrollView>

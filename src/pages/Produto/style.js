@@ -8,37 +8,56 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     Item: {
-        marginVertical: 5,
+        marginVertical: 8,
         marginHorizontal: 5,
-        elevation: 5,
-        padding:"4%",
+        elevation: 8,
+        flexDirection: "row",
         height: 160,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff'    
     },
-    Pedido: {
-
+    ProdutoEPreco: {
+        padding: "4%",
+        backgroundColor: '#fff',
+        width: "50%",
+        height: "100%",
+        flexDirection: "column"
     },
-    PedidoText: {
+    ProdutoNomeText: {
+        color: "#969696",
+        fontSize: 26,
+        marginBottom: 0
+    },
+    SimboloEPreco: {        
+        height: "50%",
+        justifyContent: "space-between",
+        marginTop: "15%",
+        flexDirection: "row",
+        alignItems:"center"
+    },
+    SimboloText: {
         color: "#969696",
         fontSize: 22,
-        marginBottom:0
+        marginBottom: 0
     },
-    NomeMercantil: {
-        marginTop:"2%"
+    PrecoText: {
+        color: "red",
+        fontSize: 24,
+        marginRight:"45%"
     },
-    Status: {
-        marginTop:0, 
-        flexDirection:"row",
-        justifyContent:"flex-end"
+    ImagemProduto: {       
+        width: "47%",
+        height: "90%",
+        marginVertical:"2%",
+        elevation:4,
+        flexDirection:"column"    
     },
-    StatusText:{
-        backgroundColor:"red",
-        color:"white",
-        fontSize:20,
-        borderRadius:25,
-        paddingHorizontal:"15%",
-        paddingVertical:"1%"
-    }
+    img: {        
+        width: "85%",
+        height: "95%",
+        resizeMode: 'stretch',
+        alignSelf: "center",
+        
+    },
 });
 
 export default styles;
