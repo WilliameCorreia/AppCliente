@@ -1,13 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native';
 
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 import { Image } from 'react-native-elements';
-import { ProdutosContext } from '../../Contexts/ProdutoContext';
+import AuthContext from '../../Contexts/auth';
+import Api from '../../services/Api'
 
 export default function Categorias( { navigation } ) {
 
-    const { categorias } = useContext(ProdutosContext)
+    const { token } = useContext(AuthContext);
+    const [categorias, setCategorias] = useState([]);
+
+    function LoadCategorias(){
+        Api.get("v1/Categorias",{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(response => {
+            setCategorias(response.data.result)
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+
+    useEffect(() => {
+        LoadCategorias();
+    }, [])
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
