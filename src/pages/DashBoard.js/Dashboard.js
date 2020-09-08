@@ -10,16 +10,16 @@ export default function Dashboard({ navigation, route }) {
 
   const { token } = useContext(AuthContext);
 
-  const { razaoSocial } = route.params;
+  const { razaoSocial, id } = route.params;
   
   return (
     <View style={styles.container}>
       <Text>{razaoSocial}</Text>
       <View style={styles.box1}>
-        <CarroselOfetas />
+        <CarroselOfetas/>
       </View>
       <View style={styles.box2}>
-        <CarroselCategorias navigation={navigation} />
+        <CarroselCategorias EstabelecimentoId={id} navigation={navigation} />
       </View>
       <View style={styles.box3}>
         <CarroselProdutos navigation={navigation} />

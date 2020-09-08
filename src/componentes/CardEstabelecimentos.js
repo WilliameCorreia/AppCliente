@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Text, StyleSheet, TouchableOpacity, View, Image, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import { getUser } from '../utilits';
 import Api from '../services/Api';
 import AuthContext from '../Contexts/auth';
 

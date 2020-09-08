@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { Image, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { Image, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './style';
 
 export default function Estabelecimentos({ navigation }) {

@@ -1,14 +1,15 @@
-import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import MyHeader from '../componentes/MyHeader'
-import MenuButton from '../componentes/MenuButton'
-import MybackButton from '../componentes/MybackButton'
-import { DrawerActions } from '@react-navigation/native'
-import DashBoard from '../pages/DashBoard.js/Dashboard'
-import Pagamento from '../pages/Pagamento/Pagamento'
-import Categorias from '../pages/Categorias/Categorias'
-import Descricao from '../pages/DescricaoProduto/DescricaoProduto'
+import MyHeader from '../componentes/MyHeader';
+import MenuButton from '../componentes/MenuButton';
+import MybackButton from '../componentes/MybackButton';
+import { DrawerActions } from '@react-navigation/native';
+import DashBoard from '../pages/DashBoard.js/Dashboard';
+import Pagamento from '../pages/Pagamento/Pagamento';
+import Categorias from '../pages/Categorias/Categorias';
+import Descricao from '../pages/DescricaoProduto/DescricaoProduto';
+import MeusProdutos from '../pages/MeusProdutos/MeusProdutos';
 
 const Stack = createStackNavigator();
 
@@ -67,6 +68,11 @@ function RouteDashBoard({ route }) {
             <Stack.Screen
                 name='Descricao'
                 component={Descricao}
+                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+            />
+            <Stack.Screen
+                name='MeusProdutos'
+                component={MeusProdutos}
                 options={{ headerStyle: { backgroundColor: '#B32728' } }}
             />
         </Stack.Navigator>

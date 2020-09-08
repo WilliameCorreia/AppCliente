@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 
-const CarroselCategorias = ({ navigation }) => {
+const CarroselCategorias = ({ navigation, EstabelecimentoId }) => {
     return (
         <View style={styles.container}>
             <View style={styles.box1}>
-                <TouchableOpacity onPress={() => navigation.navigate('Categorias')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Categorias', EstabelecimentoId)}>
                     <Text style={styles.textHeader}>CATEGORIAS</Text>
                 </TouchableOpacity>
             </View>

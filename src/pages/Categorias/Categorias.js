@@ -6,11 +6,12 @@ import { Image } from 'react-native-elements';
 import AuthContext from '../../Contexts/auth';
 import Api from '../../services/Api'
 
-export default function Categorias( { navigation } ) {
+export default function Categorias( { navigation, route } ) {
 
     const { token } = useContext(AuthContext);
     const [categorias, setCategorias] = useState([]);
-
+    const EstabelecimentoId = route.params;
+    
     function LoadCategorias(){
         Api.get("v1/Categorias",{
             headers: {
@@ -37,7 +38,7 @@ export default function Categorias( { navigation } ) {
                     <TouchableOpacity
                         style={styles.btnCategoria}
                         key={item.id}
-                        //onPress={() => navigation.navigate('MeusProdutos', item.id)}
+                        onPress={() => navigation.navigate('MeusProdutos', item.id)}
                     >
                         <Image
                             source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/categorias/' + item.categoriaPng }}
