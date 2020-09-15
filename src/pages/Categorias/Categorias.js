@@ -33,14 +33,15 @@ export default function Categorias( { navigation, route } ) {
             {Array(10).fill(
                 <ShimmerPlaceHolder style={styles.uriShimmer} autoRun={true} visible={categorias.length != 0} />
             )}
-            {categorias.map(item => {
+            {categorias.map((item, index) => {
                 return (
                     <TouchableOpacity
                         style={styles.btnCategoria}
                         key={item.id}
-                        onPress={() => navigation.navigate('MeusProdutos', item.id)}
+                        onPress={() => navigation.navigate('MeusProdutos', {itemID: item.id, EstabelecimentoId: EstabelecimentoId} )}
                     >
                         <Image
+                            key={index}
                             source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/categorias/' + item.categoriaPng }}
                             style={styles.uriImg}
                             PlaceholderContent={<ActivityIndicator style={styles.Indicator} color={'red'} />}

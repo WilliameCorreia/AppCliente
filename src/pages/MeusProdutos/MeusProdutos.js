@@ -1,10 +1,41 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useEffect, useContext, useState } from 'react';
+import { View } from 'react-native';
 
+import ListaProdutos from '../../componentes/ListaProdutos';
 import { SearchBar } from 'react-native-elements';
 import styles from './style';
+import AuthContext from '../../Contexts/auth';
+import Api from '../../services/Api';
 
-export default function MeusProdutos() {
+export default function MeusProdutos({ navigation, route }) {
+
+    console.log('000000000000000000000000');
+    console.log(route.params);
+    console.log('000000000000000000000000');
+
+    const { token } = useContext(AuthContext);
+    const [Produtos, SetProdutos] = useState();
+
+    const produtos = () => {
+        Api.get(`v1/Produtos/${12}/${30}/${1}`, {
+            headers:{
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(response =>{
+            const { result } = response.data;
+            if(result){
+                SetProdutos(result);
+            }
+            console.log(response.data);
+        }).catch(error =>{
+            console.log(error);
+        })
+    }
+
+    useEffect(() => {
+        produtos();
+    }, [])
+
     return (
         <View style={styles.container}>
             <View style={styles.containerSearch}>
@@ -19,7 +50,7 @@ export default function MeusProdutos() {
                 />
                 {/* <TouchableOpacity onPress={pesquisar} style={styles.btnPesquisar}><Text style={styles.textPesquisar}>Pesquisar</Text></TouchableOpacity> */}
             </View>
-            {/* <ListaProdutos navigation={navigation} Produtos={produtos.data ? produtos.data : []} LoadListaProdutos loading={produtos.loading}/> */}
+            <ListaProdutos navigation={navigation} Produtos={Produtos} /* LoadListaProdutos */ /* loading={produtos.loading} *//>
         </View>
     )
 }

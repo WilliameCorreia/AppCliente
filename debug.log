@@ -158,3 +158,12 @@
 [0830/163657.192:ERROR:exception_snapshot_win.cc(98)] thread ID 17004 not found in process
 [0830/163657.192:ERROR:exception_snapshot_win.cc(98)] thread ID 6212 not found in process
 [0830/163657.192:ERROR:exception_snapshot_win.cc(98)] thread ID 17384 not found in process
+[0914/203629.295:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0914/203629.296:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0914/203629.296:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0914/203629.296:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0914/203629.296:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0914/203629.296:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0914/203629.296:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0914/203629.296:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0914/203629.296:ERROR:crash_report_database_win.cc(469)] failed to stat report
