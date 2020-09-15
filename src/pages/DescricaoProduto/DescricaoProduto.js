@@ -3,13 +3,15 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, ScrollView, View, StyleSheet } from 'react-native';
 import styles from './style';
 
-export default function DescricaoProduto({ navigation }) {
+export default function DescricaoProduto({ navigation, route }) {
+
+  const produto = route.params;
 
   return (
     <View style={styles.container1}>
       <View style={styles.container}>
         <View style={styles.ContainerImg}>
-          <Image style={styles.img} source={{ uri: `https://appmercantilestabelecimento.s3.us-east-2.amazonaws.com/images/8rHnabDY3XMbq3l5Q9jsAh8mYam2/logo2.png` }} />
+          <Image style={styles.img} source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/ImagensPng/png/' + produto.fotoPng }} />
         </View>
         <View style={styles.qnt}>
           <TouchableOpacity style={styles.qntMenorButton}>
@@ -23,7 +25,7 @@ export default function DescricaoProduto({ navigation }) {
           </TouchableOpacity>
         </View>
         <View style={styles.NomeProduto}>
-          <Text style={styles.NomeProdutoText}>Alcatra</Text>
+          <Text style={styles.NomeProdutoText}>{produto._Produto}</Text>
         </View>
         <View style={styles.ResumoTotal}>
 

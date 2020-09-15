@@ -14,16 +14,15 @@ const styles = StyleSheet.create({
     ContainerImg: {
         marginTop:"3%",
         backgroundColor: '#fff',
-        elevation: 4,
+        elevation: 2,
         width:"100%",
         height:"60%",
         justifyContent: 'center',
         alignItems: 'center',
     },
     img: {
-        width: "100%",
-        height: "100%",
-        resizeMode: 'stretch',
+        width: "50%",
+        height: "80%",
         alignSelf: "center"
     },
     NomeProduto: {    

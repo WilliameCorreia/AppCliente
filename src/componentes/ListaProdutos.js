@@ -19,7 +19,7 @@ export default function listaProdutos({ Produtos, loading, navigation, LoadLista
         <View>
             <TouchableOpacity
                 style={styles.cards}
-                onPress={() => navigation.navigate('Produto', item)}
+                onPress={() => navigation.navigate('Descricao', item)}
             >
                 <View style={styles.box}>
                     <View style={styles.box1}>
