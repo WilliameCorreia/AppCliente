@@ -7,6 +7,10 @@ export default function DescricaoProduto({ navigation, route }) {
 
   const produto = route.params;
 
+  console.log("+++++++++++++++++++++++++++++++++");
+  console.log(produto);
+  console.log("+++++++++++++++++++++++++++++++++");
+
   return (
     <View style={styles.container1}>
       <View style={styles.container}>
@@ -30,8 +34,8 @@ export default function DescricaoProduto({ navigation, route }) {
         <View style={styles.ResumoTotal}>
 
           <Text style={styles.ResumoTotalSimbolo}>R$</Text>
-          <Text style={styles.ResumoTotalDecimal}>22,</Text>
-          <Text style={styles.ResumoTotalSimbolo}>90</Text>
+          <Text style={styles.ResumoTotalDecimal}>{produto.preco}</Text>
+         {/*  <Text style={styles.ResumoTotalSimbolo}>90</Text> */}
 
         </View>
       </View>

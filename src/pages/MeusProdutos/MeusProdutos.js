@@ -13,11 +13,13 @@ export default function MeusProdutos({ navigation, route }) {
     console.log(route.params);
     console.log('000000000000000000000000');
 
+    const item = route.params;
+
     const { token } = useContext(AuthContext);
     const [Produtos, SetProdutos] = useState();
 
     const produtos = () => {
-        Api.get(`v1/Produtos/${12}/${30}/${1}`, {
+        Api.get(`v1/Produtos/${item.itemID}/${item.EstabelecimentoId}/${1}`, {
             headers:{
                 'Authorization': `Bearer ${token}`
             }
