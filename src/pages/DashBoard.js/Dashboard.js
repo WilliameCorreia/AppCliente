@@ -1,20 +1,42 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import CarroselOfetas from '../../componentes/CarroselOfetas';
 import CarroselCategorias from '../../componentes/CarroselCategorias';
 import CarroselProdutos from '../../componentes/CarroselProdutos';
 import AuthContext from '../../Contexts/auth';
+import Api from '../../services/Api';
 
 export default function Dashboard({ navigation, route }) {
 
   const { token } = useContext(AuthContext);
 
   const { razaoSocial, id } = route.params;
+
+  const [listOfertas, setListOfertas] = useState([]);
+
+  const Add_Ofertas = () =>{
+    Api.get(`v1/Produtos/pesquisarOfertasProdutos/${id}/12/true/1`,{
+      headers:{
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(response =>{
+      const { result } = response.data;
+      if(result){
+        setListOfertas(result);
+        console.log(result);
+      }
+    }).catch(error =>{
+      console.log(error)
+    })
+  }
+
+  useEffect(() => {
+    Add_Ofertas();
+  }, [])
   
   return (
     <View style={styles.container}>
-      <Text>{razaoSocial}</Text>
       <View style={styles.box1}>
         <CarroselOfetas/>
       </View>
@@ -22,7 +44,7 @@ export default function Dashboard({ navigation, route }) {
         <CarroselCategorias EstabelecimentoId={id} navigation={navigation} />
       </View>
       <View style={styles.box3}>
-        <CarroselProdutos navigation={navigation} />
+        <CarroselProdutos navigation={navigation} ofertas={listOfertas} />
       </View>
     </View>
   );

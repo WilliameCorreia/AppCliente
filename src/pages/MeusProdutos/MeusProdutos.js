@@ -9,10 +9,6 @@ import Api from '../../services/Api';
 
 export default function MeusProdutos({ navigation, route }) {
 
-    console.log('000000000000000000000000');
-    console.log(route.params);
-    console.log('000000000000000000000000');
-
     const item = route.params;
 
     const { token } = useContext(AuthContext);

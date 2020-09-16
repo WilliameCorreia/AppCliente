@@ -7,9 +7,25 @@ export default function DescricaoProduto({ navigation, route }) {
 
   const produto = route.params;
 
-  console.log("+++++++++++++++++++++++++++++++++");
-  console.log(produto);
-  console.log("+++++++++++++++++++++++++++++++++");
+  const precoPersonalizado = (preco, initial) => {
+
+    if (preco.includes('.')) {
+        let valor = preco.split('.');
+        if (initial) {
+            return valor[0]
+        } else {
+            return valor[1]
+        }
+    } else {
+        let valor = preco.split(',');
+        if (initial) {
+            return valor[0]
+        } else {
+            return valor[1]
+        }
+    }
+
+}
 
   return (
     <View style={styles.container1}>
@@ -33,9 +49,9 @@ export default function DescricaoProduto({ navigation, route }) {
         </View>
         <View style={styles.ResumoTotal}>
 
-          <Text style={styles.ResumoTotalSimbolo}>R$</Text>
-          <Text style={styles.ResumoTotalDecimal}>{produto.preco}</Text>
-         {/*  <Text style={styles.ResumoTotalSimbolo}>90</Text> */}
+          <Text style={styles.ResumoTotalSimbolo}>R$ </Text>
+          <Text style={styles.ResumoTotalDecimal}>{precoPersonalizado(produto.preco, true)},</Text>
+          <Text style={styles.ResumoTotalSimbolo}>{precoPersonalizado(produto.preco, false)}</Text>
 
         </View>
       </View>
