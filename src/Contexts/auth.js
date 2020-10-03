@@ -1,7 +1,7 @@
-import React, { createContext, useState, useEffect, Children } from 'react'
+import React, { createContext, useState, useEffect, useReducer } from 'react'
 
-import { credencias } from '../credenciais'
-import Api from '../services/Api'
+import { credencias } from '../credenciais';
+import Api from '../services/Api';
 
 const AuthContext = createContext();
 

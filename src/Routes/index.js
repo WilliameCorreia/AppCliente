@@ -1,14 +1,16 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useContext } from 'react';
 
 import RouteDrawer from './RouteDrawer';
+import { EstabelecimentoProvider } from '../Contexts/Estabelecimento';
 
 const Routes = () => {
 
   return (
-    <RouteDrawer />
+    <EstabelecimentoProvider>
+      <RouteDrawer />
+    </EstabelecimentoProvider>
   )
-
 };
 
 export default Routes;

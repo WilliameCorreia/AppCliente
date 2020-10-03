@@ -13,7 +13,7 @@ import MeusProdutos from '../pages/MeusProdutos/MeusProdutos';
 
 const Stack = createStackNavigator();
 
-function RouteDashBoard({ route }) {
+function RouteDashBoard() {
     return (
         <Stack.Navigator
             initialRouteName={'DashBoard'}
@@ -52,7 +52,6 @@ function RouteDashBoard({ route }) {
                         )
                     }
                 }}
-                initialParams={route.params}
             />
             <Stack.Screen
                 name='Categorias'

@@ -5,28 +5,31 @@ import CarroselOfetas from '../../componentes/CarroselOfetas';
 import CarroselCategorias from '../../componentes/CarroselCategorias';
 import CarroselProdutos from '../../componentes/CarroselProdutos';
 import AuthContext from '../../Contexts/auth';
+import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import Api from '../../services/Api';
 
-export default function Dashboard({ navigation, route }) {
+export default function Dashboard({ navigation }) {
 
   const { token } = useContext(AuthContext);
 
-  const { razaoSocial, id } = route.params;
+  const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
+
+  const { Estabelecimento } = stateEstabelecimento;
 
   const [listOfertas, setListOfertas] = useState([]);
 
-  const Add_Ofertas = () =>{
-    Api.get(`v1/Produtos/pesquisarOfertasProdutos/${id}/12/true/1`,{
-      headers:{
+  const Add_Ofertas = () => {
+
+    Api.get(`v1/Produtos/pesquisarOfertasProdutos/${Estabelecimento.id}/12/true/1`, {
+      headers: {
         'Authorization': `Bearer ${token}`
       }
-    }).then(response =>{
+    }).then(response => {
       const { result } = response.data;
-      if(result){
+      if (result) {
         setListOfertas(result);
-        console.log(result);
       }
-    }).catch(error =>{
+    }).catch(error => {
       console.log(error)
     })
   }
@@ -34,14 +37,14 @@ export default function Dashboard({ navigation, route }) {
   useEffect(() => {
     Add_Ofertas();
   }, [])
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.box1}>
-        <CarroselOfetas/>
+        <CarroselOfetas />
       </View>
       <View style={styles.box2}>
-        <CarroselCategorias EstabelecimentoId={id} navigation={navigation} />
+        <CarroselCategorias EstabelecimentoId={Estabelecimento.id} navigation={navigation} />
       </View>
       <View style={styles.box3}>
         <CarroselProdutos navigation={navigation} ofertas={listOfertas} />

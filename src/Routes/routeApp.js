@@ -33,6 +33,7 @@ function RouteApp({ route }) {
           );
         },
       }}>
+        
       <Stack.Screen
         name="Estabelecimentos"
         component={Estabelecimentos}

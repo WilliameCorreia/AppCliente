@@ -8,9 +8,9 @@ const api = axios.create({
 
 api.interceptors.response.use(
     response => {
-        console.log("=>>>>>>>>>>>>>>>>>>>>>>")
+        /* console.log("=>>>>>>>>>>>>>>>>>>>>>>")
         console.log(response)
-        console.log("=>>>>>>>>>>>>>>>>>>>>>>")
+        console.log("=>>>>>>>>>>>>>>>>>>>>>>") */
         return response;
     },
     error => {

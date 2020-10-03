@@ -4,10 +4,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import Api from '../services/Api';
 import AuthContext from '../Contexts/auth';
+import EstabelecimentoContext from '../Contexts/Estabelecimento';
 
 export default function CardEstabelecimentos({ navigation }) {
 
     const { token } = useContext(AuthContext);
+
+    const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
 
     const [estabelecimentos, setEstabelecimentos] = useState([]);
 
@@ -25,6 +28,11 @@ export default function CardEstabelecimentos({ navigation }) {
         }
     }
 
+    const selectedEstabelecimento = item =>{
+        dispathEstabelecimento({ type: 'setEstabelecimento', estabelecimento: item });
+        navigation.navigate('RouteButton');
+    }
+
     useEffect(() => {
         getEstabelecimentos();
     }, [])
@@ -33,7 +41,7 @@ export default function CardEstabelecimentos({ navigation }) {
         <ScrollView style={styles.container}>
             {estabelecimentos.map(item => {
                 return (
-                    <TouchableOpacity key={item.id} style={styles.card} onPress={() => navigation.navigate('RouteButton', item)}>
+                    <TouchableOpacity key={item.id} style={styles.card} onPress={() => selectedEstabelecimento(item)}>
                         <View style={styles.box1}>
                             <Text>{item._Estabelecimento}</Text>
                             <Text>{item.email}</Text>
