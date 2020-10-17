@@ -113,6 +113,10 @@ const styles = StyleSheet.create({
         fontSize: 45,
         fontWeight:"bold"      
     },
+    bntQuantidade:{
+        flex: 1,
+        paddingHorizontal: 10,
+    }
 });
 
 export default styles;

@@ -20,6 +20,8 @@ export default function Dashboard({ navigation }) {
 
   const Add_Ofertas = () => {
 
+    console.log(Estabelecimento.id);
+
     Api.get(`v1/Produtos/pesquisarOfertasProdutos/${Estabelecimento.id}/12/true/1`, {
       headers: {
         'Authorization': `Bearer ${token}`

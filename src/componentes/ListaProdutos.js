@@ -6,14 +6,10 @@ import {
     TouchableOpacity,
     ActivityIndicator,
     StyleSheet,
+    FlatList
 } from 'react-native'
 
-import { FlatList } from 'react-native-gesture-handler';
-
 export default function listaProdutos({ Produtos, loading, navigation, LoadListaProdutos}) {
-
-    console.log("((((((((((((((((((((lista de produtos renderizado))))))))))))))))))))")
-    console.log(Produtos);
 
     const _renderItem = ({ item }) => (
         <View>

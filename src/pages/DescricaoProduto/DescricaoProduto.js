@@ -11,6 +11,8 @@ export default function DescricaoProduto({ navigation, route }) {
 
   const produto = route.params;
 
+  console.log(produto);
+
   const [quantidade, setQuantidade] = useState(0);
 
   const precoPersonalizado = (preco, initial) => {
@@ -36,17 +38,18 @@ export default function DescricaoProduto({ navigation, route }) {
   const adicionarProduto = () => {
 
     dispathEstabelecimento(
-      { 
-        type: 'setProdutos', 
+      {
+        type: 'setProdutos',
         produto:
-          { 
-            codeBar: produto.codeBar,
-            nome: produto._Produto,
-            categoria: produto.categoriaId,
-            EstabelecimentoId: produto.estabelecimentoId,
-            preco: produto.preco,
-            quantidade: quantidade
-          }  
+        {
+          codeBar: produto.codeBar,
+          nome: produto._Produto,
+          categoria: produto.categoriaId,
+          EstabelecimentoId: produto.estabelecimentoId,
+          preco: produto.preco,
+          fotoPng: produto.fotoPng,
+          quantidade: quantidade
+        }
       }
     );
 
@@ -62,7 +65,9 @@ export default function DescricaoProduto({ navigation, route }) {
         <View style={styles.ContainerImg}>
           <Image style={styles.img} source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/ImagensPng/png/' + produto.fotoPng }} />
         </View>
-        <BtnProdutoQuantidade setQuantidade={setQuantidade} quantidade={quantidade}/>
+        <View style={styles.bntQuantidade}>
+          <BtnProdutoQuantidade setQuantidade={setQuantidade} quantidade={quantidade} />
+        </View>
         <View style={styles.NomeProduto}>
           <Text style={styles.NomeProdutoText}>{produto._Produto}</Text>
         </View>
