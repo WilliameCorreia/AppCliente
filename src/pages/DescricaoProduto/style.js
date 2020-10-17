@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container1: {
@@ -43,63 +43,11 @@ const styles = StyleSheet.create({
         color: "#B32728",
         fontSize: 12
     },
-    PrecoDecimais: {   
-        color: "#B32728",
-        fontSize: 22
-    },
+   
     PrecoCentavos: {
         marginTop: "28%",
         color: "#B32728",
         fontSize: 12
-    },
-    qnt: {
-        flexDirection: "row",
-        marginBottom: "2%",
-        justifyContent:"flex-end",
-        paddingHorizontal:"8%",
-        paddingVertical:"2%"
-    },
-    qntMenorButton: {
-        backgroundColor: "#B32728",
-        flexDirection: "column",
-        alignItems:"center",
-        justifyContent:"center",
-        borderRadius: 25,
-        width: "10%",
-        // height: "35%",
-        marginRight: 7,
-        marginTop: 5
-    },
-    qntMenor: {
-        color: "white",
-        textAlign: "center",
-        fontSize: 25,
-        fontWeight: "bold"
-    },
-    qntMaiorButton: {
-        backgroundColor: "#B32728",
-        flexDirection: "column",
-        alignItems:"center",
-        justifyContent:"center",
-        borderRadius: 25,
-        width: "10%",
-        // height: "35%",
-        marginLeft: 7,
-        marginTop: 5
-    },
-    qntMaior: {
-        color: "white",
-        textAlign: "center",
-        fontSize: 25,
-        fontWeight: "bold"
-    },
-    ContainerQnt: {
-        backgroundColor: '#fff',
-        elevation: 4,
-        width:"20%",
-        // height:"45%",
-        alignItems: "center",
-        justifyContent:"center"
     },
     Total: {
         marginLeft: 10,
@@ -118,6 +66,13 @@ const styles = StyleSheet.create({
         width:"50%",        
         justifyContent:"center",
         alignItems:"center"        
+    },
+    BtnCarrinhoDisabled: {
+        backgroundColor: "#ff722340",
+        width:"50%",        
+        justifyContent:"center",
+        alignItems:"center",
+        opacity: 9
     },
     BtnComprarText: {
         color: "white",
@@ -161,48 +116,3 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
-
-
-    // LabelCarrinho:{w
-    //     height:"5%",
-    //     flexDirection:"row",
-    //     marginLeft:"25%"
-    // },
-    // LabelCarrinhoProduto:{        
-    //     width:"18%",
-    //     marginRight:"7%",    
-    //     color:"#B32728",
-    //     fontSize:14
-    // },
-    // LabelCarrinhoPreco:{        
-    //     width:"18%",
-    //     marginRight:"12%",
-    //     color:"#B32728",
-    //     fontSize:14
-    // },
-    // LabelCarrinhoQnt:{        
-    //     width:"18%",
-    //     marginRight:"9%",
-    //     color:"#B32728",
-    //     fontSize:14
-    // },
-    // LabelCarrinhoTotal:{        
-    //     width:"18%",
-    //     color:"#B32728",
-    //     fontSize:14
-    // },
-    // Itens:{
-    //     backgroundColor:"#fff",
-    //     height:10
-    //     // backgroundColor:"blue"
-    // },
-    // Item:{
-    //     marginVertical:5,
-    //     marginHorizontal:5,
-    //     elevation:5,
-    //     padding:"2%",
-    //     height:110,
-    //     backgroundColor: '#fff',
-    //     flexDirection:"row",
-    //     alignItems:"center"
-    // },
