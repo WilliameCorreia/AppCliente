@@ -10,6 +10,8 @@ import Pagamento from '../pages/Pagamento/Pagamento';
 import Categorias from '../pages/Categorias/Categorias';
 import Descricao from '../pages/DescricaoProduto/DescricaoProduto';
 import MeusProdutos from '../pages/MeusProdutos/MeusProdutos';
+import Carrinho from '../pages/Carrinho/Carrinho';
+import PerfilUsuario from '../pages/PerfilUsuario/PerfilUsuario';
 
 const Stack = createStackNavigator();
 
@@ -18,47 +20,36 @@ function RouteDashBoard() {
         <Stack.Navigator
             initialRouteName={'DashBoard'}
             headerMode={'screen'}
-        /* screenOptions={{
-            header:({ scene, navigation }) =>{
-                const { options } = scene.descriptor;
-                const Title = "Estabelecimentos"//options.headerTitle !== undefined ? options.headerTitle : options.title !== undefined ? options.title : scene.route.name;
-                const backColor = options.headerStyle.backgroundColor
+            screenOptions={{
+                header: ({ scene, navigation }) => {
+                    const { options } = scene.descriptor;
+                    const Title = options.headerTitle !== undefined ? options.headerTitle : options.title !== undefined ? options.title : scene.route.name;
+                    const backColor = options.headerStyle.backgroundColor
 
-                console.log(Title);
+                    console.log(Title);
+                    console.log(backColor);
 
-                return(
-                    <MyHeader
-                        color={backColor}
-                        title={Title}
-                        leftButton={<MenuButton onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}/>}
-                        rightButton={ title == 'Estabelecimentos' ? null : <MybackButton onPress={() => navigation.goBack()}/>}
-                    />
-                )
-            }
-        }} */
+                    return (
+                        <MyHeader
+                            color={backColor}
+                            title={Title}
+                            leftButton={<MenuButton onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />}
+                            rightButton={'title' == 'Estabelecimentos' ? null : <MybackButton onPress={() => navigation.goBack()} />}
+                        />
+                    )
+                }
+            }}
         >
             <Stack.Screen
                 name='DashBoard'
                 component={DashBoard}
-                options={{
-                    header: ({ }) => {
-                        return (
-                            <MyHeader
-                               color={backColor}
-                               title={Title}
-                               leftButton={<MenuButton onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />}
-                               rightButton={title == 'Estabelecimentos' ? null : <MybackButton onPress={() => navigation.goBack()} />}
-                            />
-                        )
-                    }
-                }}
+                options={{ headerStyle: { backgroundColor: '#B32728' }, title: "Estabelecimentos" }}
             />
             <Stack.Screen
                 name='Categorias'
                 component={Categorias}
                 options={{ headerStyle: { backgroundColor: '#B32728' } }}
             />
-
             <Stack.Screen
                 name='Pagamento'
                 component={Pagamento}
@@ -72,6 +63,16 @@ function RouteDashBoard() {
             <Stack.Screen
                 name='MeusProdutos'
                 component={MeusProdutos}
+                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+            />
+            <Stack.Screen
+                name='CarrinhoCompras'
+                component={Carrinho}
+                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+            />
+            <Stack.Screen
+                name='user'
+                component={PerfilUsuario}
                 options={{ headerStyle: { backgroundColor: '#B32728' } }}
             />
         </Stack.Navigator>

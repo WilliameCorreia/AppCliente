@@ -8,7 +8,7 @@ export default function MyHeader({ title, color, leftButton, rightButton }) {
         <Header
             statusBarProps={{ barStyle: 'light-content', backgroundColor: color }}
             barStyle="light-content"
-            centerComponent={<View><Text>{title}</Text></View>}
+            centerComponent={<View><Text style={styles.tituloHeader}>{title}</Text></View>}
             leftComponent={leftButton}
             rightComponent={rightButton}
             containerStyle={{
@@ -18,4 +18,9 @@ export default function MyHeader({ title, color, leftButton, rightButton }) {
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    tituloHeader:{
+        fontSize: 18,
+        color: '#fff',
+    }
+})
