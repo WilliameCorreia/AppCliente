@@ -1,7 +1,8 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import React from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-export default function DrawerContent() {
+export default function DrawerContent({ navigation }) {
+
     return (
         <View>
             <View style={styles.box1}>
@@ -10,22 +11,21 @@ export default function DrawerContent() {
                 <Text style={styles.textSublinhado}>___________</Text>
             </View>
             <View style={styles.box2}>
-                <View style={styles.box2_1}>
+                <TouchableOpacity style={styles.box2_1} onPress={() => navigation.navigate('MeusPedidos')}>
                     <Image style={styles.imgItem} source={require('../Assets/images/pedidos.png')} />
                     <Text style={styles.textItem}>Pedidos</Text>
-                </View>
-                <View style={styles.box2_2}>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.box2_2}>
                     <Image style={styles.imgItem} source={require('../Assets/images/pedidos.png')} />
                     <Text style={styles.textItem}>Suporte</Text>
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.box3}>
-                <View style={styles.box3_1}>
+                <TouchableOpacity style={styles.box3_1}>
                     <Image style={styles.imgSair} source={require('../Assets/images/sair.png')} />
                     <Text style={styles.textItem}>Sair</Text>
-                </View>
+                </TouchableOpacity>
             </View>
-
         </View>
     )
 }

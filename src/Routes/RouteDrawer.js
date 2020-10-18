@@ -11,7 +11,7 @@ export default function RouteDrawer() {
   return (
     <Drawer.Navigator
       drawerStyle={{backgroundColor: '#F23132'}}
-      drawerContent={({navigator}) => <DrawerContent/>}
+      drawerContent={({navigation}) => <DrawerContent navigation={navigation}/>}
     >
       <Drawer.Screen name="RouteApp" component={RouteApp} />
     </Drawer.Navigator>

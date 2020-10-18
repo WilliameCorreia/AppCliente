@@ -12,6 +12,7 @@ import Descricao from '../pages/DescricaoProduto/DescricaoProduto';
 import MeusProdutos from '../pages/MeusProdutos/MeusProdutos';
 import Carrinho from '../pages/Carrinho/Carrinho';
 import PerfilUsuario from '../pages/PerfilUsuario/PerfilUsuario';
+import MeusPedidos from '../pages/MeusPedidos/MeusPedidos';
 
 const Stack = createStackNavigator();
 
@@ -73,6 +74,11 @@ function RouteDashBoard() {
             <Stack.Screen
                 name='user'
                 component={PerfilUsuario}
+                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+            />
+            <Stack.Screen
+                name='MeusPedidos'
+                component={MeusPedidos}
                 options={{ headerStyle: { backgroundColor: '#B32728' } }}
             />
         </Stack.Navigator>
