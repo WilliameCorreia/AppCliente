@@ -9,7 +9,6 @@ export const UserReducerEstabelecimento = (state, action) => {
             return { ...state, Estabelecimento: action.estabelecimento }
             break;
         case 'setProdutos':
-
             if (state.Produtos.length > 0) {
 
                 let flag = false;
@@ -35,7 +34,22 @@ export const UserReducerEstabelecimento = (state, action) => {
                     ...state, Produtos: [action.produto]
                 }
             }
-
+            break;
+        case 'AddProdutosQuantidade':
+            state.Produtos.map(item => {
+                if (item.codeBar === action.produto.codeBar) {
+                    item.quantidade = item.quantidade + 1
+                }
+            })
+            return { ...state }
+            break;
+        case 'removerProdutosQuantidade':
+            state.Produtos.map(item => {
+                if (item.codeBar === action.produto.codeBar) {
+                    item.quantidade = item.quantidade - 1
+                }
+            })
+            return { ...state }
             break;
         default:
             break;

@@ -1,21 +1,25 @@
-import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React, { useContext, useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default function BtnProdutoQuantidade({ setQuantidade, quantidade }) {
+import EstabelecimentoContext from '../Contexts/Estabelecimento';
+
+export default function BtnProdutoQuantidade({ setQuantidade, quantidade, item, tipo }) {
+
+    const disabled = quantidade <= 1;
+
+    const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
 
     const adicionarvalor = () => {
-        setQuantidade(quantidade + 1)
+        tipo ? dispathEstabelecimento({type:'AddProdutosQuantidade', produto: item})  : setQuantidade(quantidade + 1) 
     }
 
     const removerValor = () => {
-        if(quantidade > 0){
-            setQuantidade(quantidade - 1)
-        }
+        tipo ? dispathEstabelecimento({type:'removerProdutosQuantidade', produto: item })  : setQuantidade(quantidade - 1)
     }
 
     return (
         <View style={styles.qnt}>
-          <TouchableOpacity style={styles.qntButton} onPress={() => removerValor()}>
+          <TouchableOpacity disabled={disabled} style={disabled ? styles.qntButtonDisabled : styles.qntButton} onPress={() => removerValor()}>
             <Text style={styles.qntSinal}>-</Text>
           </TouchableOpacity>
           <View style={styles.ContainerQnt}>
@@ -49,6 +53,15 @@ const styles = StyleSheet.create({
     },
     qntButton: {
         backgroundColor: "#B32728",
+        flexDirection: "column",
+        alignItems:"center",
+        justifyContent:"center",
+        borderRadius: 25,
+        width: 25,
+        height: 25
+    },
+    qntButtonDisabled: {
+        backgroundColor: "#b3272873",
         flexDirection: "column",
         alignItems:"center",
         justifyContent:"center",

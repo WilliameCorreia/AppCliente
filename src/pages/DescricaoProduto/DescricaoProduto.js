@@ -11,8 +11,6 @@ export default function DescricaoProduto({ navigation, route }) {
 
   const produto = route.params;
 
-  console.log(produto);
-
   const [quantidade, setQuantidade] = useState(0);
 
   const precoPersonalizado = (preco, initial) => {

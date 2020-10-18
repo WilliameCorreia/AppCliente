@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
 
 import BtnProdutoQuantidade from '../componentes/BtnProdutoQuantidade';
@@ -47,7 +47,7 @@ export default function CardItensProdutos({ produtos }) {
                     </View>
                     <View style={styles.qnt}>
                         <View style={styles.quantidade}>
-                            <BtnProdutoQuantidade quantidade={item.quantidade} />
+                            <BtnProdutoQuantidade quantidade={item.quantidade} item={item} tipo={true}/>
                         </View>
                         <View style={styles.Total}>
                             <Text style={styles.PrecoDecimais}>{precoPersonalizado(calculoTotal(item.preco, item.quantidade).toString(), true)},</Text>
