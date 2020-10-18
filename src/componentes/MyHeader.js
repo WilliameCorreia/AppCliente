@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Header } from 'react-native-elements'
 
 export default function MyHeader({ title, color, leftButton, rightButton }) {
-    console.log(title);
     return (
         <Header
             statusBarProps={{ barStyle: 'light-content', backgroundColor: color }}
