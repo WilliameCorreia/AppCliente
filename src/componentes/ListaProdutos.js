@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     },
     textoPreco: {
         fontSize: 20,
-        color: '#999999',
+        color: '#B32728',
         paddingLeft: 10,
         fontFamily: 'Montserrat-SemiBold',
         fontWeight: '600',
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     texto$:{
-        color: 'red',
+        color: '#B32728',
         fontWeight: 'bold',
         fontSize: 25
     }

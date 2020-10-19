@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 
 import ListaProdutos from '../../componentes/ListaProdutos';
 import { SearchBar } from 'react-native-elements';
@@ -12,26 +12,55 @@ export default function MeusProdutos({ navigation, route }) {
     const item = route.params;
 
     const { token } = useContext(AuthContext);
-    const [Produtos, SetProdutos] = useState();
+    const [texto, setTexto] = useState();
+    const [produtos, setProdutos] = useState({
+        data: [],
+        page: 1,
+        loading: false,
+    });
 
-    const produtos = () => {
-        Api.get(`v1/Produtos/${item.itemID}/${item.EstabelecimentoId}/${1}`, {
-            headers:{
+    const LoadProdutos = () => {
+        Api.get(`v1/Produtos/${item.categoriaId}/${item.EstabelecimentoId}/${1}`, {
+            headers: {
                 'Authorization': `Bearer ${token}`
             }
-        }).then(response =>{
+        }).then(response => {
             const { result } = response.data;
-            if(result){
-                SetProdutos(result);
+            if (result) {
+                setProdutos({
+                    data: [...result],
+                    page: 1,
+                    loading: false
+                })
             }
-            console.log(response.data);
-        }).catch(error =>{
+        }).catch(error => {
             console.log(error);
         })
     }
 
+    const pesquisar = () => {
+        if (texto) {
+            Api.get(`v1/Produtos/Pesquisar/${item.EstabelecimentoId}/${item.categoriaId}/${texto}/${1}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(response => {
+                const { result } = response.data; 
+                console.log(result);
+                setProdutos({
+                    data: [...result],
+                    page: produtos.page + 1,
+                    loading: false
+                })
+            }
+            ).catch(error => {
+                console.log(error);
+            })
+        }
+    }
+
     useEffect(() => {
-        produtos();
+        LoadProdutos();
     }, [])
 
     return (
@@ -43,12 +72,17 @@ export default function MeusProdutos({ navigation, route }) {
                     containerStyle={styles.search}
                     inputStyle={styles.input}
                     placeholderTextColor={"#fff"}
-                    //onChangeText={text => text.length < 1 ? LoadListaProdutos() && setTexto(text): setTexto(text)}
-                    //value={texto}
+                    onChangeText={text => text.length < 1 ? LoadProdutos() && setTexto(text): setTexto(text)}
+                    value={texto}
+                    cancelIcon={false}
+                    clearIcon={false}
+                    searchIcon={false}
                 />
-                {/* <TouchableOpacity onPress={pesquisar} style={styles.btnPesquisar}><Text style={styles.textPesquisar}>Pesquisar</Text></TouchableOpacity> */}
+                <TouchableOpacity onPress={pesquisar} style={styles.btnPesquisar}>
+                    <Text style={styles.textPesquisar}>Pesquisar</Text>
+                </TouchableOpacity>
             </View>
-            <ListaProdutos navigation={navigation} Produtos={Produtos} /* LoadListaProdutos */ /* loading={produtos.loading} *//>
+            <ListaProdutos navigation={navigation} Produtos={produtos.data} /* LoadListaProdutos */ /* loading={produtos.loading} */ />
         </View>
     )
 }

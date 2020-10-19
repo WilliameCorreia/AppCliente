@@ -38,7 +38,7 @@ export default function Categorias( { navigation, route } ) {
                     <TouchableOpacity
                         style={styles.btnCategoria}
                         key={item.id}
-                        onPress={() => navigation.navigate('MeusProdutos', {itemID: item.id, EstabelecimentoId: EstabelecimentoId} )}
+                        onPress={() => navigation.navigate('MeusProdutos', {categoriaId: item.id, EstabelecimentoId: EstabelecimentoId} )}
                     >
                         <Image
                             key={index}
