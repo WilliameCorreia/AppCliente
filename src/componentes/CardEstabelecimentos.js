@@ -1,59 +1,34 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View, Image, Dimensions } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Text, StyleSheet, TouchableOpacity, View, Image, Dimensions, ScrollView, SafeAreaView } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 
-import Api from '../services/Api';
-import AuthContext from '../Contexts/auth';
-import EstabelecimentoContext from '../Contexts/Estabelecimento';
+export default function CardEstabelecimentos({ estabelecimentos, selectedEstabelecimento, filtrados }) {
 
-export default function CardEstabelecimentos({ navigation }) {
+    console.log(filtrados.length)
 
-    const { token } = useContext(AuthContext);
-
-    const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
-
-    const [estabelecimentos, setEstabelecimentos] = useState([]);
-
-    function getEstabelecimentos() {
-        if (token) {
-            Api.get('v1/Estabelecimentos', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }).then(response => {
-                setEstabelecimentos(response.data.result)
-            }).catch(error => {
-                console.log(error)
-            })
-        }
+    const renderItem = ({item}) => {
+        return (
+            <TouchableOpacity key={item.id} style={styles.card} onPress={() => selectedEstabelecimento(item)}>
+                <View style={styles.box1}>
+                    <Text>{item._Estabelecimento}</Text>
+                    <Text>{item.email}</Text>
+                    <Text>{item.razaoSocial}</Text>
+                </View>
+                <View style={styles.box2}>
+                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
+                </View>
+            </TouchableOpacity>
+        )
     }
-
-    const selectedEstabelecimento = item =>{
-        dispathEstabelecimento({ type: 'setEstabelecimento', estabelecimento: item });
-        navigation.navigate('RouteButton');
-    }
-
-    useEffect(() => {
-        getEstabelecimentos();
-    }, [])
 
     return (
-        <ScrollView style={styles.container}>
-            {estabelecimentos.map(item => {
-                return (
-                    <TouchableOpacity key={item.id} style={styles.card} onPress={() => selectedEstabelecimento(item)}>
-                        <View style={styles.box1}>
-                            <Text>{item._Estabelecimento}</Text>
-                            <Text>{item.email}</Text>
-                            <Text>{item.razaoSocial}</Text>
-                        </View>
-                        <View style={styles.box2}>
-                            <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
-                        </View>
-                    </TouchableOpacity>
-                )
-            })}
-        </ScrollView>
+        <SafeAreaView>
+            <FlatList
+                data={filtrados.length > 0 ? filtrados : estabelecimentos}
+                renderItem={renderItem}
+                keyExtractor={item => item.codBar}
+            />
+        </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({

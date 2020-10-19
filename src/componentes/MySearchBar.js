@@ -1,9 +1,17 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import React, { useState } from 'react';
+import {View, StyleSheet, Dimensions, Platform} from 'react-native';
 import { SearchBar } from 'react-native-elements';
 
-export default function MySearchBar() {
+export default function MySearchBar({ action }) {
+
+  const [word, setWord] = useState();
+
+  const pesquisar = (texto) => {
+    setWord(texto);
+    action(texto);
+  }
+
   return (
     <View style={styles.container}>
       <SearchBar
@@ -11,9 +19,12 @@ export default function MySearchBar() {
         placeholder="pesquise o estabelecimento"
         containerStyle={styles.search}
         inputStyle={styles.input}
-        placeholderTextColor={'#fff'}
-        //onChangeText={}
-        //value={}
+        placeholderTextColor={'#606770e3'}
+        searchIcon={false}
+        cancelIcon={false}
+        clearIcon={false}
+        onChangeText={text => pesquisar(text)}
+        value={word}
       />
     </View>
   );
@@ -23,7 +34,7 @@ const styles = StyleSheet.create({
     container:{
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 10
+       // padding: 10
     },
     seachInput:{
         backgroundColor: '#B32728',
@@ -35,5 +46,5 @@ const styles = StyleSheet.create({
       elevation: 3, 
       borderRadius: 30,
       justifyContent: 'center',
-  },
+  }
 });
