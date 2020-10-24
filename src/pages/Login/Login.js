@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
     Text,
     View,
@@ -9,13 +9,13 @@ import {
     ActivityIndicator,
     StatusBar,
     KeyboardAvoidingView
-} from 'react-native'
+} from 'react-native';
 
-import { Icon } from 'react-native-elements'
-import auth from '@react-native-firebase/auth'
-import MyModal from '../../Componentes/MyModal'
+import { Icon } from 'react-native-elements';
+import auth from '@react-native-firebase/auth';
+import MyModal from '../../componentes/MyModal';
 
-import styles from './style'
+import styles from './style';
 
 export default function login({ navigation }) {
 
@@ -68,22 +68,23 @@ export default function login({ navigation }) {
             setloading(false)
         }
     }
+    
     return (
         <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={80} behavior={"position"}>
             <View style={styles.box1}>
-                <Image source={require('../../Assets/logo322.png')} style={styles.image_logo} />
-                <Image source={require('../../Assets/nomeLogo2.png')} style={styles.name_logo} />
+                <Image source={require('../../Assets/images/logo322.png')} style={styles.image_logo} />
+                <Image source={require('../../Assets/images/nomeLogo.png')} style={styles.name_logo} />
             </View>
-            <View style={styles.box2}>
+            <View style={[styles.box2]}>
                 {loading ? <ActivityIndicator size={"large"} color={'#ffff'}></ActivityIndicator> : <Text></Text>}
                 <View style={styles.SectionStyle}>
-                    <Icon
+                    {/* <Icon
                         style={styles.icon}
                         name='ios-contact'
                         type='ionicon'
                         size={40}
                         color={'#fff'}
-                    />
+                    /> */}
                     <TextInput
                         returnKeyType={'next'}
                         autoCapitalize={'none'}
@@ -95,7 +96,7 @@ export default function login({ navigation }) {
                     />
                 </View>
                 <View style={styles.SectionStyle}>
-                    <Icon
+                   {/*  <Icon
                         returnKeyType={'next'}
                         autoCapitalize={'none'}
                         style={styles.icon}
@@ -103,7 +104,7 @@ export default function login({ navigation }) {
                         type='ionicon'
                         size={40}
                         color={'#fff'}
-                    />
+                    /> */}
                     <TextInput
                         style={styles.input}
                         placeholder={'********'}

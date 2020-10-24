@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     box1:{
         justifyContent: 'center',
         alignItems: 'center',
+        paddingTop: 10
     },
     box2:{
         justifyContent: 'center',
@@ -56,13 +57,13 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-SemiBold', fontWeight: '600'
     },
     image_logo:{
-        width: (Dimensions.get('window').width / 10 * 6),
-        height: (Dimensions.get('window').height / 10 * 2),
+        width: (Dimensions.get('window').width / 100 * 80),
+        height: (Dimensions.get('window').height / 100 * 15),
         resizeMode: 'center',
     },
     name_logo:{
-        width: (Dimensions.get('window').width / 10 * 4),
-        height: (Dimensions.get('window').height / 10 * 2),
+        width: (Dimensions.get('window').width / 100 * 40),
+        height: (Dimensions.get('window').height / 100 * 15),
         resizeMode: 'center',
     },
     textBtn:{

@@ -20,7 +20,7 @@ const Stack = createStackNavigator();
 function RouteDashBoard() {
     return (
         <Stack.Navigator
-            initialRouteName={'DashBoard'}
+            initialRouteName={'Login'}
             headerMode={'screen'}
             screenOptions={{
                 header: ({ scene, navigation }) => {
