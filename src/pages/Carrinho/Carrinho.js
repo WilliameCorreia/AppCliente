@@ -59,10 +59,20 @@ export default function Carrinho({ navigation }) {
           <Text style={styles.ResumoTotalCentavos}>{precoPersonalizado(total.toString(), false)}</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.BtnComprar}>
-        <Text style={styles.BtnComprarText}>EFETUAR COMPRA</Text>
-      </TouchableOpacity>
+      <View style={{ flex: 1.1, backgroundColor: 'red', alignItems: 'center' }}>
+        <View style={{width: '80%', justifyContent: 'flex-start', marginVertical: 5}}>
+          <Text style={{ fontSize: 14, marginVertical: 5, color: '#fff' }}>Falta pouco!</Text>
+          <Text style={{ fontSize: 12, color: '#fff' }}>Para concluir seu pedido, precisamos que você se identifique. Como quer continuar ?</Text>
+        </View>
+        <TouchableOpacity style={{backgroundColor: '#fff', padding: 5, borderRadius: 30, paddingHorizontal: 10}}>
+          <Text>Entrar ou Cadastrar</Text>
+        </TouchableOpacity>
+      </View>
+      {/*  <View style={{backgroundColor: 'red', flex: 1}}>
+        <TouchableOpacity style={styles.BtnComprar}>
+          <Text style={styles.BtnComprarText}>EFETUAR COMPRA</Text>
+        </TouchableOpacity>
+      </View> */}
     </View>
   );
-
 }

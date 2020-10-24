@@ -79,7 +79,7 @@ export default function DescricaoProduto({ navigation, route }) {
         <TouchableOpacity disabled={quantidade <= 0} style={quantidade <= 0 ? styles.BtnCarrinhoDisabled : styles.BtnCarrinho} onPress={() => adicionarProduto()}>
           <Text style={styles.BtnCarrinhoText}>ADICIONAR AO CARRINHO</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.BtnComprar} onPress={() => Comprar()}>
+        <TouchableOpacity style={styles.BtnComprar} onPress={() => navigation.navigate('CarrinhoCompras')}>
           <Text style={styles.BtnComprarText}>COMPRAR</Text>
         </TouchableOpacity>
       </View>

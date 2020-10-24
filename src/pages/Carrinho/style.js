@@ -7,12 +7,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'      
     },
     container: {        
-        height:"83%",
+        flex: 4,
         backgroundColor: '#fff',
     },
     BtnComprar:{
         backgroundColor:"#9c3f3a",
-        height:"10%",
         alignItems:"center",
         justifyContent:"center"
     },
@@ -22,12 +21,14 @@ const styles = StyleSheet.create({
         fontSize:24
     },
     ResumoTotal:{
+        flex: 0.3,
         flexDirection:"row",
-        justifyContent:'space-around'
+        justifyContent:'space-around',
+        alignItems: 'center'
     },
     ResumoTotalText:{
         color:"#9c3f3a",
-        fontSize:28
+        fontSize:20
     },
     ResumoTotalValor:{
         flexDirection:"row",
@@ -41,12 +42,12 @@ const styles = StyleSheet.create({
     },
     ResumoTotalDecimal:{
         color:"#B32728",
-        fontSize:28,
+        fontSize:20,
         marginTop:"5%",        
     },
     ResumoTotalCentavos:{
         color:"#B32728",
-        fontSize:28,
+        fontSize: 14,
         marginTop:"5%",        
     },
 });

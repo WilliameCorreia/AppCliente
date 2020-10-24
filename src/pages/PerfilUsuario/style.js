@@ -9,7 +9,7 @@ const Styles = StyleSheet.create({
        backgroundColor:"#fff"
     },
     box1: {
-        height: windowHeight * 32,
+        height: windowHeight * 20,
         alignItems: 'center',
         justifyContent:"center",
         backgroundColor: "#B32728",
@@ -36,8 +36,8 @@ const Styles = StyleSheet.create({
     img: {
         backgroundColor:"#fff",
         borderRadius:100,
-        width: 120,
-        height: 120,
+        width: 60,
+        height: 60,
         marginBottom:"3%"
     },
     item: { 
@@ -46,7 +46,7 @@ const Styles = StyleSheet.create({
     },    
     Text: { 
         // fontFamily: "Montserrat-Medium", 
-        fontSize: 28,
+        fontSize: 20,
         color:"white",
         marginBottom:"2%"
     },
@@ -59,17 +59,16 @@ const Styles = StyleSheet.create({
         marginBottom:"2%"
     },
     itemInput: {
+        marginTop:"2%",
         marginHorizontal:"2%",
         marginBottom:"2%",
-        // height:"30%",      
-        // width:"96%",
         color: '#B32728',
         textAlign: "left",
         backgroundColor: "#fff",
         elevation: 10,
         borderRadius: 25,
         paddingLeft:22,
-        fontSize: 22,
+        fontSize: 18,
         fontFamily: "Montserrat-light",
         borderColor: "#b4b4b4"
     },
