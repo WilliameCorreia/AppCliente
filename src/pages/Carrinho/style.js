@@ -36,9 +36,15 @@ const styles = StyleSheet.create({
     ResumoTotalSimbolo:{
         color:"#B32728",
         fontSize:14,
-        marginTop:"10%"
+        marginTop:"10%",
+        marginHorizontal: 5,
     },
     ResumoTotalDecimal:{
+        color:"#B32728",
+        fontSize:28,
+        marginTop:"5%",        
+    },
+    ResumoTotalCentavos:{
         color:"#B32728",
         fontSize:28,
         marginTop:"5%",        

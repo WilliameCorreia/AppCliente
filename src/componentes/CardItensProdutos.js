@@ -7,7 +7,7 @@ export default function CardItensProdutos({ produtos }) {
 
     const calculoTotal = (preco, quantidade) => {
         let valor = preco.replace(",", ".") * quantidade;
-        return parseFloat(valor);
+        return parseFloat(valor).toFixed(2);
     }
 
     const precoPersonalizado = (preco, initial) => {
