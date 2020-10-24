@@ -30,8 +30,10 @@ export default function login({ navigation }) {
         if (usuario && password) {
             auth()
                 .signInWithEmailAndPassword(usuario, password)
-                .then(() => {
+                .then(({user}) => {
                     console.log('autenticado')
+                    console.log(user);
+                    setloading(false)
                 })
                 .catch(error => {
                     switch (error.code) {

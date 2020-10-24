@@ -1,7 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
+
+import auth from '@react-native-firebase/auth';
 
 export default function DrawerContent({ navigation }) {
+
+    const logout = () => {
+        Alert.alert('Mensagem', 'Deseja Realmente sair?', [
+            {
+              text: "Cancelar",
+              onPress: () => console.log("OK Pressed"),
+              style: "cancel"
+            },
+            { 
+                text: "OK", 
+                onPress: () => auth().signOut().then(() =>{
+                   // navigation.navigate('Login');
+                }).catch(error => {
+                    Alert.alert('Erro', toString(error.code))
+                })},
+          ],
+          { cancelable: true }
+        )
+    }
 
     return (
         <View>
@@ -21,7 +42,7 @@ export default function DrawerContent({ navigation }) {
                 </TouchableOpacity>
             </View>
             <View style={styles.box3}>
-                <TouchableOpacity style={styles.box3_1}>
+                <TouchableOpacity style={styles.box3_1} onPress={() => logout()}>
                     <Image style={styles.imgSair} source={require('../Assets/images/sair.png')} />
                     <Text style={styles.textItem}>Sair</Text>
                 </TouchableOpacity>

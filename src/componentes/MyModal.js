@@ -22,7 +22,7 @@ export default function MyModal({ activeModal, mensagem, mudarEstado }) {
     return (
         <View style={styles.centeredView}>
             <Modal
-                onDismiss={() => navigation.navigate('Home')}
+                //onDismiss={() => navigation.navigate('')}
                 animationType="slide"
                 transparent={true}
                 visible={activeModal}

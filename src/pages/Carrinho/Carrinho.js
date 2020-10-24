@@ -4,11 +4,15 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './style';
 import CardItensProdutos from '../../componentes/CardItensProdutos';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
+import AuthContext from '../../Contexts/auth';
 
 export default function Carrinho({ navigation }) {
 
   const { stateEstabelecimento } = useContext(EstabelecimentoContext);
+  const { stateCliente } = useContext(AuthContext);
   const [total, setTotal] = useState("0,00");
+
+  console.log(stateCliente);
 
   const valorTotal = () => {
     let valor = 0;
@@ -59,20 +63,23 @@ export default function Carrinho({ navigation }) {
           <Text style={styles.ResumoTotalCentavos}>{precoPersonalizado(total.toString(), false)}</Text>
         </View>
       </View>
-      <View style={{ flex: 1.1, backgroundColor: 'red', alignItems: 'center' }}>
-        <View style={{width: '80%', justifyContent: 'flex-start', marginVertical: 5}}>
-          <Text style={{ fontSize: 14, marginVertical: 5, color: '#fff' }}>Falta pouco!</Text>
-          <Text style={{ fontSize: 12, color: '#fff' }}>Para concluir seu pedido, precisamos que você se identifique. Como quer continuar ?</Text>
+      {stateCliente ?
+        <View style={{ backgroundColor: 'red', flex: 0.5, justifyContent: 'center' }}>
+          <TouchableOpacity style={[styles.BtnComprar, { flex: 1 }]}>
+            <Text style={styles.BtnComprarText}>EFETUAR COMPRA</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={{backgroundColor: '#fff', padding: 5, borderRadius: 30, paddingHorizontal: 10}} onPress={() => navigation.navigate('Login')}>
-          <Text>Entrar ou Cadastrar</Text>
-        </TouchableOpacity>
-      </View>
-      {/*  <View style={{backgroundColor: 'red', flex: 1}}>
-        <TouchableOpacity style={styles.BtnComprar}>
-          <Text style={styles.BtnComprarText}>EFETUAR COMPRA</Text>
-        </TouchableOpacity>
-      </View> */}
+        :
+        <View style={{ flex: 1.1, backgroundColor: 'red', alignItems: 'center' }}>
+          <View style={{ width: '80%', justifyContent: 'flex-start', marginVertical: 5 }}>
+            <Text style={{ fontSize: 14, marginVertical: 5, color: '#fff' }}>Falta pouco!</Text>
+            <Text style={{ fontSize: 12, color: '#fff' }}>Para concluir seu pedido, precisamos que você se identifique. Como quer continuar ?</Text>
+          </View>
+          <TouchableOpacity style={{ backgroundColor: '#fff', padding: 5, borderRadius: 30, paddingHorizontal: 10 }} onPress={() => navigation.navigate('Login')}>
+            <Text>Entrar ou Cadastrar</Text>
+          </TouchableOpacity>
+        </View>
+      }
     </View>
   );
 }

@@ -21,7 +21,7 @@ const Stack = createStackNavigator();
 function RouteDashBoard() {
     return (
         <Stack.Navigator
-            initialRouteName={'Login'}
+            initialRouteName={'DashBoard'}
             headerMode={'screen'}
             screenOptions={{
                 header: ({ scene, navigation }) => {

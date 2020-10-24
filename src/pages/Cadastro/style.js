@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     box1:{
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 40
+        marginTop: 5
     },
     box2:{
         justifyContent: 'center',
