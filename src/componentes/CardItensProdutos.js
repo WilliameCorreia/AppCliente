@@ -2,8 +2,11 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
 
 import BtnProdutoQuantidade from '../componentes/BtnProdutoQuantidade';
+import EstabelecimentoContext from '../Contexts/Estabelecimento';
 
 export default function CardItensProdutos({ produtos }) {
+
+    const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
 
     const calculoTotal = (preco, quantidade) => {
         let valor = preco.replace(",", ".") * quantidade;
@@ -30,6 +33,10 @@ export default function CardItensProdutos({ produtos }) {
 
     }
 
+    const DeletarItem = (item) =>{
+        dispathEstabelecimento({type: 'deletarProduto', produto: item})
+    }
+
     const renderItem = ({ item }) => {
         return (
             <View style={styles.Item}>
@@ -47,13 +54,18 @@ export default function CardItensProdutos({ produtos }) {
                     </View>
                     <View style={styles.qnt}>
                         <View style={styles.quantidade}>
-                            <BtnProdutoQuantidade quantidade={item.quantidade} item={item} tipo={true}/>
+                            <BtnProdutoQuantidade quantidade={item.quantidade} item={item} tipo={true} />
                         </View>
                         <View style={styles.Total}>
                             <Text style={styles.PrecoDecimais}>{precoPersonalizado(calculoTotal(item.preco, item.quantidade).toString(), true)},</Text>
                             <Text style={styles.PrecoCentavos}>{precoPersonalizado(calculoTotal(item.preco, item.quantidade).toString(), false)}</Text>
                         </View>
                     </View>
+                </View>
+                <View style={{ height: '100%', width: 20, position: 'relative', alignSelf: 'baseline', }}>
+                    <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={() => DeletarItem(item)}>
+                        <Text>X</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )

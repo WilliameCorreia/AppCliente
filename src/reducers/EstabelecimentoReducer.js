@@ -51,6 +51,9 @@ export const UserReducerEstabelecimento = (state, action) => {
             })
             return { ...state }
             break;
+        case 'deletarProduto':
+            return { ...state, Produtos: [...state.Produtos.filter((x) => x.codeBar !== action.produto.codeBar)] }
+            break;
         default:
             break;
     }
