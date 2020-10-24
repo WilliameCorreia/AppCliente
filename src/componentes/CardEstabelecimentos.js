@@ -26,7 +26,7 @@ export default function CardEstabelecimentos({ estabelecimentos, selectedEstabel
             <FlatList
                 data={filtrados.length > 0 ? filtrados : estabelecimentos}
                 renderItem={renderItem}
-                keyExtractor={item => item.codBar}
+                keyExtractor={(item, index) => index.toString()}
             />
         </SafeAreaView>
     )

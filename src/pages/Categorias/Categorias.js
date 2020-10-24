@@ -41,7 +41,7 @@ export default function Categorias( { navigation, route } ) {
                         onPress={() => navigation.navigate('MeusProdutos', {categoriaId: item.id, EstabelecimentoId: EstabelecimentoId} )}
                     >
                         <Image
-                            key={index}
+                            key={item.id}
                             source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/categorias/' + item.categoriaPng }}
                             style={styles.uriImg}
                             PlaceholderContent={<ActivityIndicator style={styles.Indicator} color={'red'} />}

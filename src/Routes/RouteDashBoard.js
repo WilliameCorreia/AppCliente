@@ -14,6 +14,7 @@ import Carrinho from '../pages/Carrinho/Carrinho';
 import PerfilUsuario from '../pages/PerfilUsuario/PerfilUsuario';
 import MeusPedidos from '../pages/MeusPedidos/MeusPedidos';
 import Login from '../pages/Login/Login';
+import Cadastro from '../pages/Cadastro/Cadastro';
 
 const Stack = createStackNavigator();
 
@@ -85,6 +86,11 @@ function RouteDashBoard() {
             <Stack.Screen
                 name='Login'
                 component={Login}
+                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+            />
+            <Stack.Screen
+                name='Cadastro'
+                component={Cadastro}
                 options={{ headerStyle: { backgroundColor: '#B32728' } }}
             />
         </Stack.Navigator>
