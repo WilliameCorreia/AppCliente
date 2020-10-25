@@ -102,15 +102,15 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     img: {
-        width: 60,
-        height: 60,
+        width: 70,
+        height: 70,
     },
     descricaoProduto: {
         flex: 1,
     },
     NomeProduto: {
         color: "#B32728",
-        fontSize: 14
+        fontSize: 15
     },
     Preco: {
         flex: 1,
