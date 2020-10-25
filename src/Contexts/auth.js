@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
         Api.post('Auth/login', credencias).then(response => {
             const { token } = response.data;
             setToken(token);
+            console.log(token);
         }).catch(error => {
             console.log(error);
         })

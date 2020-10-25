@@ -7,6 +7,7 @@ export default function CardEstabelecimentos({ estabelecimentos, selectedEstabel
     console.log(filtrados.length)
 
     const renderItem = ({item}) => {
+        console.log(item);
         return (
             <TouchableOpacity key={item.id} style={styles.card} onPress={() => selectedEstabelecimento(item)}>
                 <View style={styles.box1}>

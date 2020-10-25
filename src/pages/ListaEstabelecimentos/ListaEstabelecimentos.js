@@ -9,7 +9,9 @@ import Api from '../../services/Api';
 import AuthContext from '../../Contexts/auth';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 
-export default function ListaEstabelecimentos({ navigation }) {
+export default function ListaEstabelecimentos({ navigation, route }) {
+
+  const { tipo } = route.params;
 
   const { token } = useContext(AuthContext);
 
@@ -20,13 +22,16 @@ export default function ListaEstabelecimentos({ navigation }) {
   const [estabelecimentoFiltrados, setEstabelecimentoFiltrados] = useState([]);
 
   function getEstabelecimentos() {
+    console.log(tipo);
     if (token) {
-      Api.get('v1/Estabelecimentos', {
+      Api.get(`v1/Estabelecimentos/TipoEstabelecimento/${tipo}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       }).then(response => {
-        setEstabelecimentos(response.data.result);
+        const { result } = response.data;
+        console.log(result);
+        setEstabelecimentos([result]);
       }).catch(error => {
         console.log(error)
       })
