@@ -35,7 +35,7 @@ export default function DrawerContent({ navigation }) {
         <View>
             <View style={styles.box1}>
                 <Image style={styles.imgHeader} source={require('../Assets/images/user.png')} />
-                <Text style={styles.textNome}>PAULO ARTUR</Text>
+                <Text style={styles.textNome}>{stateCliente ? stateCliente.User.email : 'User'}</Text>
                 <Text style={styles.textSublinhado}>___________</Text>
             </View>
             <View style={styles.box2}>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         margin: 10
     },
     textNome: {
-        fontSize: 25,
+        fontSize: 18,
         color: '#fff',
         fontWeight: 'bold',
         marginTop: 20
