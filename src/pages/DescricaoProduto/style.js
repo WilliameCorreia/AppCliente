@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     container: {
-        height: "75%",
+        height: "90%",
         backgroundColor: '#fff',
     },
     ContainerImg: {
-        marginTop:"3%",
+        marginTop:"1%",
         backgroundColor: '#fff',
         elevation: 2,
         width:"100%",

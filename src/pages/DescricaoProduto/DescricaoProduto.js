@@ -4,6 +4,7 @@ import { Image, Text, TouchableOpacity, ScrollView, View, StyleSheet } from 'rea
 import styles from './style';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import BtnProdutoQuantidade from '../../componentes/BtnProdutoQuantidade';
+import MyModal from '../../componentes/MyModal';
 
 export default function DescricaoProduto({ navigation, route }) {
 
@@ -12,6 +13,8 @@ export default function DescricaoProduto({ navigation, route }) {
   const produto = route.params;
 
   const [quantidade, setQuantidade] = useState(0);
+  const [modalActive, setModalActive] = useState(false);
+  const [msnModal, setMsnModal] = useState('primeira passada');
 
   const precoPersonalizado = (preco, initial) => {
 
@@ -51,6 +54,9 @@ export default function DescricaoProduto({ navigation, route }) {
       }
     );
 
+    setMsnModal('Produto Adcionado ao Carrinho !')
+    setModalActive(true)
+
   }
 
   const Comprar = () => {
@@ -82,6 +88,9 @@ export default function DescricaoProduto({ navigation, route }) {
         <TouchableOpacity style={styles.BtnComprar} onPress={() => navigation.navigate('CarrinhoCompras')}>
           <Text style={styles.BtnComprarText}>COMPRAR</Text>
         </TouchableOpacity>
+      </View>
+      <View style={styles.box3}>
+        <MyModal activeModal={modalActive} mensagem={msnModal} mudarEstado={setModalActive} />
       </View>
     </View>
   );
