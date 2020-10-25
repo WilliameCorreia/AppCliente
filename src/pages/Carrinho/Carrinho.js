@@ -10,9 +10,9 @@ export default function Carrinho({ navigation }) {
 
   const { stateEstabelecimento } = useContext(EstabelecimentoContext);
   const { stateCliente } = useContext(AuthContext);
+  const { User } = stateCliente;
   const [total, setTotal] = useState("0,00");
 
-  console.log(stateCliente);
 
   const valorTotal = () => {
     let valor = 0;
@@ -63,7 +63,7 @@ export default function Carrinho({ navigation }) {
           <Text style={styles.ResumoTotalCentavos}>{precoPersonalizado(total.toString(), false)}</Text>
         </View>
       </View>
-      {stateCliente ?
+      {User ?
         <View style={{ backgroundColor: 'red', flex: 0.5, justifyContent: 'center' }}>
           <TouchableOpacity style={[styles.BtnComprar, { flex: 1 }]}>
             <Text style={styles.BtnComprarText}>EFETUAR COMPRA</Text>

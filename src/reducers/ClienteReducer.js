@@ -1,4 +1,6 @@
-export const initialStateCliente = {}
+export const initialStateCliente = {
+    User: null
+}
 
 export const UserReducerCliente = (state, action) => {
     switch (action.type) {
@@ -6,7 +8,7 @@ export const UserReducerCliente = (state, action) => {
             return {...state, User: action.user}
             break;
             case 'delUser':
-                return null
+                return {...state, User: null }
                 break;
         default:
             break;

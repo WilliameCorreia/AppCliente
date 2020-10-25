@@ -9,7 +9,27 @@ import {
     FlatList
 } from 'react-native'
 
-export default function listaProdutos({ Produtos, loading, navigation, LoadListaProdutos}) {
+export default function listaProdutos({ Produtos, loading, navigation, LoadListaProdutos }) {
+
+    const precoPersonalizado = (preco, initial) => {
+
+        if (preco.includes('.')) {
+            let valor = preco.split('.');
+            if (initial) {
+                return valor[0]
+            } else {
+                return valor[1]
+            }
+        } else {
+            let valor = preco.split(',');
+            if (initial) {
+                return valor[0]
+            } else {
+                return valor[1]
+            }
+        }
+
+    }
 
     const _renderItem = ({ item }) => (
         <View>
@@ -23,8 +43,9 @@ export default function listaProdutos({ Produtos, loading, navigation, LoadLista
                             <Text style={styles.nomeProduto}>{item._Produto}</Text>
                         </View>
                         <View style={styles.box1_2}>
-                            <Text style={styles.textoPreco}>R$</Text>
-                            <Text style={[styles.textoPreco, styles.texto$]}>{item.preco}</Text>
+                            <Text style={styles.PrecoSimbolo}>R$</Text>
+                            <Text style={styles.PrecoDecimais}>{precoPersonalizado(item.preco, true)},</Text>
+                            <Text style={styles.PrecoCentavos}>{precoPersonalizado(item.preco, false)}</Text>
                         </View>
                     </View>
                     <View style={styles.box2}>
@@ -58,14 +79,14 @@ export default function listaProdutos({ Produtos, loading, navigation, LoadLista
     return (
         <View>
             {<FlatList
-            data={Produtos}
-            renderItem={_renderItem}
-            keyExtractor={item => item.codbar}
-            //onEndReached={Produtos.length >= 5 ? LoadListaProdutos : null}
-            onEndReachedThreshold={0.1}
-            ListFooterComponent={renderFooter}
-            ListEmptyComponent={RenderEmpty}
-        />}
+                data={Produtos}
+                renderItem={_renderItem}
+                keyExtractor={(item, index) => index.toString()}
+                //onEndReached={Produtos.length >= 5 ? LoadListaProdutos : null}
+                onEndReachedThreshold={0.1}
+                ListFooterComponent={renderFooter}
+                ListEmptyComponent={RenderEmpty}
+            />}
         </View>
     )
 
@@ -92,10 +113,10 @@ const styles = StyleSheet.create({
         padding: 10,
         justifyContent: 'space-evenly',
     },
-    box1_2:{
+    box1_2: {
         flexDirection: 'row',
         alignItems: 'center'
-    },  
+    },
     box2: {
         flex: 1.2,
         alignItems: 'center',
@@ -112,12 +133,18 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-SemiBold',
         fontWeight: '600',
     },
-    textoPreco: {
-        fontSize: 20,
-        color: '#B32728',
-        paddingLeft: 10,
-        fontFamily: 'Montserrat-SemiBold',
-        fontWeight: '600',
+    PrecoSimbolo: {
+        margin: 5,
+        color: "#B32728",
+        fontSize: 16
+    },
+    PrecoDecimais: {
+        color: "#B32728",
+        fontSize: 22,
+    },
+    PrecoCentavos: {
+        color: "#B32728",
+        fontSize: 16
     },
     dispon: {
         backgroundColor: '#f23132',
@@ -148,7 +175,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-SemiBold',
         fontWeight: '600'
     },
-    texto$:{
+    texto$: {
         color: '#B32728',
         fontWeight: 'bold',
         fontSize: 25

@@ -7,10 +7,7 @@ import AuthContext from '../Contexts/auth';
 export default function DrawerContent({ navigation }) {
 
     const { stateCliente } = useContext(AuthContext);
-
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@");
-    console.log(stateCliente);
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@");
+    const { user } = stateCliente; 
 
     const logout = () => {
         Alert.alert('Mensagem', 'Deseja Realmente sair?', [
@@ -35,7 +32,7 @@ export default function DrawerContent({ navigation }) {
         <View>
             <View style={styles.box1}>
                 <Image style={styles.imgHeader} source={require('../Assets/images/user.png')} />
-                <Text style={styles.textNome}>{stateCliente ? stateCliente.User.email : 'User'}</Text>
+                <Text style={styles.textNome}>{ user ? User.email : 'User'}</Text>
                 <Text style={styles.textSublinhado}>___________</Text>
             </View>
             <View style={styles.box2}>

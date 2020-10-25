@@ -11,25 +11,25 @@ const CarroselCategorias = ({ navigation, EstabelecimentoId }) => {
             </View>
             <View style={styles.box2}>
                 <View style={styles.box2_1}>
-                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, itemID: 1 })}>
+                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, categoriaId: 1 })}>
                         <Image style={styles.img} source={require('../Assets/images/açougue.png')} />
                     </TouchableOpacity>
                     <Text style={styles.textBtn}>Açougue</Text>
                 </View>
                 <View style={styles.box2_1}>
-                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, itemID: 4 })}>
+                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, categoriaId: 4 })}>
                         <Image style={styles.img} source={require('../Assets/images/bebidas.png')} />
                     </TouchableOpacity>
                     <Text style={styles.textBtn}>Bebidas</Text>
                 </View>
                 <View style={styles.box2_1}>
-                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, itemID: 12 })}>
+                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, categoriaId: 12 })}>
                         <Image style={styles.img} source={require('../Assets/images/cereais.png')} />
                     </TouchableOpacity>
                     <Text style={styles.textBtn}>Cereais</Text>
                 </View>
                 <View style={styles.box2_1}>
-                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, itemID: 10 })}>
+                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, categoriaId: 10 })}>
                         <Image style={styles.img} source={require('../Assets/images/hortifruti.png')} />
                     </TouchableOpacity>
                     <Text style={styles.textBtn}>Hort Fruti</Text>
@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
         color: '#B32728'
     },
     img: {
-        width: 70,
-        height: 70,
+        width: 60,
+        height: 60,
         margin: 5,
         borderRadius: 10,
     }
