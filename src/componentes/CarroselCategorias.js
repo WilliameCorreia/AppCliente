@@ -1,11 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native'
 
 const CarroselCategorias = ({ navigation, EstabelecimentoId }) => {
     return (
         <View style={styles.container}>
             <View style={styles.box1}>
-                <TouchableOpacity onPress={() => navigation.navigate('Categorias', EstabelecimentoId)}>
+                <TouchableOpacity style={styles.btnCat} onPress={() => navigation.navigate('Categorias', EstabelecimentoId)}>
                     <Text style={styles.textHeader}>CATEGORIAS</Text>
                 </TouchableOpacity>
             </View>
@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     box1: {
-
+        height: 30,
+        justifyContent: 'center'
     },
     box2: {
         backgroundColor: '#fff',
@@ -64,7 +65,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         backgroundColor: '#fff',
         color: '#B32728',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
     },
     btn: {
         backgroundColor: '#fff',
@@ -72,6 +74,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10
+    },
+    btnCat:{
+        width: (Dimensions.get('screen').width * 1.5),
+        height: '60%'
     },
     textBtn: {
         color: '#B32728'

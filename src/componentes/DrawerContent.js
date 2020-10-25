@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
 
 import auth from '@react-native-firebase/auth';
+import AuthContext from '../Contexts/auth';
 
 export default function DrawerContent({ navigation }) {
+
+    const { stateCliente } = useContext(AuthContext);
+
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.log(stateCliente);
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@");
 
     const logout = () => {
         Alert.alert('Mensagem', 'Deseja Realmente sair?', [

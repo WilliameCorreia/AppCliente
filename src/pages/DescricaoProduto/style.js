@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     img: {
-        width: "50%",
+        width: "60%",
         height: "80%",
         alignSelf: "center"
     },
@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
         padding:"10%",
         color: "white",
         fontWeight: "bold",
-        fontSize: 24
+        fontSize: 24,
+        textAlign: 'center'
     },
     BtnsFinalizarContainer:{
         flexDirection:"row",
@@ -114,8 +115,8 @@ const styles = StyleSheet.create({
         fontWeight:"bold"      
     },
     bntQuantidade:{
-        flex: 1,
-        paddingHorizontal: 10,
+        height: '15%',
+        marginHorizontal: 10
     }
 });
 

@@ -46,7 +46,7 @@ function RouteDashBoard() {
             <Stack.Screen
                 name='DashBoard'
                 component={DashBoard}
-                options={{ headerStyle: { backgroundColor: '#B32728' }, title: "Estabelecimentos" }}
+                options={{ headerStyle: { backgroundColor: '#B32728' }, title: "Estabelecimento" }}
             />
             <Stack.Screen
                 name='Categorias'
@@ -71,7 +71,7 @@ function RouteDashBoard() {
             <Stack.Screen
                 name='CarrinhoCompras'
                 component={Carrinho}
-                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+                options={{ headerStyle: { backgroundColor: '#B32728' }, title: 'Carrinho de Compras' }}
             />
             <Stack.Screen
                 name='user'

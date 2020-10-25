@@ -72,7 +72,7 @@ export default function login({ navigation }) {
     }
 
     return (
-        <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={80} behavior={"position"}>
+        <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={40} behavior={"position"}>
             <View style={styles.box1}>
                 <Image source={require('../../Assets/images/logoInicio1.png')} style={styles.image_logo} />
             </View>

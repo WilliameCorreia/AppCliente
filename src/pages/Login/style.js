@@ -17,11 +17,12 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     input: {
-        fontSize: 16,
+        width: '80%',
+        fontSize: 15,
         backgroundColor: 'transparent',
         fontFamily: 'Montserrat-SemiBold', 
         fontWeight: '600',
-        marginLeft: 10
+        marginLeft: 5
     },
     SectionStyle: {
         width: (Dimensions.get('window').width / 4 * 3),
