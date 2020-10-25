@@ -71,12 +71,12 @@ export default function Carrinho({ navigation }) {
         </View>
         :
         <View style={{ flex: 1.1, backgroundColor: '#F23132', alignItems: 'center' }}>
-          <View style={{ width: '80%', justifyContent: 'flex-start', marginVertical: 5 }}>
+          <View style={{ width: '60%', justifyContent: 'flex-start', marginVertical: 5 }}>
             <Text style={{ fontSize: 14, marginVertical: 5, color: '#fff' }}>Falta pouco!</Text>
             <Text style={{ fontSize: 12, color: '#fff' }}>Para concluir seu pedido, precisamos que você se identifique. Como quer continuar ?</Text>
           </View>
           <TouchableOpacity style={{ backgroundColor: '#fff', padding: 5, borderRadius: 30, paddingHorizontal: 10 }} onPress={() => navigation.navigate('Login')}>
-            <Text>Entrar ou Cadastrar</Text>
+            <Text style={{color: '#b32728', fontWeight: 'bold'}}>Entrar ou Cadastrar</Text>
           </TouchableOpacity>
         </View>
       }

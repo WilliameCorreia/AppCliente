@@ -64,7 +64,7 @@ export default function CardItensProdutos({ produtos }) {
                 </View>
                 <View style={{ height: '100%', width: 20, position: 'relative', alignSelf: 'baseline', }}>
                     <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={() => DeletarItem(item)}>
-                        <Text>X</Text>
+                        <Image style={{width: 15, height: 15, marginTop: 5, tintColor: '#b32728'}} source={require('../Assets/images/cancel.png')}/>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native'
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor: '#F23132',
+        backgroundColor: '#b32728',
     },
     box1:{
         justifyContent: 'center',
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         margin: 15,
         borderWidth: 4,
         borderRadius: 30,
-        borderColor: '#9C3F3A',
+        borderColor: '#ff7223',
         backgroundColor: 'transparent',
         paddingLeft: 20,
         fontSize: 16,
