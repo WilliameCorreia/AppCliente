@@ -3,12 +3,13 @@ import { StyleSheet, Dimensions } from 'react-native'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FF7223',
+        backgroundColor: '#F23132',
     },
     box1:{
+        height: '35%',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: 10
+        paddingTop: 10,
     },
     box2:{
         justifyContent: 'center',
@@ -16,13 +17,11 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     input: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
         fontSize: 16,
         backgroundColor: 'transparent',
-        fontFamily: 'Montserrat-SemiBold', fontWeight: '600'
+        fontFamily: 'Montserrat-SemiBold', 
+        fontWeight: '600',
+        marginLeft: 10
     },
     SectionStyle: {
         width: (Dimensions.get('window').width / 4 * 3),
@@ -33,12 +32,18 @@ const styles = StyleSheet.create({
         borderColor: '#9C3F3A',
         textAlign: "center",
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: 'transparent',
     },
     icon:{
-        margin: 15,
+        width: 50,
+        height: 50,
+        tintColor: '#9C3F3A',
+    },
+    icon2:{
+        width:35,
+        height: 35,
+        tintColor: '#9C3F3A',
+        marginLeft: 10,
     },
     btn: {
         backgroundColor: "#ffff",

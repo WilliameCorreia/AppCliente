@@ -30,7 +30,7 @@ export default function login({ navigation }) {
         if (usuario && password) {
             auth()
                 .signInWithEmailAndPassword(usuario, password)
-                .then(({user}) => {
+                .then(({ user }) => {
                     console.log('autenticado')
                     console.log(user);
                     setloading(false)
@@ -70,23 +70,16 @@ export default function login({ navigation }) {
             setloading(false)
         }
     }
-    
+
     return (
         <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={80} behavior={"position"}>
             <View style={styles.box1}>
-                <Image source={require('../../Assets/images/logo322.png')} style={styles.image_logo} />
-                <Image source={require('../../Assets/images/nomeLogo.png')} style={styles.name_logo} />
+                <Image source={require('../../Assets/images/logoInicio1.png')} style={styles.image_logo} />
             </View>
-            <View style={[styles.box2]}>
-                {loading ? <ActivityIndicator size={"large"} color={'#ffff'}></ActivityIndicator> : <Text></Text>}
+            {loading ? <ActivityIndicator size={"large"} color={'#ffff'}></ActivityIndicator> : <Text></Text>}
+            <View style={styles.box2}>
                 <View style={styles.SectionStyle}>
-                    {/* <Icon
-                        style={styles.icon}
-                        name='ios-contact'
-                        type='ionicon'
-                        size={40}
-                        color={'#fff'}
-                    /> */}
+                    <Image style={styles.icon} source={require('../../Assets/images/user.png')} />
                     <TextInput
                         returnKeyType={'next'}
                         autoCapitalize={'none'}
@@ -98,16 +91,10 @@ export default function login({ navigation }) {
                     />
                 </View>
                 <View style={styles.SectionStyle}>
-                   {/*  <Icon
+                    <Image style={styles.icon2} source={require('../../Assets/images/padlock.png')} />
+                    <TextInput
                         returnKeyType={'next'}
                         autoCapitalize={'none'}
-                        style={styles.icon}
-                        name='ios-lock'
-                        type='ionicon'
-                        size={40}
-                        color={'#fff'}
-                    /> */}
-                    <TextInput
                         style={styles.input}
                         placeholder={'********'}
                         placeholderTextColor={'#ffff'}

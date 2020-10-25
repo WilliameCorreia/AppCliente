@@ -70,7 +70,7 @@ export default function Carrinho({ navigation }) {
           </TouchableOpacity>
         </View>
         :
-        <View style={{ flex: 1.1, backgroundColor: 'red', alignItems: 'center' }}>
+        <View style={{ flex: 1.1, backgroundColor: '#F23132', alignItems: 'center' }}>
           <View style={{ width: '80%', justifyContent: 'flex-start', marginVertical: 5 }}>
             <Text style={{ fontSize: 14, marginVertical: 5, color: '#fff' }}>Falta pouco!</Text>
             <Text style={{ fontSize: 12, color: '#fff' }}>Para concluir seu pedido, precisamos que você se identifique. Como quer continuar ?</Text>
