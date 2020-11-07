@@ -22,7 +22,6 @@ export default function ListaEstabelecimentos({ navigation, route }) {
   const [estabelecimentoFiltrados, setEstabelecimentoFiltrados] = useState([]);
 
   function getEstabelecimentos() {
-    console.log(tipo);
     if (token) {
       Api.get(`v1/Estabelecimentos/TipoEstabelecimento/${tipo}`, {
         headers: {

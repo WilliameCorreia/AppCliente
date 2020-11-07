@@ -5,10 +5,13 @@ import styles from './style';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import BtnProdutoQuantidade from '../../componentes/BtnProdutoQuantidade';
 import MyModal from '../../componentes/MyModal';
+import AuthContext from '../../Contexts/auth';
 
 export default function DescricaoProduto({ navigation, route }) {
 
   const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
+  const { stateCliente } = useContext(AuthContext);
+  const { User } = stateCliente;
 
   const produto = route.params;
 
@@ -54,7 +57,7 @@ export default function DescricaoProduto({ navigation, route }) {
       }
     );
 
-    setMsnModal('Produto Adcionado ao Carrinho !')
+    setMsnModal('Produto Adicionado ao Carrinho !')
     setModalActive(true)
 
   }
@@ -81,14 +84,27 @@ export default function DescricaoProduto({ navigation, route }) {
           <Text style={styles.ResumoTotalSimbolo}>{precoPersonalizado(produto.preco, false)}</Text>
         </View>
       </View>
-      <View style={styles.BtnsFinalizarContainer}>
-        <TouchableOpacity disabled={quantidade <= 0} style={quantidade <= 0 ? styles.BtnCarrinhoDisabled : styles.BtnCarrinho} onPress={() => adicionarProduto()}>
-          <Text style={styles.BtnCarrinhoText}>ADICIONAR CARRINHO</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.BtnComprar} onPress={() => navigation.navigate('CarrinhoCompras')}>
-          <Text style={styles.BtnComprarText}>COMPRAR</Text>
-        </TouchableOpacity>
-      </View>
+      {User ?
+        <View style={styles.BtnsFinalizarContainer}>
+          <TouchableOpacity disabled={quantidade <= 0} style={quantidade <= 0 ? styles.BtnCarrinhoDisabled : styles.BtnCarrinho} onPress={() => adicionarProduto()}>
+            <Text style={styles.BtnCarrinhoText}>ADICIONAR CARRINHO</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.BtnComprar} onPress={() => navigation.navigate('CarrinhoCompras')}>
+            <Text style={styles.BtnComprarText}>COMPRAR</Text>
+          </TouchableOpacity>
+        </View>
+        :
+        <View style={{ flex: 1, backgroundColor: '#F23132', alignItems: 'center' }}>
+          <View style={{ width: '60%', justifyContent: 'flex-start', marginVertical: 5 }}>
+            <Text style={{ fontSize: 14, marginVertical: 5, color: '#fff' }}>Falta pouco!</Text>
+            <Text style={{ fontSize: 12, color: '#fff' }}>Para adicionar itens ao seu Carrinho, precisamos que você se identifique. Como quer continuar ?</Text>
+          </View>
+          <TouchableOpacity style={{ backgroundColor: '#fff', padding: 5, borderRadius: 30, paddingHorizontal: 10 }} onPress={() => navigation.navigate('Login')}>
+            <Text style={{color: '#b32728', fontWeight: 'bold'}}>Entrar ou Cadastrar</Text>
+          </TouchableOpacity>
+        </View>
+    }
+
       <View style={styles.box3}>
         <MyModal activeModal={modalActive} mensagem={msnModal} mudarEstado={setModalActive} />
       </View>

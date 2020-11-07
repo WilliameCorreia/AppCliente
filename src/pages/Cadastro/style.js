@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     box1:{
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 5
     },
     box2:{
         justifyContent: 'center',
@@ -16,13 +15,13 @@ const styles = StyleSheet.create({
         marginBottom: 50
     },
     image_person:{
-        width: (Dimensions.get('window').width / 10 * 3),
-        height: (Dimensions.get('window').width / 10 * 3),
-        margin: 20
+        width: (Dimensions.get('window').width / 10 * 2),
+        height: (Dimensions.get('window').width / 10 * 2),
+        margin: 10
     },
     input: {
         width: (Dimensions.get('window').width / 4 * 3),
-        height: (Dimensions.get('window').width / 7),
+        height: (Dimensions.get('window').width / 8),
         margin: 15,
         borderWidth: 4,
         borderRadius: 30,

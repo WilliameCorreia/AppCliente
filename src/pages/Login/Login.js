@@ -11,7 +11,6 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 
-import { Icon } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import MyModal from '../../componentes/MyModal';
 
@@ -31,9 +30,8 @@ export default function login({ navigation }) {
             auth()
                 .signInWithEmailAndPassword(usuario, password)
                 .then(({ user }) => {
-                    console.log('autenticado')
-                    console.log(user);
                     setloading(false)
+                    navigation.goBack();
                 })
                 .catch(error => {
                     switch (error.code) {

@@ -10,7 +10,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 
     const [token, setToken] = useState();
-    const [ stateCliente, dispathCliente ] = useReducer(UserReducerCliente, initialStateCliente);
+    const [stateCliente, dispathCliente] = useReducer(UserReducerCliente, initialStateCliente);
 
     async function GetAuth() {
         Api.post('Auth/login', credencias).then(response => {
@@ -22,24 +22,42 @@ export const AuthProvider = ({ children }) => {
         })
     }
 
-    async function signIn(user) {
-        console.log("@@@@@@@@@@@@@@@@@SignIn@@@@@@@@@@@@@@@@@@@@@@@")
-        setTimeout(() => {
-            if (user) {
-                dispathCliente({ type: 'AddUser', user: { email: user.email, token: user.uid } })
-            } else {
-                dispathCliente({ type: 'delUser'})
+    async function GetUsuario(user) {
+
+        const { email, uid } = user;
+
+        Api.get(`v1/Clientes/FilterClienteCpfNome?nomeCliente=${'williame'}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
             }
-        }, 2000)
+        }).then(response => {
+            const { result } = response.data;
+            dispathCliente({ type: 'AddUser', user: { email: user.email, token: user.uid, id: result[0].cod_Client, nome: result[0].nome_Client } })
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+
+    async function signIn(user) {
+        if (token) {
+            if (user) {
+                GetUsuario(user);
+            } else {
+                dispathCliente({ type: 'delUser' })
+            }
+        }
     }
 
     useEffect(() => {
-        const subscriber = auth().onUserChanged(signIn)
         GetAuth();
     }, [])
-    
+
+    useEffect(() => {
+        const subscriber = auth().onUserChanged(signIn)
+    }, [token])
+
     return (
-        <AuthContext.Provider value={{token: token, stateCliente, dispathCliente}}>
+        <AuthContext.Provider value={{ token: token, stateCliente, dispathCliente }}>
             {children}
         </AuthContext.Provider>
     )
