@@ -56,7 +56,6 @@ export default function DescricaoProduto({ navigation, route }) {
         'Authorization': `Bearer ${token}`
       }
     }).then(response => {
-      console.log(response);
       setMsnModal('Produto Adicionado ao Carrinho !')
       setModalActive(true)
     }).catch(error => {

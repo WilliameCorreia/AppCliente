@@ -6,10 +6,12 @@ import CardItensProdutos from '../../componentes/CardItensProdutos';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import AuthContext from '../../Contexts/auth';
 import Api from '../../services/Api';
+import { clockRunning } from 'react-native-reanimated';
 
 export default function Carrinho({ navigation }) {
 
   const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
+  const { Pedido } = stateEstabelecimento;
   const { Estabelecimento } = stateEstabelecimento;
   const { Carrinho } = stateEstabelecimento;
   const { stateCliente, token } = useContext(AuthContext);
@@ -22,12 +24,10 @@ export default function Carrinho({ navigation }) {
     if (Carrinho) {
       let valor = 0;
       stateEstabelecimento.Carrinho.forEach(item => {
-        console.log(item);
         valor += (parseFloat(item.produtos.preco.replace(",", ".")) * item.quantidade);
       });
       setTotal(valor.toFixed(2))
     }
-
   }
 
   const precoPersonalizado = (preco, initial) => {
@@ -66,6 +66,25 @@ export default function Carrinho({ navigation }) {
     })
   }
 
+  const FinalizarCompra = () => {
+    Api.put(`/api/v1/Pedidos/${Pedido.cod_Pedido}`, {
+      cod_Pedido: Pedido.cod_Pedido,
+      cod_ClientId: User.id,
+      valor_Total: total,
+      dataHora_Pedido: "2020-11-08",
+      pedido_Concluido: true,
+      estabelecimentoId: Estabelecimento.id,
+    }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(response => {
+      const { result } = response.data;
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+
   useEffect(() => {
     GetProdutosCarrinho();
   }, [])
@@ -89,7 +108,7 @@ export default function Carrinho({ navigation }) {
       </View>
       {User ?
         <View style={{ backgroundColor: 'red', flex: 0.5, justifyContent: 'center' }}>
-          <TouchableOpacity style={[styles.BtnComprar, { flex: 1 }]}>
+          <TouchableOpacity style={[styles.BtnComprar, { flex: 1 }]} onPress={() => FinalizarCompra()}>
             <Text style={styles.BtnComprarText}>EFETUAR COMPRA</Text>
           </TouchableOpacity>
         </View>
