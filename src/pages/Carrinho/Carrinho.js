@@ -70,7 +70,7 @@ export default function Carrinho({ navigation }) {
     Api.put(`/api/v1/Pedidos/${Pedido.cod_Pedido}`, {
       cod_Pedido: Pedido.cod_Pedido,
       cod_ClientId: User.id,
-      valor_Total: total,
+      valor_Total: parseFloat(total.replace(',', '.')),
       dataHora_Pedido: "2020-11-08",
       pedido_Concluido: true,
       estabelecimentoId: Estabelecimento.id,
