@@ -5,22 +5,29 @@ import styles from './style';
 import CardItensProdutos from '../../componentes/CardItensProdutos';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import AuthContext from '../../Contexts/auth';
+import Api from '../../services/Api';
 
 export default function Carrinho({ navigation }) {
 
-  const { stateEstabelecimento } = useContext(EstabelecimentoContext);
-  const { stateCliente } = useContext(AuthContext);
+  const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
+  const { Estabelecimento } = stateEstabelecimento;
+  const { Carrinho } = stateEstabelecimento;
+  const { stateCliente, token } = useContext(AuthContext);
   const { User } = stateCliente;
   const [total, setTotal] = useState("0,00");
+  const [produtos, setProdutos] = useState([]);
 
 
   const valorTotal = () => {
-    let valor = 0;
-    stateEstabelecimento.Produtos.forEach(item => {
-      console.log(item);
-      valor += (parseFloat(item.preco.replace(",", ".")) * item.quantidade);
-    });
-    setTotal(valor.toFixed(2))
+    if (Carrinho) {
+      let valor = 0;
+      stateEstabelecimento.Carrinho.forEach(item => {
+        console.log(item);
+        valor += (parseFloat(item.produtos.preco.replace(",", ".")) * item.quantidade);
+      });
+      setTotal(valor.toFixed(2))
+    }
+
   }
 
   const precoPersonalizado = (preco, initial) => {
@@ -46,6 +53,23 @@ export default function Carrinho({ navigation }) {
     }
   }
 
+  const GetProdutosCarrinho = () => {
+    Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.id},${Estabelecimento.id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(response => {
+      const { result } = response.data;
+      dispathEstabelecimento({ type: 'AddCarrinho', carrinho: result });
+    }).catch(error => {
+      console.log(error);
+    })
+  }
+
+  useEffect(() => {
+    GetProdutosCarrinho();
+  }, [])
+
   useEffect(() => {
     valorTotal();
   }, [stateEstabelecimento])
@@ -53,7 +77,7 @@ export default function Carrinho({ navigation }) {
   return (
     <View style={styles.container1}>
       <View style={styles.container}>
-        <CardItensProdutos produtos={stateEstabelecimento.Produtos} />
+        <CardItensProdutos produtos={Carrinho} />
       </View>
       <View style={styles.ResumoTotal}>
         <Text style={styles.ResumoTotalText}>TOTAL</Text>
@@ -76,7 +100,7 @@ export default function Carrinho({ navigation }) {
             <Text style={{ fontSize: 12, color: '#fff' }}>Para concluir seu pedido, precisamos que você se identifique. Como quer continuar ?</Text>
           </View>
           <TouchableOpacity style={{ backgroundColor: '#fff', padding: 5, borderRadius: 30, paddingHorizontal: 10 }} onPress={() => navigation.navigate('Login')}>
-            <Text style={{color: '#b32728', fontWeight: 'bold'}}>Entrar ou Cadastrar</Text>
+            <Text style={{ color: '#b32728', fontWeight: 'bold' }}>Entrar ou Cadastrar</Text>
           </TouchableOpacity>
         </View>
       }

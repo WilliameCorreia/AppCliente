@@ -38,32 +38,34 @@ export default function CardItensProdutos({ produtos }) {
     }
 
     const renderItem = ({ item }) => {
+
+        const { produtos } = item;
         return (
             <View style={styles.Item}>
                 <View style={styles.ContainerImg}>
-                    <Image style={styles.img} source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/ImagensPng/png/' + item.fotoPng }} />
+                    <Image style={styles.img} source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/ImagensPng/png/' + produtos.fotoPng }} />
                 </View>
                 <View style={styles.ContainerDescricao}>
                     <View style={styles.descricaoProduto} >
-                        <Text style={styles.NomeProduto}>{item.nome}</Text>
+                        <Text style={styles.NomeProduto}>{produtos.nome}</Text>
                     </View>
                     <View style={styles.Preco}>
                         <Text style={styles.PrecoSimbolo}>R$</Text>
-                        <Text style={styles.PrecoDecimais}>{precoPersonalizado(item.preco, true)},</Text>
-                        <Text style={styles.PrecoCentavos}>{precoPersonalizado(item.preco, false)}</Text>
+                        <Text style={styles.PrecoDecimais}>{precoPersonalizado(produtos.preco, true)},</Text>
+                        <Text style={styles.PrecoCentavos}>{precoPersonalizado(produtos.preco, false)}</Text>
                     </View>
                     <View style={styles.qnt}>
                         <View style={styles.quantidade}>
                             <BtnProdutoQuantidade quantidade={item.quantidade} item={item} tipo={true} />
                         </View>
                         <View style={styles.Total}>
-                            <Text style={styles.PrecoDecimais}>{precoPersonalizado(calculoTotal(item.preco, item.quantidade).toString(), true)},</Text>
-                            <Text style={styles.PrecoCentavos}>{precoPersonalizado(calculoTotal(item.preco, item.quantidade).toString(), false)}</Text>
+                            <Text style={styles.PrecoDecimais}>{precoPersonalizado(calculoTotal(produtos.preco, item.quantidade).toString(), true)},</Text>
+                            <Text style={styles.PrecoCentavos}>{precoPersonalizado(calculoTotal(produtos.preco, item.quantidade).toString(), false)}</Text>
                         </View>
                     </View>
                 </View>
                 <View style={{ height: '100%', width: 20, position: 'relative', alignSelf: 'baseline', }}>
-                    <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={() => DeletarItem(item)}>
+                    <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={() => DeletarItem(produtos)}>
                         <Image style={{width: 15, height: 15, marginTop: 5, tintColor: '#b32728'}} source={require('../Assets/images/cancel.png')}/>
                     </TouchableOpacity>
                 </View>
@@ -74,7 +76,7 @@ export default function CardItensProdutos({ produtos }) {
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
-                data={produtos}
+                data={produtos && produtos}
                 renderItem={renderItem}
                 keyExtractor={item => item.codeBar}
             />

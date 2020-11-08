@@ -57,6 +57,25 @@ export const UserReducerEstabelecimento = (state, action) => {
         case 'AddPedido':
             return { ...state, Pedido: action.pedido }
             break;
+        case 'AddCarrinho':
+            return { ...state, Carrinho: action.carrinho }
+            break;
+        case 'AddQuantidade':
+            state.Carrinho.map(item => {
+                if (action.carrinho === item) {
+                    item.quantidade = item.quantidade + 1
+                }
+            })
+            return { ...state }
+            break;
+        case 'RemoverQuantidade':
+            state.Carrinho.map(item => {
+                if (action.carrinho === item) {
+                    item.quantidade = item.quantidade - 1
+                }
+            })
+            return { ...state }
+            break;
         default:
             break;
     }

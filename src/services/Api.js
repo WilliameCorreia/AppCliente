@@ -60,11 +60,9 @@ api.interceptors.response.use(
            // return axios(requestConfig)
         }
 
-        api.interceptors.request.use(
+        /* api.interceptors.request.use(
             config => {
                 console.log(config);
-                return config
-                /* console.log(config);
                 return getUser().then(token => {
                     if (token) {
                         config.headers.Authorization = `Bearer ${token}`
@@ -73,9 +71,9 @@ api.interceptors.response.use(
                 }).catch(error => {
                     console.log(error)
                     return Promise.reject(error)
-                }) */
+                })
             }
-        )
+        ) */
 
         //return Promise.reject(error)
     },

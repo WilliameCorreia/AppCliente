@@ -46,7 +46,7 @@ export default function DescricaoProduto({ navigation, route }) {
 
     Api.post(`v1/Carrinhos`, {
       produtosId: produto.id,
-      preco: parseFloat(produto.preco),
+      preco: parseFloat(produto.preco.replace(',', '.')),
       quantidade: quantidade,
       cod_PedidoId: Pedido.cod_Pedido,
       cod_ClientId: User.id,
@@ -62,25 +62,6 @@ export default function DescricaoProduto({ navigation, route }) {
     }).catch(error => {
       console.log(error);
     })
-
-    /* dispathEstabelecimento(
-      {
-        type: 'setProdutos',
-        produto:
-        {
-          codeBar: produto.codeBar,
-          nome: produto._Produto,
-          categoria: produto.categoriaId,
-          EstabelecimentoId: produto.estabelecimentoId,
-          preco: produto.preco,
-          fotoPng: produto.fotoPng,
-          quantidade: quantidade
-        }
-      }
-    ); */
-
-
-
   }
 
   const Comprar = () => {

@@ -10,11 +10,11 @@ export default function BtnProdutoQuantidade({ setQuantidade, quantidade, item, 
     const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
 
     const adicionarvalor = () => {
-        tipo ? dispathEstabelecimento({type:'AddProdutosQuantidade', produto: item})  : setQuantidade(quantidade + 1) 
+        tipo ? dispathEstabelecimento({type:'AddQuantidade', carrinho: item})  : setQuantidade(quantidade + 1) 
     }
 
     const removerValor = () => {
-        tipo ? dispathEstabelecimento({type:'removerProdutosQuantidade', produto: item })  : setQuantidade(quantidade - 1)
+        tipo ? dispathEstabelecimento({type:'RemoverQuantidade', carrinho: item })  : setQuantidade(quantidade - 1)
     }
 
     return (
