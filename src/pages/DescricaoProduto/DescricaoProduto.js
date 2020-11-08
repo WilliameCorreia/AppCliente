@@ -6,11 +6,14 @@ import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import BtnProdutoQuantidade from '../../componentes/BtnProdutoQuantidade';
 import MyModal from '../../componentes/MyModal';
 import AuthContext from '../../Contexts/auth';
+import Api from '../../services/Api';
 
 export default function DescricaoProduto({ navigation, route }) {
 
   const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
-  const { stateCliente } = useContext(AuthContext);
+  const { Estabelecimento } = stateEstabelecimento;
+  const { Pedido } = stateEstabelecimento;
+  const { stateCliente, token } = useContext(AuthContext);
   const { User } = stateCliente;
 
   const produto = route.params;
@@ -41,7 +44,26 @@ export default function DescricaoProduto({ navigation, route }) {
 
   const adicionarProduto = () => {
 
-    dispathEstabelecimento(
+    Api.post(`v1/Carrinhos`, {
+      produtosId: produto.id,
+      preco: parseFloat(produto.preco),
+      quantidade: quantidade,
+      cod_PedidoId: Pedido.cod_Pedido,
+      cod_ClientId: User.id,
+      estabelecimentoId: Estabelecimento.id,
+    }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(response => {
+      console.log(response);
+      setMsnModal('Produto Adicionado ao Carrinho !')
+      setModalActive(true)
+    }).catch(error => {
+      console.log(error);
+    })
+
+    /* dispathEstabelecimento(
       {
         type: 'setProdutos',
         produto:
@@ -55,10 +77,9 @@ export default function DescricaoProduto({ navigation, route }) {
           quantidade: quantidade
         }
       }
-    );
+    ); */
 
-    setMsnModal('Produto Adicionado ao Carrinho !')
-    setModalActive(true)
+
 
   }
 
@@ -100,10 +121,10 @@ export default function DescricaoProduto({ navigation, route }) {
             <Text style={{ fontSize: 12, color: '#fff' }}>Para adicionar itens ao seu Carrinho, precisamos que você se identifique. Como quer continuar ?</Text>
           </View>
           <TouchableOpacity style={{ backgroundColor: '#fff', padding: 5, borderRadius: 30, paddingHorizontal: 10 }} onPress={() => navigation.navigate('Login')}>
-            <Text style={{color: '#b32728', fontWeight: 'bold'}}>Entrar ou Cadastrar</Text>
+            <Text style={{ color: '#b32728', fontWeight: 'bold' }}>Entrar ou Cadastrar</Text>
           </TouchableOpacity>
         </View>
-    }
+      }
 
       <View style={styles.box3}>
         <MyModal activeModal={modalActive} mensagem={msnModal} mudarEstado={setModalActive} />
