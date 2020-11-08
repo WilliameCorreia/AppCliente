@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
         const { email, uid } = user;
 
-        Api.get(`v1/Clientes/FilterClienteCpfNome?nomeCliente=${'williame'}`, {
+        Api.get(`v1/Clientes/FilterClientePorEmailTokenLogin?tokenLogin=${uid}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

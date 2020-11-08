@@ -54,6 +54,9 @@ export const UserReducerEstabelecimento = (state, action) => {
         case 'deletarProduto':
             return { ...state, Produtos: [...state.Produtos.filter((x) => x.codeBar !== action.produto.codeBar)] }
             break;
+        case 'AddPedido':
+            return { ...state, Pedido: action.pedido }
+            break;
         default:
             break;
     }

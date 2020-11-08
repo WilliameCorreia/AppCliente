@@ -8,10 +8,9 @@ const EstabelecimentoContext = createContext();
 export const EstabelecimentoProvider = ({ children }) => {
 
     const [ stateEstabelecimento, dispathEstabelecimento ] = useReducer(UserReducerEstabelecimento, initialStateStabelecimento);
-    const [ stateCliente, dispathCliente ] = useReducer(UserReducerCliente, initialStateCliente);
 
     return (
-        <EstabelecimentoContext.Provider value={{ stateCliente, dispathCliente, stateEstabelecimento, dispathEstabelecimento }}>
+        <EstabelecimentoContext.Provider value={{ stateEstabelecimento, dispathEstabelecimento }}>
             {children}
         </EstabelecimentoContext.Provider>
     )
