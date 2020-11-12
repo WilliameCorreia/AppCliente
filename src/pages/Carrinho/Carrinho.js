@@ -6,7 +6,7 @@ import CardItensProdutos from '../../componentes/CardItensProdutos';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import AuthContext from '../../Contexts/auth';
 import Api from '../../services/Api';
-import { clockRunning } from 'react-native-reanimated';
+import moment from 'moment';
 
 export default function Carrinho({ navigation }) {
 
@@ -18,7 +18,6 @@ export default function Carrinho({ navigation }) {
   const { User } = stateCliente;
   const [total, setTotal] = useState("0,00");
   const [produtos, setProdutos] = useState([]);
-
 
   const valorTotal = () => {
     if (Carrinho) {
@@ -54,7 +53,7 @@ export default function Carrinho({ navigation }) {
   }
 
   const GetProdutosCarrinho = () => {
-    Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.id},${Estabelecimento.id}`, {
+    Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.id},${Estabelecimento.id},${Pedido.cod_Pedido}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -67,11 +66,12 @@ export default function Carrinho({ navigation }) {
   }
 
   const FinalizarCompra = () => {
-    Api.put(`/api/v1/Pedidos/${Pedido.cod_Pedido}`, {
+    console.log(moment().format());
+    Api.put(`v1/Pedidos/${Pedido.cod_Pedido}`, {
       cod_Pedido: Pedido.cod_Pedido,
       cod_ClientId: User.id,
       valor_Total: parseFloat(total.replace(',', '.')),
-      dataHora_Pedido: "2020-11-08",
+      dataHora_Pedido: moment().format(),
       pedido_Concluido: true,
       estabelecimentoId: Estabelecimento.id,
     }, {
