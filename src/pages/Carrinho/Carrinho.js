@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './style';
 import CardItensProdutos from '../../componentes/CardItensProdutos';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
+import MyModalConfimation from '../../componentes/MyModalConfirmation';
 import AuthContext from '../../Contexts/auth';
 import Api from '../../services/Api';
 import moment from 'moment';
@@ -18,6 +19,8 @@ export default function Carrinho({ navigation }) {
   const { User } = stateCliente;
   const [total, setTotal] = useState("0,00");
   const [produtos, setProdutos] = useState([]);
+  const [modalConfim, setModalConfirm] = useState(false);
+
 
   const valorTotal = () => {
     if (Carrinho) {
@@ -66,7 +69,6 @@ export default function Carrinho({ navigation }) {
   }
 
   const FinalizarCompra = () => {
-    console.log(moment().format());
     Api.put(`v1/Pedidos/${Pedido.cod_Pedido}`, {
       cod_Pedido: Pedido.cod_Pedido,
       cod_ClientId: User.id,
@@ -80,6 +82,7 @@ export default function Carrinho({ navigation }) {
       }
     }).then(response => {
       const { result } = response.data;
+      navigation.navigate('PagamentoEfetuado');
     }).catch(error => {
       console.log(error);
     });
@@ -107,8 +110,8 @@ export default function Carrinho({ navigation }) {
         </View>
       </View>
       {User ?
-        <View style={{ backgroundColor: 'red', flex: 0.5, justifyContent: 'center' }}>
-          <TouchableOpacity style={[styles.BtnComprar, { flex: 1 }]} onPress={() => FinalizarCompra()}>
+        <View style={Carrinho.length !== 0 ? styles.boxBtn : styles.boxBtnDisabled}>
+          <TouchableOpacity style={styles.BtnComprar} disabled={Carrinho.length === 0} onPress={() => setModalConfirm(true)}>
             <Text style={styles.BtnComprarText}>EFETUAR COMPRA</Text>
           </TouchableOpacity>
         </View>
@@ -123,6 +126,9 @@ export default function Carrinho({ navigation }) {
           </TouchableOpacity>
         </View>
       }
+      <View>
+        <MyModalConfimation activeModal={modalConfim} setActiveModal={setModalConfirm} action={FinalizarCompra} mensagem={"Dejesa FInalizar seu Pedido ?"} />
+      </View>
     </View>
   );
 }

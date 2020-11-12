@@ -1,6 +1,7 @@
 export const initialStateStabelecimento = {
     Estabelecimento: '',
     Produtos: [],
+    Carrinho: []
 }
 
 export const UserReducerEstabelecimento = (state, action) => {

@@ -37,7 +37,7 @@ export default function MeusPedidos({ navigation }) {
           if(element1.cod_Pedido === element2.cod_Pedido){
             element2.produtos.push(element1.produtos[0])
           }else{
-
+            console.log(element1);
           }
           console.log(element2); 
         }

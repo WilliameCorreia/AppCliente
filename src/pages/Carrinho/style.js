@@ -11,9 +11,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     BtnComprar:{
+        flex: 1,
         backgroundColor:"#9c3f3a",
         alignItems:"center",
         justifyContent:"center"
+    },
+    BtnComprarDisabled:{
+        flex: 1,
+        backgroundColor:"#9c3f3a",
+        alignItems:"center",
+        justifyContent:"center",
+        opacity: 0.1
     },
     BtnComprarText:{
         color:"white",
@@ -50,6 +58,17 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginTop:"5%",        
     },
+    boxBtn:{
+        backgroundColor: 'red', 
+        flex: 0.5, 
+        justifyContent: 'center'
+    },
+    boxBtnDisabled:{
+        backgroundColor: 'red', 
+        flex: 0.5, 
+        justifyContent: 'center',
+        opacity: 0.5
+    }
 });
 
 export default styles;
