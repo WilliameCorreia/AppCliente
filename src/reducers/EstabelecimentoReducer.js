@@ -52,7 +52,7 @@ export const UserReducerEstabelecimento = (state, action) => {
             return { ...state }
             break;
         case 'deletarProduto':
-            return { ...state, Produtos: [...state.Produtos.filter((x) => x.codeBar !== action.produto.codeBar)] }
+            return { ...state, Carrinho: [...state.Carrinho.filter((x) => x.item_Id !== action.carrinho.item_Id)] }
             break;
         case 'AddPedido':
             return { ...state, Pedido: action.pedido }

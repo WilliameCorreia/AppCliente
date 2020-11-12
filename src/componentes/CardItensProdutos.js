@@ -3,10 +3,13 @@ import { StyleSheet, Text, View, SafeAreaView, FlatList, Image, TouchableOpacity
 
 import BtnProdutoQuantidade from '../componentes/BtnProdutoQuantidade';
 import EstabelecimentoContext from '../Contexts/Estabelecimento';
+import AuthContext from '../Contexts/auth';
+import Api from '../services/Api';
 
 export default function CardItensProdutos({ produtos }) {
 
     const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
+    const { token } = useContext(AuthContext);
 
     const calculoTotal = (preco, quantidade) => {
         let valor = preco.replace(",", ".") * quantidade;
@@ -34,7 +37,17 @@ export default function CardItensProdutos({ produtos }) {
     }
 
     const DeletarItem = (item) =>{
-        dispathEstabelecimento({type: 'deletarProduto', produto: item})
+        
+        dispathEstabelecimento({type: 'deletarProduto', carrinho: item})
+        Api.delete(`v1/Carrinhos/${item.item_Id}`,{
+            headers:{
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(response =>{
+            console.log(response);
+        }).catch(error =>{
+            console.log(error)
+        });
     }
 
     const renderItem = ({ item }) => {
@@ -65,7 +78,7 @@ export default function CardItensProdutos({ produtos }) {
                     </View>
                 </View>
                 <View style={{ height: '100%', width: 20, position: 'relative', alignSelf: 'baseline', }}>
-                    <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={() => DeletarItem(produtos)}>
+                    <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={() => DeletarItem(item)}>
                         <Image style={{width: 15, height: 15, marginTop: 5, tintColor: '#b32728'}} source={require('../Assets/images/cancel.png')}/>
                     </TouchableOpacity>
                 </View>
