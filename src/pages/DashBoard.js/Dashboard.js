@@ -14,7 +14,7 @@ export default function Dashboard({ navigation }) {
 
   const { User } = stateCliente;
 
-  const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
+  const { stateEstabelecimento, dispathEstabelecimento, GetPedidosAbertos } = useContext(EstabelecimentoContext);
 
   const { Estabelecimento } = stateEstabelecimento;
 
@@ -36,44 +36,9 @@ export default function Dashboard({ navigation }) {
     })
   }
 
-  const gerarPedido = () => {
-    Api.post(`v1/Pedidos`, {
-      cod_ClientId: User.id,
-      pedido_Concluido: false,
-      estabelecimentoId: Estabelecimento.id,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }).then(response => {
-      const { result } = response.data;
-      dispathEstabelecimento({ type: 'AddPedido', pedido: result });
-    }).catch(error => {
-      console.log(error)
-    });
-  }
-
-  const GetPedidosAbertos = () => {
-    console.log(User);
-    Api.get(`v1/Pedidos/FilterPedidosAbertos/${User.id},false,${Estabelecimento.id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }).then(response => {
-      const { result } = response.data;
-      if (result) {
-        dispathEstabelecimento({ type: 'AddPedido', pedido: result});
-      }else{
-        gerarPedido();
-      }
-    }).catch(error => {
-      console.log(error);
-    });
-  }
-
   useEffect(() => {
-    Add_Ofertas();
     GetPedidosAbertos();
+    Add_Ofertas();
   }, [])
 
   return (

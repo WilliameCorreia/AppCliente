@@ -1,7 +1,15 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import React, { useContext, useEffect } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 
 export default function PedidoEfetuado() {
+
+    const { GetPedidosAbertos } = useContext(EstabelecimentoContext);
+
+    useEffect(() => {
+        GetPedidosAbertos();
+    },[])
+
     return (
         <View style={styles.container}>
             <View>
