@@ -62,12 +62,12 @@ function RouteDashBoard() {
             <Stack.Screen
                 name='Descricao'
                 component={Descricao}
-                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+                options={{ headerStyle: { backgroundColor: '#B32728' }, title: 'Descrição' }}
             />
             <Stack.Screen
                 name='MeusProdutos'
                 component={MeusProdutos}
-                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+                options={{ headerStyle: { backgroundColor: '#B32728' }, title: 'Meus Produtos' }}
             />
             <Stack.Screen
                 name='CarrinhoCompras'
@@ -77,12 +77,12 @@ function RouteDashBoard() {
             <Stack.Screen
                 name='user'
                 component={PerfilUsuario}
-                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+                options={{ headerStyle: { backgroundColor: '#B32728' }, title: 'Perfil do Usuário' }}
             />
             <Stack.Screen
                 name='MeusPedidos'
                 component={MeusPedidos}
-                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+                options={{ headerStyle: { backgroundColor: '#B32728' }, title: 'Meus Pedidos' }}
             />
             <Stack.Screen
                 name='Login'
@@ -97,7 +97,7 @@ function RouteDashBoard() {
             <Stack.Screen
                 name='PagamentoEfetuado'
                 component={PagamentoEfetuado}
-                options={{ headerStyle: { backgroundColor: '#B32728' } }}
+                options={{ headerStyle: { backgroundColor: '#B32728' }, title: 'Pagamento Efetuado' }}
             />
         </Stack.Navigator>
     )

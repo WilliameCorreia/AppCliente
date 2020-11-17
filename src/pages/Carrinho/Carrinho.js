@@ -56,16 +56,19 @@ export default function Carrinho({ navigation }) {
   }
 
   const GetProdutosCarrinho = () => {
-    Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.id},${Estabelecimento.id},${Pedido.cod_Pedido}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }).then(response => {
-      const { result } = response.data;
-      dispathEstabelecimento({ type: 'AddCarrinho', carrinho: result });
-    }).catch(error => {
-      console.log(error);
-    })
+    if (User) {
+      Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.id},${Estabelecimento.id},${Pedido.cod_Pedido}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }).then(response => {
+        const { result } = response.data;
+        dispathEstabelecimento({ type: 'AddCarrinho', carrinho: result });
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+
   }
 
   const FinalizarCompra = () => {
@@ -75,6 +78,7 @@ export default function Carrinho({ navigation }) {
       valor_Total: parseFloat(total.replace(',', '.')),
       dataHora_Pedido: moment().format(),
       pedido_Concluido: true,
+      status_Pedido: "C",
       estabelecimentoId: Estabelecimento.id,
     }, {
       headers: {
@@ -127,7 +131,7 @@ export default function Carrinho({ navigation }) {
         </View>
       }
       <View>
-        <MyModalConfimation activeModal={modalConfim} setActiveModal={setModalConfirm} action={FinalizarCompra} mensagem={"Dejesa FInalizar seu Pedido ?"} />
+        <MyModalConfimation activeModal={modalConfim} setActiveModal={setModalConfirm} action={FinalizarCompra} mensagem={"Deseja Finalizar seu Pedido ?"} />
       </View>
     </View>
   );

@@ -17,38 +17,52 @@ export default function MeusPedidos({ navigation }) {
   const [meusPedidos, setMeusPedidos] = useState([]);
 
   const GetPedidos = () => {
-    Api.get(`v1/Pedidos/FilterPedidoCliente/${User.id},${Estabelecimento.id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }).then(response => {
-      const { result } = response.data;
-
-      let filtrados = [];
-      
-      for (let index = 0; index < result.length; index++) {
-        const element1 = result[index];
-        console.log(element1);
-        if(filtrados.length === 0){
-          filtrados.push(element1)
+    if (User) {
+      Api.get(`v1/Pedidos/FilterPedidoCliente/${User.id},${Estabelecimento.id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
         }
-        for (let index = 0; index < filtrados.length; index++) {
-          const element2 = filtrados[index];
-          if(element1.cod_Pedido === element2.cod_Pedido){
-            element2.produtos.push(element1.produtos[0])
-          }else{
-            console.log(element1);
+      }).then(response => {
+        const { result } = response.data;
+
+        let filtrados = [];
+
+        for (let index = 0; index < result.length; index++) {
+          const element1 = result[index];
+          if (filtrados.length === 0) {
+            filtrados.push(element1)
           }
-          console.log(element2); 
+          for (let index = 0; index < filtrados.length; index++) {
+            const element2 = filtrados[index];
+            if (element1.cod_Pedido === element2.cod_Pedido) {
+              element2.produtos.push(element1.produtos[0])
+            } else {
+              if (!filtrados.find(item => item.cod_Pedido === element1.cod_Pedido)) {
+                filtrados.push(element1)
+              }
+              console.log(element1);
+            }
+          }
         }
-      }
+        setMeusPedidos(filtrados);
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+  }
 
-      console.log(filtrados);
+  const statusPerson = (item) => {
+    switch (item) {
+      case 'C': return 'Concluído'
+        break;
+      case 'A': return 'Aberto'
+        break;
+      case 'E': return 'Entrega'
+        break;
 
-      setMeusPedidos(filtrados);
-    }).catch(error => {
-      console.log(error);
-    })
+      default:
+        break;
+    }
   }
 
   useEffect(() => {
@@ -70,7 +84,7 @@ export default function MeusPedidos({ navigation }) {
           <Text style={styles.PedidoText}>{moment(item.dataHora_Pedido).format('DD/MM/YYYY - HH-mm')}</Text>
         </View>
         <View style={styles.Status}>
-          <Text style={styles.StatusText}>{item.status_Pedido}</Text>
+          <Text style={styles.StatusText}>{statusPerson(item.status_Pedido)}</Text>
         </View>
       </View>
     )
@@ -79,9 +93,9 @@ export default function MeusPedidos({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-         data={meusPedidos && meusPedidos}
-         renderItem={renderItem}
-         keyExtractor={(item, index) => index.toString()}
+        data={meusPedidos && meusPedidos}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
       />
     </SafeAreaView>
   );

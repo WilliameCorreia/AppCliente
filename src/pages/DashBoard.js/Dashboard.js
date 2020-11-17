@@ -37,9 +37,12 @@ export default function Dashboard({ navigation }) {
   }
 
   useEffect(() => {
-    GetPedidosAbertos();
     Add_Ofertas();
   }, [])
+
+  useEffect(() => {
+    GetPedidosAbertos();
+  }, [User])
 
   return (
     <View style={styles.container}>
