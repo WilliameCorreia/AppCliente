@@ -56,7 +56,7 @@ export default function CardItensProdutos({ produtos }) {
         return (
             <View style={styles.Item}>
                 <View style={styles.ContainerImg}>
-                    <Image style={styles.img} source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/ImagensPng/png/' + produtos.fotoPng }} />
+                    <Image style={styles.img} source={{ uri: 'https://planetaentregas.blob.core.windows.net/planeta-produtos/ImagensPng/png/' + produtos.fotoPng }} />
                 </View>
                 <View style={styles.ContainerDescricao}>
                     <View style={styles.descricaoProduto} >

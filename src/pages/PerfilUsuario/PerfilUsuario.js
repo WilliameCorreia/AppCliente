@@ -3,8 +3,6 @@ import { Image, Text, View, TouchableWithoutFeedback, TextInput, TouchableOpacit
 
 import Styles from './style'
 
-
-
 export default function PerfilUsuario({ route }) {
 
     return (

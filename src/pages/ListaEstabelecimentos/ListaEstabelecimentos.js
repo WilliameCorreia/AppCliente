@@ -29,7 +29,6 @@ export default function ListaEstabelecimentos({ navigation, route }) {
         }
       }).then(response => {
         const { result } = response.data;
-        console.log(result);
         setEstabelecimentos(result);
       }).catch(error => {
         console.log(error)

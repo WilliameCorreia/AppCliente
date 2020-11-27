@@ -40,7 +40,6 @@ export default function MeusPedidos({ navigation }) {
               if (!filtrados.find(item => item.cod_Pedido === element1.cod_Pedido)) {
                 filtrados.push(element1)
               }
-              console.log(element1);
             }
           }
         }

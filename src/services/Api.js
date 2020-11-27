@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 
 const api = axios.create({
-    baseURL: 'http://3.22.178.76:12000/api/'
+    baseURL: 'http://planetaentregas.com.br:4001/api/'
     //baseURL: 'https://44ad5eefdfc0.ngrok.io/api/'
 });
 

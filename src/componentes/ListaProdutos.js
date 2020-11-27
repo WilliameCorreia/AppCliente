@@ -50,7 +50,7 @@ export default function listaProdutos({ Produtos, loading, navigation, LoadLista
                     </View>
                     <View style={styles.box2}>
                         <Image
-                            style={styles.prodImg} source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/ImagensPng/png/' + item.fotoPng }}
+                            style={styles.prodImg} source={{ uri: 'https://planetaentregas.blob.core.windows.net/planeta-produtos/ImagensPng/png/' + item.fotoPng }}
                             PlaceholderContent={<ActivityIndicator />}
                         />
                     </View>

@@ -26,7 +26,7 @@ export default function CarroselProdutos({ navigation, ofertas }) {
     const _renderItem = ({ item }) => (
         <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Descricao', item)}>
             <View style={styles.box}>
-                <Image style={styles.img} source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/ImagensPng/png/' + item.fotoPng }} />
+                <Image style={styles.img} source={{ uri: 'https://planetaentregas.blob.core.windows.net/planeta-produtos/ImagensPng/png/' + item.fotoPng }} />
             </View>
             <View style={styles.box}>
                 <View style={styles.box1}>

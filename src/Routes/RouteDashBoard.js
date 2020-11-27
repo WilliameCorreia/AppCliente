@@ -30,9 +30,6 @@ function RouteDashBoard() {
                     const Title = options.headerTitle !== undefined ? options.headerTitle : options.title !== undefined ? options.title : scene.route.name;
                     const backColor = options.headerStyle.backgroundColor
 
-                    console.log(Title);
-                    console.log(backColor);
-
                     return (
                         <MyHeader
                             color={backColor}

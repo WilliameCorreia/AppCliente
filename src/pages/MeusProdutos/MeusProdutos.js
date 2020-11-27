@@ -11,10 +11,6 @@ export default function MeusProdutos({ navigation, route }) {
 
     const item = route.params;
 
-    console.log("#######################");
-    console.log(item);
-    console.log("#######################");
-
     const { token } = useContext(AuthContext);
     const [texto, setTexto] = useState();
     const [produtos, setProdutos] = useState({

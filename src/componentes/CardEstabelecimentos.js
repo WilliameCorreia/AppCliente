@@ -4,8 +4,6 @@ import { FlatList } from 'react-native-gesture-handler';
 
 export default function CardEstabelecimentos({ estabelecimentos, selectedEstabelecimento, filtrados }) {
 
-    console.log(filtrados.length)
-
     const renderItem = ({item}) => {
         console.log(item);
         return (

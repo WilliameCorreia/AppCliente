@@ -34,8 +34,6 @@ export default function Carrinho({ navigation }) {
 
   const precoPersonalizado = (preco, initial) => {
 
-    console.log(preco);
-
     if (preco.includes('.')) {
       let valor = preco.split('.');
       if (initial) {

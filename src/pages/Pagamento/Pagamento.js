@@ -6,7 +6,6 @@ export default function Pagamento() {
         <View style={styles.container}>
             <View>
                 <Image source={require('../../Assets/pin.png')} style={styles.imagem} />
-
             </View>
 
             <Text style={styles.texto}>PAULO ARTUR</Text>
