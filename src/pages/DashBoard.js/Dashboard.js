@@ -21,7 +21,6 @@ export default function Dashboard({ navigation }) {
   const [listOfertas, setListOfertas] = useState([]);
 
   const Add_Ofertas = () => {
-
     Api.get(`v1/Produtos/pesquisarOfertasProdutos/${Estabelecimento.id}/12/true/1`, {
       headers: {
         'Authorization': `Bearer ${token}`

@@ -23,6 +23,7 @@ export default function ListaEstabelecimentos({ navigation, route }) {
 
   function getEstabelecimentos() {
     if (token) {
+      console.log(tipo);
       Api.get(`v1/Estabelecimentos/TipoEstabelecimento/${tipo}`, {
         headers: {
           'Authorization': `Bearer ${token}`

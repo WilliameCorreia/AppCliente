@@ -24,9 +24,7 @@ export default function MeusPedidos({ navigation }) {
         }
       }).then(response => {
         const { result } = response.data;
-
         let filtrados = [];
-
         for (let index = 0; index < result.length; index++) {
           const element1 = result[index];
           if (filtrados.length === 0) {
@@ -58,7 +56,6 @@ export default function MeusPedidos({ navigation }) {
         break;
       case 'E': return 'Entrega'
         break;
-
       default:
         break;
     }
@@ -70,7 +67,6 @@ export default function MeusPedidos({ navigation }) {
 
 
   const renderItem = ({ item }) => {
-    console.log(item);
     return (
       <View style={styles.Item}>
         <View style={styles.Pedido}>

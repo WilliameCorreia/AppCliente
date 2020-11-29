@@ -5,7 +5,6 @@ import { FlatList } from 'react-native-gesture-handler';
 export default function CardEstabelecimentos({ estabelecimentos, selectedEstabelecimento, filtrados }) {
 
     const renderItem = ({item}) => {
-        console.log(item);
         return (
             <TouchableOpacity key={item.id} style={styles.card} onPress={() => selectedEstabelecimento(item)}>
                 <View style={styles.box1}>

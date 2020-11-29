@@ -39,7 +39,6 @@ export default function Carrinho({ navigation }) {
       if (initial) {
         return valor[0];
       } else {
-        console.log(valor[1]);
         return valor[1];
       }
     } else {
@@ -47,7 +46,6 @@ export default function Carrinho({ navigation }) {
       if (initial) {
         return valor[0];
       } else {
-        console.log(valor[1]);
         return valor[1];
       }
     }

@@ -24,9 +24,6 @@ function RouteApp({ route }) {
           const title = options.headerTitle !== undefined ? options.headerTitle : options.title !== undefined ? options.title : scene.route.name;
           const backColor = options.headerStyle.backgroundColor;
 
-          console.log(title);
-          console.log(backColor);
-
           switch (title) {
             case "Tipo de Estabelecimentos":
               return (

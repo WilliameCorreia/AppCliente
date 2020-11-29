@@ -91,7 +91,7 @@ export default function CardItensProdutos({ produtos }) {
             <FlatList
                 data={produtos && produtos}
                 renderItem={renderItem}
-                keyExtractor={item => item.codeBar}
+                keyExtractor={(item, index) => index.toString()}
             />
         </SafeAreaView>
     )
