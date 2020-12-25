@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Api from '../../services/Api';
 import AuthContext from '../../Contexts/auth';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
+import MyLoading from '../../componentes/MyLoading';
 
 export default function ListaEstabelecimentos({ navigation, route }) {
 
@@ -17,7 +18,7 @@ export default function ListaEstabelecimentos({ navigation, route }) {
 
   const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
 
-  const [estabelecimentos, setEstabelecimentos] = useState([]);
+  const [estabelecimentos, setEstabelecimentos] = useState(null);
 
   const [estabelecimentoFiltrados, setEstabelecimentoFiltrados] = useState([]);
 
@@ -52,8 +53,16 @@ export default function ListaEstabelecimentos({ navigation, route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <MySearch action={pesquisarEstabelecimento} />
-      <CardEstabelecimentos estabelecimentos={estabelecimentos} filtrados={estabelecimentoFiltrados} selectedEstabelecimento={selectedEstabelecimento} />
+      {
+        !estabelecimentos ?
+          <MyLoading />
+          :
+          <>
+            <MySearch action={pesquisarEstabelecimento} />
+            <CardEstabelecimentos estabelecimentos={estabelecimentos} filtrados={estabelecimentoFiltrados} selectedEstabelecimento={selectedEstabelecimento} />
+          </>
+      }
+
     </SafeAreaView>
   );
 }
