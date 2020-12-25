@@ -77,6 +77,12 @@ const Styles = StyleSheet.create({
     },
     ultimo:{marginBottom:"10%"},
 
+    textError:{
+        fontSize: 10, 
+        color: 'red',
+        alignSelf: 'center'
+    },
+
     item8_1: { width: "100%", backgroundColor: "#fff", alignItems: "center" },
     item8_1Text: { borderRadius: 25, width: "60%", backgroundColor: "#9C3F3A", textAlign: "center", padding: "2%", fontSize: 16, fontFamily: "Montserrat-SemiBold", color: "white" },
 })

@@ -1,21 +1,48 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Image, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './style';
+import Api from '../../services/Api';
+import AuthContext from '../../Contexts/auth';
+import Myloading from '../../componentes/MyLoading';
 
 export default function Estabelecimentos({ navigation }) {
 
+  const { token } = useContext(AuthContext);
+  const [tipoEstabelecimentos, setTipoEstabelecimento] = useState(null);
+
+  const getTipoEstabelecimentos = () => {
+    Api.get(`v1/TipoEstabelecimentos`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(response => {
+      const { result } = response.data;
+      setTipoEstabelecimento(result);
+      console.log(result);
+    }).catch(error => {
+      console.log(error)
+    });
+  }
+
+  useEffect(() => {
+    getTipoEstabelecimentos();
+  }, [])
+
   return (
     <ScrollView style={styles.container}>
-      <TouchableOpacity style={styles.cardBtn} onPress={() => navigation.navigate('ListaEstabelecimentos',{ tipo: "2" })}>
-        <Image style={styles.img} source={{uri:'https://appestabelecimentoscliente.s3.us-east-2.amazonaws.com/CategoriasEstabelecimentos/churascaria.png'}}/>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.cardBtn} onPress={() => navigation.navigate('ListaEstabelecimentos', { tipo: "1" })}>
-        <Image style={styles.img} source={{uri:'https://appestabelecimentoscliente.s3.us-east-2.amazonaws.com/CategoriasEstabelecimentos/mercantil.png'}}/>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.cardBtn} onPress={() => navigation.navigate('ListaEstabelecimentos', { tipo: "3" })}>
-        <Image style={styles.img} source={{uri:'https://appestabelecimentoscliente.s3.us-east-2.amazonaws.com/CategoriasEstabelecimentos/pizzaria.png'}}/>
-      </TouchableOpacity>
+      {
+        !tipoEstabelecimentos ? 
+        <Myloading/>
+        :
+        tipoEstabelecimentos.map(item => {
+          return (
+            <TouchableOpacity key={item.tipoEstab_Id} style={styles.cardBtn} onPress={() => navigation.navigate('ListaEstabelecimentos', { tipo: item.tipoEstab_Id })}>
+              <Image style={styles.img} source={{ uri: 'https://appestabelecimentoscliente.s3.us-east-2.amazonaws.com/CategoriasEstabelecimentos/churascaria.png' }} />
+            </TouchableOpacity>
+          )
+        })
+      }
     </ScrollView>
   );
 }

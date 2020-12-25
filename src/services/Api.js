@@ -18,7 +18,7 @@ api.interceptors.response.use(
         console.log(error);
 
         Alert.alert(error.message);
-        /* if (
+        if (
             error.request._hasError === true &&
             error.request._response.includes('connect')
         ) {
@@ -28,7 +28,7 @@ api.interceptors.response.use(
                 [{ text: 'OK' }],
                 { cancelable: false },
             )
-        } */
+        }
 
         if (error.response.status == 401) {
 
