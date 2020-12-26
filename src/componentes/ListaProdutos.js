@@ -91,8 +91,6 @@ export default function listaProdutos({ Produtos, navigation, LoadProdutos }) {
             />}
         </View>
     )
-
-
 }
 
 const styles = StyleSheet.create({

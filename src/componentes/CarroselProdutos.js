@@ -1,7 +1,41 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, FlatList, TouchableOpacity } from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, Dimensions, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 
-export default function CarroselProdutos({ navigation, ofertas }) {
+import AuthContext from '../Contexts/auth';
+import EstabelecimentoContext from '../Contexts/Estabelecimento';
+import Api from '../services/Api';
+
+export default function CarroselProdutos({ navigation }) {
+
+    const { token } = useContext(AuthContext);
+    const { stateEstabelecimento } = useContext(EstabelecimentoContext);
+    const { Estabelecimento } = stateEstabelecimento;
+
+    const [listOfertas, setListOfertas] = useState({
+        data: [],
+        page: 1,
+        loading: false,
+    });
+
+    const Add_Ofertas = () => {
+        setListOfertas({ ...listOfertas, loading: true })
+        Api.get(`v1/Produtos/pesquisarOfertasProdutos/${Estabelecimento.id}/12/true/${listOfertas.page}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(response => {
+            const { result } = response.data;
+            if (result) {
+                setListOfertas({
+                    data: [...listOfertas.data, ...result],
+                    page: listOfertas.page + 1,
+                    loading: false
+                });
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+    }
 
     const precoPersonalizado = (preco, initial) => {
 
@@ -23,6 +57,10 @@ export default function CarroselProdutos({ navigation, ofertas }) {
 
     }
 
+    useEffect(() => {
+        Add_Ofertas();
+    }, [])
+
     const _renderItem = ({ item }) => (
         <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Descricao', item)}>
             <View style={styles.box}>
@@ -40,17 +78,34 @@ export default function CarroselProdutos({ navigation, ofertas }) {
         </TouchableOpacity>
     )
 
+    const renderFooter = () => {
+        if (!listOfertas.loading) return null;
+        return (
+            <View style={styles.footerLoading}>
+                <ActivityIndicator style={styles.loading} size={"large", 20} color={'#000'} />
+            </View>
+        )
+    }
+
+    const RenderEmpty = () => {
+        return (
+            <View style={styles.msn}>
+                <Text style={styles.textMsn}>Nenhum produto Encontrado</Text>
+            </View>
+        )
+    }
+
     return (
         <View>
             <FlatList
                 horizontal={true}
-                //style={styles.container}
-                data={ofertas}
+                data={listOfertas.data}
                 renderItem={_renderItem}
                 keyExtractor={item => item.codeBar}
-            //onEndReached={}
-            //ListFooterComponent={}
-            //ListEmptyComponent={}
+                onEndReached={() => Add_Ofertas()}
+                onEndReachedThreshold={0.5}
+                ListFooterComponent={renderFooter}
+                ListEmptyComponent={RenderEmpty}
             />
         </View>
     )

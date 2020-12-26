@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import CarroselOfetas from '../../componentes/CarroselOfetas';
@@ -6,38 +6,16 @@ import CarroselCategorias from '../../componentes/CarroselCategorias';
 import CarroselProdutos from '../../componentes/CarroselProdutos';
 import AuthContext from '../../Contexts/auth';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
-import Api from '../../services/Api';
 
 export default function Dashboard({ navigation }) {
 
-  const { token, stateCliente } = useContext(AuthContext);
+  const { stateCliente } = useContext(AuthContext);
 
   const { User } = stateCliente;
 
-  const { stateEstabelecimento, dispathEstabelecimento, GetPedidosAbertos } = useContext(EstabelecimentoContext);
+  const { stateEstabelecimento, GetPedidosAbertos } = useContext(EstabelecimentoContext);
 
   const { Estabelecimento } = stateEstabelecimento;
-
-  const [listOfertas, setListOfertas] = useState([]);
-
-  const Add_Ofertas = () => {
-    Api.get(`v1/Produtos/pesquisarOfertasProdutos/${Estabelecimento.id}/12/true/1`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }).then(response => {
-      const { result } = response.data;
-      if (result) {
-        setListOfertas(result);
-      }
-    }).catch(error => {
-      console.log(error)
-    })
-  }
-
-  useEffect(() => {
-    Add_Ofertas();
-  }, [])
 
   useEffect(() => {
     GetPedidosAbertos();
@@ -52,7 +30,7 @@ export default function Dashboard({ navigation }) {
         <CarroselCategorias EstabelecimentoId={Estabelecimento.id} navigation={navigation} />
       </View>
       <View style={styles.box3}>
-        <CarroselProdutos navigation={navigation} ofertas={listOfertas} />
+        <CarroselProdutos navigation={navigation} />
       </View>
     </View>
   );
