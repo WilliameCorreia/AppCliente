@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 import Estabelecimentos from '../pages/Estabelecimentos/Estabelecimentos';
 import ListaEstabelecimentos from '../pages/ListaEstabelecimentos/ListaEstabelecimentos';
@@ -9,7 +9,9 @@ import MenuButton from '../componentes/MenuButton';
 import MybackButton from '../componentes/MybackButton';
 import RouteButton from '../Routes/RouteBotton';
 import PerfilUsuario from '../pages/PerfilUsuario/PerfilUsuario';
-import RouteDashBoard from '../Routes/RouteDashBoard';
+import CadastroNome from '../pages/Cadastro/CadastroNome/CadastroNome';
+import CadastroEmail from '../pages/Cadastro/CadastroEmail/CadastroEmail';
+import CadastroConfEmail from '../pages/Cadastro/CadastroConfEmail/CadastroConfEmail';
 
 const Stack = createStackNavigator();
 
@@ -67,6 +69,21 @@ function RouteApp({ route }) {
         name="RouteButton"
         component={RouteButton}
         options={{ headerStyle: { backgroundColor: '#B32728' }, title: "Estabelecimento" , headerShown: false }}
+      />
+      <Stack.Screen
+        name="CadastroNome"
+        component={CadastroNome}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+      />
+      <Stack.Screen
+        name="CadastroEmail"
+        component={CadastroEmail}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+      />
+      <Stack.Screen
+        name="CadastroConfEmail"
+        component={CadastroConfEmail}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
       />
     </Stack.Navigator>
   );

@@ -18,26 +18,34 @@ export default function MeusProdutos({ navigation, route }) {
         data: [],
         page: 1,
         loading: false,
+        continue: true
     });
 
     const LoadProdutos = () => {
-        setProdutos({ ...produtos, loading: true })
-        Api.get(`v1/Produtos/${item.categoriaId}/${item.EstabelecimentoId}/${produtos.page}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then(response => {
-            const { result } = response.data;
-            if (result) {
-                setProdutos({
-                    data: [ ...produtos.data , ...result],
-                    page: produtos.page + 1,
-                    loading: false
-                })
-            }
-        }).catch(error => {
-            console.log(error);
-        })
+        if (produtos.continue) {
+            setProdutos({ ...produtos, loading: true })
+            Api.get(`v1/Produtos/${item.categoriaId}/${item.EstabelecimentoId}/${produtos.page}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(response => {
+                const { result } = response.data;
+                if (result && result.length > 0) {
+                    setProdutos({
+                        data: [...produtos.data, ...result],
+                        page: produtos.page + 1,
+                        loading: false,
+                        continue: true
+                    })
+                }else{
+                    setProdutos({ ...produtos, continue: false, loading: false })
+                }
+            }).catch(error => {
+                console.log(error);
+            })
+        }else{
+            console.log('fim da lista');
+        }
     }
 
     const pesquisar = () => {

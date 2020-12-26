@@ -10,30 +10,14 @@ const CarroselCategorias = ({ navigation, EstabelecimentoId }) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.box2}>
-                <View style={styles.box2_1}>
-                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, categoriaId: 1 })}>
-                        <Image style={styles.img} source={require('../Assets/images/açougue.png')} />
-                    </TouchableOpacity>
-                    <Text style={styles.textBtn}>Açougue</Text>
-                </View>
-                <View style={styles.box2_1}>
-                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, categoriaId: 4 })}>
-                        <Image style={styles.img} source={require('../Assets/images/bebidas.png')} />
-                    </TouchableOpacity>
-                    <Text style={styles.textBtn}>Bebidas</Text>
-                </View>
-                <View style={styles.box2_1}>
-                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, categoriaId: 12 })}>
-                        <Image style={styles.img} source={require('../Assets/images/cereais.png')} />
-                    </TouchableOpacity>
-                    <Text style={styles.textBtn}>Cereais</Text>
-                </View>
-                <View style={styles.box2_1}>
-                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {EstabelecimentoId: EstabelecimentoId, categoriaId: 10 })}>
-                        <Image style={styles.img} source={require('../Assets/images/hortifruti.png')} />
-                    </TouchableOpacity>
-                    <Text style={styles.textBtn}>Hort Fruti</Text>
-                </View>
+                {Array(4).fill(
+                    <View style={styles.box2_1}>
+                        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', { EstabelecimentoId: EstabelecimentoId, categoriaId: 1 })}>
+                            <Image style={styles.img} source={require('../Assets/images/açougue.png')} />
+                        </TouchableOpacity>
+                        <Text style={styles.textBtn}>Açougue</Text>
+                    </View>
+                )}
             </View>
         </View>
     )
@@ -55,7 +39,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    box2_1:{
+    box2_1: {
         alignItems: 'center'
     },
     textHeader: {
@@ -75,7 +59,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 10
     },
-    btnCat:{
+    btnCat: {
         width: (Dimensions.get('screen').width * 1.5),
         height: '60%'
     },

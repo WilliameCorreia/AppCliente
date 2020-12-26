@@ -15,26 +15,34 @@ export default function CarroselProdutos({ navigation }) {
         data: [],
         page: 1,
         loading: false,
+        continue: true
     });
 
     const Add_Ofertas = () => {
-        setListOfertas({ ...listOfertas, loading: true })
-        Api.get(`v1/Produtos/pesquisarOfertasProdutos/${Estabelecimento.id}/12/true/${listOfertas.page}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then(response => {
-            const { result } = response.data;
-            if (result) {
-                setListOfertas({
-                    data: [...listOfertas.data, ...result],
-                    page: listOfertas.page + 1,
-                    loading: false
-                });
-            }
-        }).catch(error => {
-            console.log(error)
-        })
+        if (listOfertas.continue) {
+            setListOfertas({ ...listOfertas, loading: true })
+            Api.get(`v1/Produtos/pesquisarOfertasProdutos?estabelecimentoId=${Estabelecimento.id}&oferta=${true}&pagina=${listOfertas.page}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(response => {
+                const { result } = response.data;
+                if (result && result.length > 0) {
+                    setListOfertas({
+                        data: [...listOfertas.data, ...result],
+                        page: listOfertas.page + 1,
+                        loading: false,
+                        continue: true
+                    });
+                }else{
+                    setListOfertas({ ...listOfertas, continue: false, loading: false })
+                }
+            }).catch(error => {
+                console.log(error)
+            })
+        }else{
+            console.log('fim da lista');
+        }
     }
 
     const precoPersonalizado = (preco, initial) => {
