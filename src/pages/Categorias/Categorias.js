@@ -13,12 +13,20 @@ export default function Categorias( { navigation, route } ) {
     const EstabelecimentoId = route.params;
     
     function LoadCategorias(){
-        Api.get("v1/Categorias",{
+        Api.get(`v1/Estabelecimentos/FiltrarCategoriasPorEstabelecimentos/${EstabelecimentoId}`,{
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         }).then(response => {
-            setCategorias(response.data.result)
+            const { result } =  response.data;
+            let _categorias = [];
+            result.map(item =>{
+                const { categorias } = item.tipo_Estabelecimento;
+                categorias.map(element =>{
+                    _categorias.push(element);
+                });
+            });
+            setCategorias(_categorias)
         }).catch(error => {
             console.log(error);
         })
@@ -37,7 +45,7 @@ export default function Categorias( { navigation, route } ) {
                 return (
                     <TouchableOpacity
                         style={styles.btnCategoria}
-                        key={index.toString()}
+                        key={item.id.toString()}
                         onPress={() => navigation.navigate('MeusProdutos', {categoriaId: item.id, EstabelecimentoId: EstabelecimentoId} )}
                     >
                         <Image
