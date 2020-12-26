@@ -6,6 +6,7 @@ import { SearchBar } from 'react-native-elements';
 import styles from './style';
 import AuthContext from '../../Contexts/auth';
 import Api from '../../services/Api';
+import MyLoading from '../../componentes/MyLoading';
 
 export default function MeusProdutos({ navigation, route }) {
 
@@ -20,7 +21,8 @@ export default function MeusProdutos({ navigation, route }) {
     });
 
     const LoadProdutos = () => {
-        Api.get(`v1/Produtos/${item.categoriaId}/${item.EstabelecimentoId}/${1}`, {
+        setProdutos({ ...produtos, loading: true })
+        Api.get(`v1/Produtos/${item.categoriaId}/${item.EstabelecimentoId}/${produtos.page}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -28,8 +30,8 @@ export default function MeusProdutos({ navigation, route }) {
             const { result } = response.data;
             if (result) {
                 setProdutos({
-                    data: [...result],
-                    page: 1,
+                    data: [ ...produtos.data , ...result],
+                    page: produtos.page + 1,
                     loading: false
                 })
             }
@@ -45,7 +47,7 @@ export default function MeusProdutos({ navigation, route }) {
                     'Authorization': `Bearer ${token}`
                 }
             }).then(response => {
-                const { result } = response.data; 
+                const { result } = response.data;
                 console.log(result);
                 setProdutos({
                     data: [...result],
@@ -65,24 +67,31 @@ export default function MeusProdutos({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <View style={styles.containerSearch}>
-                <SearchBar
-                    platform={'android'}
-                    placeholder="Pesquise o produto"
-                    containerStyle={styles.search}
-                    inputStyle={styles.input}
-                    placeholderTextColor={"#fff"}
-                    onChangeText={text => text.length < 1 ? LoadProdutos() && setTexto(text): setTexto(text)}
-                    value={texto}
-                    cancelIcon={false}
-                    clearIcon={false}
-                    searchIcon={false}
-                />
-                <TouchableOpacity onPress={pesquisar} style={styles.btnPesquisar}>
-                    <Text style={styles.textPesquisar}>Pesquisar</Text>
-                </TouchableOpacity>
-            </View>
-            <ListaProdutos navigation={navigation} Produtos={produtos.data} /* LoadListaProdutos */ /* loading={produtos.loading} */ />
+            {
+                !produtos.data ?
+                    <MyLoading />
+                    :
+                    <>
+                        <View style={styles.containerSearch}>
+                            <SearchBar
+                                platform={'android'}
+                                placeholder="Pesquise o produto"
+                                containerStyle={styles.search}
+                                inputStyle={styles.input}
+                                placeholderTextColor={"#fff"}
+                                onChangeText={text => text.length < 1 ? LoadProdutos() && setTexto(text) : setTexto(text)}
+                                value={texto}
+                                cancelIcon={false}
+                                clearIcon={false}
+                                searchIcon={false}
+                            />
+                            <TouchableOpacity onPress={pesquisar} style={styles.btnPesquisar}>
+                                <Text style={styles.textPesquisar}>Pesquisar</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <ListaProdutos navigation={navigation} Produtos={produtos} LoadProdutos={LoadProdutos} />
+                    </>
+            }
         </View>
     )
 }

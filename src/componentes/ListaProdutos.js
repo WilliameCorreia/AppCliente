@@ -9,7 +9,9 @@ import {
     FlatList
 } from 'react-native'
 
-export default function listaProdutos({ Produtos, loading, navigation, LoadListaProdutos }) {
+export default function listaProdutos({ Produtos, navigation, LoadProdutos }) {
+
+    const { data, page, loading } = Produtos;
 
     const precoPersonalizado = (preco, initial) => {
 
@@ -79,11 +81,11 @@ export default function listaProdutos({ Produtos, loading, navigation, LoadLista
     return (
         <View>
             {<FlatList
-                data={Produtos}
+                data={data}
                 renderItem={_renderItem}
                 keyExtractor={(item, index) => index.toString()}
-                //onEndReached={Produtos.length >= 5 ? LoadListaProdutos : null}
-                onEndReachedThreshold={0.1}
+                onEndReached={() => LoadProdutos()}
+                onEndReachedThreshold={0.9}
                 ListFooterComponent={renderFooter}
                 ListEmptyComponent={RenderEmpty}
             />}
