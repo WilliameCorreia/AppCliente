@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
             }
         }).then(response => {
             const { result } = response.data;
-            dispathCliente({ type: 'AddUser', user: { email: user.email, token: user.uid, id: result[0].cod_Client, nome: result[0].nome_Client } })
+            dispathCliente({ type: 'AddUser', user: { email: user.email, token: user.uid, ...result[0] } })
         }).catch(error => {
             console.log(error);
         })

@@ -105,7 +105,7 @@ export default function login({ navigation }) {
                     <Text style={styles.text}>Entrar</Text>
                 </TouchableOpacity>
                 <StatusBar backgroundColor={'#FF7223'} barStyle='dark-content' />
-                <TouchableOpacity onPress={() => { navigation.navigate('Cadastro') }} style={styles.textBtn}>
+                <TouchableOpacity onPress={() => { navigation.navigate('CadastroNome') }} style={styles.textBtn}>
                     <Text style={styles.text2}>Ainda não possui conta ?</Text>
                     <Text style={styles.text2}>Cadastre-se</Text>
                 </TouchableOpacity>

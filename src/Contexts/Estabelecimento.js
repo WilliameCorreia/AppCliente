@@ -16,7 +16,7 @@ export const EstabelecimentoProvider = ({ children }) => {
 
   const GetPedidosAbertos = () => {
     if (User) {
-      Api.get(`v1/Pedidos/FilterPedidosAbertos/${User.id},false,${Estabelecimento.id}`, {
+      Api.get(`v1/Pedidos/FilterPedidosAbertos/${User.cod_Client},false,${Estabelecimento.id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

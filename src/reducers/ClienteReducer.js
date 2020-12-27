@@ -1,32 +1,34 @@
 export const initialStateCliente = {
-    User: null,
-    User1: {
-        nome_Client: "",
-        email: "",
-        cpf: "",
-        rg: "",
-        telefone: "",
-        sms_Enviar: true,
-        email_Enviar: true,
-        token_Login: "",
-        enderecos: [
-            {
-                numero: "",
-                rua: "",
-                cidade: "",
-                bairro: "",
-                estado: "",
-                cep: 0,
-                complemento: "",
-            }
-        ]
+    User: {
+        cod_Client: 5,
+        cpf: null,
+        data_Nascimento: '',
+        email: '',
+        email_Enviar: false,
+        enderecos: [{
+            numero: "",
+            rua: "",
+            cidade: "",
+            bairro: "",
+            estado: "",
+            cep: 0,
+            complemento: "",
+            estabelecimentoId: 0,
+            clienteId: 0,
+        }],
+        nome_Client: '',
+        rg: null,
+        sms_Enviar: false,
+        telefone: null,
+        token: '',
+        token_Login: '',
     }
 }
 
 export const UserReducerCliente = (state, action) => {
     switch (action.type) {
         case 'AddUser':
-            return { ...state, User: action.user }
+            return { User: action.user }
             break;
         case 'delUser':
             return { ...state, User: null }
@@ -35,13 +37,13 @@ export const UserReducerCliente = (state, action) => {
             return { ...state, nome_Client: action.nome_Client }
             break;
         case 'setEmail':
-            return { ...state, nome_Client: action.nome_Client }
+            return { ...state, email: action.email }
             break;
         case 'setCpf':
-            return { ...state, nome_Client: action.nome_Client }
+            return { ...state, cpf: action.cpf }
             break;
         case 'setTelefone':
-            return { ...state, nome_Client: action.nome_Client }
+            return { ...state, telefone: action.telefone }
             break;
         case 'setEndereco':
             return { ...state, nome_Client: action.nome_Client }
