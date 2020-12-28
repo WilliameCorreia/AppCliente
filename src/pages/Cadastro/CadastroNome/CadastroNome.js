@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 
 export default function CadastroNome({ navigation }) {
 
-    const { dispatchAuth } = useContext(AuthContext);
+    const { dispathCliente } = useContext(AuthContext);
     const [modalActive, setModalActive] = useState(false);
 
     const Nome = useRef(null);
@@ -19,11 +19,10 @@ export default function CadastroNome({ navigation }) {
         Nome: Yup
             .string()
             .required('Nome é obrigatório!')
-            .matches(/(\w.+\s).+/, 'Insira seu nome e sobrenome'),
     })
 
     const setNome = (value) => {
-        //dispatchAuth({ type: 'setNome', nome_Client: value.Nome })
+        dispathCliente({ type: 'setNome', nome_Client: value.Nome })
         navigation.navigate('CadastroEmail')
     }
 

@@ -53,7 +53,7 @@ export default function Carrinho({ navigation }) {
 
   const GetProdutosCarrinho = () => {
     if (User) {
-      Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.id},${Estabelecimento.id},${Pedido.cod_Pedido}`, {
+      Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.cod_Client},${Estabelecimento.id},${Pedido.cod_Pedido}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -70,7 +70,7 @@ export default function Carrinho({ navigation }) {
   const FinalizarCompra = () => {
     Api.put(`v1/Pedidos/${Pedido.cod_Pedido}`, {
       cod_Pedido: Pedido.cod_Pedido,
-      cod_ClientId: User.id,
+      cod_ClientId: User.cod_Client,
       valor_Total: parseFloat(total.replace(',', '.')),
       dataHora_Pedido: moment().format(),
       pedido_Concluido: true,

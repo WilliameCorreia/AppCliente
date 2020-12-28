@@ -12,13 +12,16 @@ import PerfilUsuario from '../pages/PerfilUsuario/PerfilUsuario';
 import CadastroNome from '../pages/Cadastro/CadastroNome/CadastroNome';
 import CadastroEmail from '../pages/Cadastro/CadastroEmail/CadastroEmail';
 import CadastroConfEmail from '../pages/Cadastro/CadastroConfEmail/CadastroConfEmail';
+import CadastroSenha from '../pages/Cadastro/CadastroSenha/CadastroSenha';
+import CadastroConfSenha from '../pages/Cadastro/CadastroConfSenha/CadastroConfSenha';
+import CadastroEndereco from '../pages/Cadastro/CadastroEndereco/CadastroEndereco';
 
 const Stack = createStackNavigator();
 
 function RouteApp({ route }) {
   return (
     <Stack.Navigator
-      initialRouteName={'Estabelecimentos'}
+      initialRouteName={'CadastroEndereco'}
       headerMode={'screen'}
       screenOptions={{
         header: ({ scene, navigation }) => {
@@ -84,6 +87,21 @@ function RouteApp({ route }) {
         name="CadastroConfEmail"
         component={CadastroConfEmail}
         options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+      />
+      <Stack.Screen
+        name="CadastroSenha"
+        component={CadastroSenha}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+      />
+      <Stack.Screen
+        name="CadastroConfSenha"
+        component={CadastroConfSenha}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+      />
+      <Stack.Screen
+        name="CadastroEndereco"
+        component={CadastroEndereco}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
       />
     </Stack.Navigator>
   );

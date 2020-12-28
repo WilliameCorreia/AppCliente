@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 
 export default function CadastroConfEmail({ navigation }) {
 
-    const { dispatchAuth } = useContext(AuthContext);
+    const { dispatchAuth, stateCliente } = useContext(AuthContext);
     const [modalActive, setModalActive] = useState(false);
 
     const ConfEmail = useRef(null);
@@ -20,12 +20,11 @@ export default function CadastroConfEmail({ navigation }) {
             .string()
             .required('Email é obrigatório!')
             .email('Por favor digite um Email válido!')
-            .oneOf([stateCliente.usertasy.DS_EMAIL], 'Os email-s digitados são diferentes')
-    })
+            .oneOf([stateCliente.email], 'Os email-s digitados são diferentes')
+    });
 
     const setConfEmail = (value) => {
-        //dispatchAuth({ type: 'setNome', email: value.email })
-        navigation.navigate('consultarNascimento')
+        navigation.navigate('CadastroSenha');
     }
 
     return (
@@ -55,7 +54,7 @@ export default function CadastroConfEmail({ navigation }) {
                                 onBlur={handleBlur('ConfEmail')}
                                 value={values.ConfEmail}
                             />
-                            {(touched.ConfEmail && errors.ConfEmail) && <Text style={styles.Error}>{errors.EmConfEmailail}</Text>}
+                            {(touched.ConfEmail && errors.ConfEmail) && <Text style={styles.Error}>{errors.ConfEmail}</Text>}
                         </View>
                         <View style={styles.box2}>
                             <BtnProsseguir

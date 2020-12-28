@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 
 export default function CadastroEmail({ navigation }) {
 
-    const { dispatchAuth } = useContext(AuthContext);
+    const { dispathCliente } = useContext(AuthContext);
     const [modalActive, setModalActive] = useState(false);
 
     const Email = useRef(null);
@@ -23,7 +23,7 @@ export default function CadastroEmail({ navigation }) {
     })
 
     const setEmail = (value) => {
-        //dispatchAuth({ type: 'setNome', email: value.email })
+        dispathCliente({ type: 'setEmail', email: value.Email })
         navigation.navigate('CadastroConfEmail')
     }
 

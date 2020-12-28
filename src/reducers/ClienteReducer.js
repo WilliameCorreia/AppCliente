@@ -22,6 +22,7 @@ export const initialStateCliente = {
         telefone: null,
         token: '',
         token_Login: '',
+        senha: ''
     }
 }
 
@@ -47,6 +48,9 @@ export const UserReducerCliente = (state, action) => {
             break;
         case 'setEndereco':
             return { ...state, nome_Client: action.nome_Client }
+            break;
+        case 'setSenha':
+            return { ...state, senha: action.senha }
             break;
         default:
             return { ...state }
