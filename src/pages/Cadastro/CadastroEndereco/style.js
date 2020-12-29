@@ -5,44 +5,51 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor: '#fff',
-        justifyContent: 'center',
     },
     box1:{
         flex: 8,
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    box1Item1:{
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'red'
+        alignItems: 'center'
+    },
+    box1Item2:{
+        flexDirection: 'row',
+        marginTop: 10,
+        justifyContent: 'flex-start'
     },
     box2:{
+        position: 'relative',
         width: (Dimensions.get('screen').width),
-        height: (Dimensions.get('screen').height / 15) 
+        height: (Dimensions.get('screen').height / 18) 
     },
     textInfo:{
         color: '#3f4348f2',
-        fontSize: 26,
+        fontSize: 18,
         textAlign: 'center'
     },
     text:{
         color: '#8b949e',
-        fontSize: 15
+        fontSize: 14
     },
     input:{
-        width: '80%',
+        width: '95%',
+        height: 37,
+        alignSelf: 'center',
         borderBottomColor: '#DBCCCC',
-        borderBottomWidth:2,
-        margin: 10,
-        fontSize: 20,
-        textAlign: 'center',
+        borderBottomWidth:1,
+        fontSize: 14,
+        textAlign: 'left',
+    },
+    InputLabel:{
+        paddingLeft: 10,
     },
     Error:{
         color:'red',
         fontSize: 14
     },
-    BackgroundImage:{
-        flex: 1,
-        resizeMode: 'cover'
-    }
-
 })
 
 export default styles

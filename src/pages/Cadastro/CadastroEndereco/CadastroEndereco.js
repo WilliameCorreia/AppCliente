@@ -105,12 +105,9 @@ export default function CadastroEndereco() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{ flex: 0.5,justifyContent: 'center' }}>
-                <MybackButton onPress={() => console.log('teste')} color={'#B32728'} />
-            </View>
-            <View>
+            {/* <View>
                 <Text>{endereco.rua} - {endereco.bairro} - {endereco.cidade} - {endereco.estado}</Text>
-            </View>
+            </View> */}
             <Formik
                 initialValues={{
                     ConfSenha: '',
@@ -122,19 +119,95 @@ export default function CadastroEndereco() {
             /* validationSchema={FormSchema} */
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid, }) => (
-                    <View style={{ flex: 1 }} >
+                    <View style={{ flex: 1, margin: 10 }} >
                         <View style={styles.box1}>
-                            <Text style={styles.textInfo}>Cadastre seu endereço para entrega!</Text>
-                            <Text style={styles.text}>Informe os dados para validar seu acesso !</Text>
-                            <TextInput
-                                ref={ConfSenha}
-                                textContentType={'password'}
-                                style={styles.input}
-                                onChangeText={handleChange('ConfSenha')}
-                                onBlur={handleBlur('ConfSenha')}
-                                value={values.ConfSenha}
-                            />
-                            {(touched.ConfSenha && errors.ConfSenha) && <Text style={styles.Error}>{errors.ConfSenha}</Text>}
+                            <View style={styles.box1Item1}>
+                                <Text style={styles.textInfo}>Cadastre seu endereço para entrega!</Text>
+                                <Text style={styles.text}>Informe os dados para validar seu acesso !</Text>
+                            </View>
+                            <View style={styles.box1Item2}>
+                                <View style={{ flex: 3 }}>
+                                    <Text style={styles.InputLabel}>Rua</Text>
+                                    <TextInput
+                                        ref={ConfSenha}
+                                        keyboardType={'default'}
+                                        returnKeyType={'next'}
+                                        style={styles.input}
+                                        onChangeText={handleChange('ConfSenha')}
+                                        onBlur={handleBlur('ConfSenha')}
+                                        value={values.ConfSenha}
+                                    />
+                                    {(touched.ConfSenha && errors.ConfSenha) && <Text style={styles.Error}>{errors.ConfSenha}</Text>}
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <Text style={styles.InputLabel}>Numero</Text>
+                                    <TextInput
+                                        ref={ConfSenha}
+                                        keyboardType={'numeric'}
+                                        returnKeyType={'next'}
+                                        style={styles.input}
+                                        onChangeText={handleChange('ConfSenha')}
+                                        onBlur={handleBlur('ConfSenha')}
+                                        value={values.ConfSenha}
+                                    />
+                                    {(touched.ConfSenha && errors.ConfSenha) && <Text style={styles.Error}>{errors.ConfSenha}</Text>}
+                                </View>
+                            </View>
+                            <View style={styles.box1Item2}>
+                                <View style={{ flex: 1 }}>
+                                    <Text style={styles.InputLabel}>Bairro</Text>
+                                    <TextInput
+                                        ref={ConfSenha}
+                                        keyboardType={'default'}
+                                        returnKeyType={'next'}
+                                        style={styles.input}
+                                        onChangeText={handleChange('ConfSenha')}
+                                        onBlur={handleBlur('ConfSenha')}
+                                        value={values.ConfSenha}
+                                    />
+                                    {(touched.ConfSenha && errors.ConfSenha) && <Text style={styles.Error}>{errors.ConfSenha}</Text>}
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <Text style={styles.InputLabel}>Cidade</Text>
+                                    <TextInput
+                                        ref={ConfSenha}
+                                        keyboardType={'default'}
+                                        returnKeyType={'next'}
+                                        style={styles.input}
+                                        onChangeText={handleChange('ConfSenha')}
+                                        onBlur={handleBlur('ConfSenha')}
+                                        value={values.ConfSenha}
+                                    />
+                                    {(touched.ConfSenha && errors.ConfSenha) && <Text style={styles.Error}>{errors.ConfSenha}</Text>}
+                                </View>
+                            </View>
+                            <View style={styles.box1Item2}>
+                                <View style={{ flex: 2 }}>
+                                    <Text style={styles.InputLabel}>complemento</Text>
+                                    <TextInput
+                                        ref={ConfSenha}
+                                        keyboardType={'default'}
+                                        returnKeyType={'next'}
+                                        style={styles.input}
+                                        onChangeText={handleChange('ConfSenha')}
+                                        onBlur={handleBlur('ConfSenha')}
+                                        value={values.ConfSenha}
+                                    />
+                                    {(touched.ConfSenha && errors.ConfSenha) && <Text style={styles.Error}>{errors.ConfSenha}</Text>}
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <Text style={styles.InputLabel}>Cep</Text>
+                                    <TextInput
+                                        ref={ConfSenha}
+                                        keyboardType={'numeric'}
+                                        style={styles.input}
+                                        onChangeText={handleChange('ConfSenha')}
+                                        onBlur={handleBlur('ConfSenha')}
+                                        value={values.ConfSenha}
+                                    />
+                                    {(touched.ConfSenha && errors.ConfSenha) && <Text style={styles.Error}>{errors.ConfSenha}</Text>}
+                                </View>
+                            </View>
                         </View>
                         <View style={styles.box2}>
                             <BtnProsseguir

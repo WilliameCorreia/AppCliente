@@ -38,16 +38,22 @@ function RouteApp({ route }) {
                 />
               )
               break;
-              case "Lista de Estabelecimentos":
-                return (
-                  <MyHeader
-                    title={title}
-                    color={backColor}
-                    rightButton={title === 'Estabelecimentos' ? null : (<MybackButton onPress={() => navigation.goBack()} />)}
-                  />
-                )
-                break; 
+            case "Lista de Estabelecimentos":
+              return (
+                <MyHeader
+                  title={title}
+                  color={backColor}
+                  rightButton={title === 'Estabelecimentos' ? null : (<MybackButton onPress={() => navigation.goBack()} />)}
+                />
+              )
+              break;
             default:
+              return (
+                <MyHeader
+                  color={backColor}
+                  leftButton={<MybackButton onPress={() => navigation.goBack()} />}
+                />
+              )
               break;
           }
         },
@@ -71,7 +77,7 @@ function RouteApp({ route }) {
       <Stack.Screen
         name="RouteButton"
         component={RouteButton}
-        options={{ headerStyle: { backgroundColor: '#B32728' }, title: "Estabelecimento" , headerShown: false }}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, title: "Estabelecimento", headerShown: false }}
       />
       <Stack.Screen
         name="CadastroNome"
