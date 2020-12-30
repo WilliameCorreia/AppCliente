@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 
-export default function BtnProsseguir({ onPress }) {
+export default function BtnProsseguir({ onPress, text }) {
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
-            <Text style={styles.text}>Continuar</Text>
+            <Text style={styles.text}>{text ? text : 'Continuar'}</Text>
         </TouchableOpacity>
     )
 }

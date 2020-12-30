@@ -47,7 +47,7 @@ export const UserReducerCliente = (state, action) => {
             return { ...state, telefone: action.telefone }
             break;
         case 'setEndereco':
-            return { ...state, nome_Client: action.nome_Client }
+            return { ...state, enderecos: [ action.enderecos ] }
             break;
         case 'setSenha':
             return { ...state, senha: action.senha }

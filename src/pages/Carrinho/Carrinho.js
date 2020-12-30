@@ -64,7 +64,6 @@ export default function Carrinho({ navigation }) {
         console.log(error);
       })
     }
-
   }
 
   const FinalizarCompra = () => {

@@ -53,6 +53,7 @@ export default function CadastroSenha({ navigation }) {
                                 onChangeText={handleChange('Senha')}
                                 onBlur={handleBlur('Senha')}
                                 value={values.Senha}
+                                secureTextEntry={true}
                             />
                             {(touched.Senha && errors.Senha) && <Text style={styles.Error}>{errors.Senha}</Text>}
                         </View>

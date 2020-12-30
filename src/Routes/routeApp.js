@@ -21,7 +21,7 @@ const Stack = createStackNavigator();
 function RouteApp({ route }) {
   return (
     <Stack.Navigator
-      initialRouteName={'CadastroEndereco'}
+      initialRouteName={'Estabelecimentos'}
       headerMode={'screen'}
       screenOptions={{
         header: ({ scene, navigation }) => {

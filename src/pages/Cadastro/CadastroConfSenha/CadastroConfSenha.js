@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 
 export default function CadastroConfSenha({ navigation }) {
 
-    const { stateCliente } = useContext(AuthContext);
+    const { stateCliente, cadastroUsuario } = useContext(AuthContext);
     const [modalActive, setModalActive] = useState(false);
 
     const ConfSenha = useRef(null);
@@ -23,8 +23,11 @@ export default function CadastroConfSenha({ navigation }) {
         .oneOf([stateCliente.senha], 'As senhas digitadas são diferentes')
     })
 
-    const setConfSenha = (value) => {
-        navigation.navigate('CadastroEndereco')
+    const setConfSenha = async (value) => {
+        const result = await cadastroUsuario();
+        if(result){
+            navigation.navigate('CadastroEndereco')
+        }
     }
 
     return (
@@ -53,12 +56,14 @@ export default function CadastroConfSenha({ navigation }) {
                                 onChangeText={handleChange('ConfSenha')}
                                 onBlur={handleBlur('ConfSenha')}
                                 value={values.ConfSenha}
+                                secureTextEntry={true}
                             />
                             {(touched.ConfSenha && errors.ConfSenha) && <Text style={styles.Error}>{errors.ConfSenha}</Text>}
                         </View>
                         <View style={styles.box2}>
                             <BtnProsseguir
                                 onPress={() => handleSubmit()}
+                                text={'Cadastrar-se'}
                             />
                         </View>
                         <View style={styles.box3}>

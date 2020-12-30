@@ -35,7 +35,7 @@ export const EstabelecimentoProvider = ({ children }) => {
 
   const gerarPedido = () => {
     Api.post(`v1/Pedidos`, {
-      cod_ClientId: User.id,
+      cod_ClientId: User.cod_Client,
       pedido_Concluido: false,
       estabelecimentoId: Estabelecimento.id,
     }, {

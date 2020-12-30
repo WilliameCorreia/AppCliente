@@ -49,7 +49,7 @@ export default function DescricaoProduto({ navigation, route }) {
       preco: parseFloat(produto.preco.replace(',', '.')),
       quantidade: quantidade,
       cod_PedidoId: Pedido.cod_Pedido,
-      cod_ClientId: User.id,
+      cod_ClientId: User.cod_Client,
       estabelecimentoId: Estabelecimento.id,
     }, {
       headers: {

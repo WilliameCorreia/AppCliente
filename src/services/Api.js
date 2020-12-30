@@ -60,23 +60,26 @@ api.interceptors.response.use(
            // return axios(requestConfig)
         }
 
-        /* api.interceptors.request.use(
-            config => {
-                console.log(config);
-                return getUser().then(token => {
-                    if (token) {
-                        config.headers.Authorization = `Bearer ${token}`
-                        return Promise.resolve(config)
-                    }
-                }).catch(error => {
-                    console.log(error)
-                    return Promise.reject(error)
-                })
-            }
-        ) */
+        
 
         //return Promise.reject(error)
     },
+)
+
+api.interceptors.request.use(
+    config => {
+        console.log(config);
+        return config
+       /*  return getUser().then(token => {
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`
+                return Promise.resolve(config)
+            }
+        }).catch(error => {
+            console.log(error)
+            return Promise.reject(error)
+        }) */
+    }
 )
 
 export default api;
