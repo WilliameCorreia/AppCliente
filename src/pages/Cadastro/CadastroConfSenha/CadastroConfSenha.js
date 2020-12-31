@@ -14,7 +14,7 @@ import moment from 'moment';
 
 export default function CadastroConfSenha({ navigation }) {
 
-    const { stateCliente, token, cadastroUsuario } = useContext(AuthContext);
+    const { stateCliente, token, cadastroUsuario, GetUsuario } = useContext(AuthContext);
     const [modalActive, setModalActive] = useState(false);
 
     const ConfSenha = useRef(null);
@@ -62,7 +62,7 @@ export default function CadastroConfSenha({ navigation }) {
             }
         }).then(response => {
             const { result } = response.data
-            const user = { email: result.email, uid: result.token_Login }
+            GetUsuario({ email: result.email, uid: result.token_Login });
             return result
         }).catch(error => {
             console.log(error);

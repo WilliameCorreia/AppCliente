@@ -15,6 +15,7 @@ import CadastroConfEmail from '../pages/Cadastro/CadastroConfEmail/CadastroConfE
 import CadastroSenha from '../pages/Cadastro/CadastroSenha/CadastroSenha';
 import CadastroConfSenha from '../pages/Cadastro/CadastroConfSenha/CadastroConfSenha';
 import CadastroEndereco from '../pages/Cadastro/CadastroEndereco/CadastroEndereco';
+import MeusPedidosDescricao from '../pages/MeusPedidosDescricao/MeusPedidosDescricao';
 
 const Stack = createStackNavigator();
 
@@ -108,6 +109,11 @@ function RouteApp({ route }) {
         name="CadastroEndereco"
         component={CadastroEndereco}
         options={{ headerStyle: { backgroundColor: '#B32728' }, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+      />
+      <Stack.Screen
+        name="MeusPedidosDescricao"
+        component={MeusPedidosDescricao}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, title: "Descricao Pedidos" }}
       />
     </Stack.Navigator>
   );

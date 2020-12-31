@@ -66,8 +66,9 @@ export const AuthProvider = ({ children }) => {
                 'Authorization': `Bearer ${token}`
             }
         }).then(response => {
+            const { result } = response.data;
             console.log(response);
-            GetUsuario({ email: stateCliente.User.email, uid: stateCliente.User.token_Login });
+            GetUsuario({ email: stateCliente.User.email, uid: stateCliente.User.token });
         }).catch(error => {
             console.log(error);
         });
@@ -82,7 +83,7 @@ export const AuthProvider = ({ children }) => {
     }, [token])
 
     return (
-        <AuthContext.Provider value={{ token: token, stateCliente, dispathCliente, cadastroEndereco, signIn }}>
+        <AuthContext.Provider value={{ token: token, stateCliente, dispathCliente, cadastroEndereco, signIn, GetUsuario }}>
             {children}
         </AuthContext.Provider>
     )

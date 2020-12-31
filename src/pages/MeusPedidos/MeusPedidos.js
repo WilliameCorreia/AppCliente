@@ -24,7 +24,7 @@ export default function MeusPedidos({ navigation }) {
         }
       }).then(response => {
         const { result } = response.data;
-        if(result){
+        if (result) {
           setMeusPedidos(result);
         }
       }).catch(error => {
@@ -41,7 +41,7 @@ export default function MeusPedidos({ navigation }) {
         break;
       case 'E': return 'Entrega'
         break;
-      default:
+      default:  return 'Andamento'
         break;
     }
   }
@@ -53,7 +53,7 @@ export default function MeusPedidos({ navigation }) {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.Item} onPress={() => console.log('teste')}>
+      <TouchableOpacity style={styles.Item} onPress={() => navigation.navigate('MeusPedidosDescricao', { produtos: item.produtos } )}>
         <View style={styles.Pedido}>
           <Text style={styles.PedidoText}>Número do Pedido: {item.cod_Pedido}</Text>
         </View>
