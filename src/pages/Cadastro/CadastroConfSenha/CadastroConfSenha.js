@@ -7,26 +7,84 @@ import MybackButton from '../../../componentes/MybackButton';
 import BtnProsseguir from '../../../componentes/BtnProsseguir';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { Alert } from 'react-native';
+import auth from '@react-native-firebase/auth';
+import Api from '../../../services/Api';
+import moment from 'moment';
 
 export default function CadastroConfSenha({ navigation }) {
 
-    const { stateCliente, cadastroUsuario } = useContext(AuthContext);
+    const { stateCliente, token, cadastroUsuario } = useContext(AuthContext);
     const [modalActive, setModalActive] = useState(false);
 
     const ConfSenha = useRef(null);
 
+    const cadastrarFireBase = async () => {
+        console.log('teste');
+        return auth()
+            .createUserWithEmailAndPassword(stateCliente.email, stateCliente.senha)
+            .then(response => {
+                const { uid } = response.user;
+                return uid
+            }).catch(error => {
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        setMsnModal('Email Já Está em Uso!')
+                        setModalActive(true)
+                        break;
+                    case 'auth/invalid-email':
+                        setMsnModal('Formato Inválido de E-mail')
+                        setModalActive(true)
+                        break;
+                    case 'auth/weak-password':
+                        setMsnModal('Sua senha precisa ter pelo menos 8 caracteres')
+                        setModalActive(true)
+                        break;
+                    default:
+                        setMsnModal(error.code)
+                        setModalActive(true)
+                        break;
+                }
+            });
+    }
+
+    const cadastrarUser = async (_token) => {
+        Api.post('v1/Clientes', {
+            nome_Client: stateCliente.nome_Client,
+            data_Nascimento: moment().format(),
+            email: stateCliente.email,
+            sms_Enviar: true,
+            email_Enviar: true,
+            token_Login: _token
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(response => {
+            const { result } = response.data
+            const user = { email: result.email, uid: result.token_Login }
+            return result
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
     const FormSchema = Yup.object().shape({
         ConfSenha: Yup
-        .string()
-        .required("A confirmação da senha é obrigatório!")
-        .min(8, ({ min }) => `A senha deve ter pelo menos ${min} caracteres`)
-        .oneOf([stateCliente.senha], 'As senhas digitadas são diferentes')
+            .string()
+            .required("A confirmação da senha é obrigatório!")
+            .min(8, ({ min }) => `A senha deve ter pelo menos ${min} caracteres`)
+            .oneOf([stateCliente.senha], 'As senhas digitadas são diferentes')
     })
 
-    const setConfSenha = async (value) => {
-        const result = await cadastroUsuario();
-        if(result){
+    const setConfSenha = async () => {
+        try {
+            console.log('teste');
+            const token = await cadastrarFireBase();
+            const resultApp = await cadastrarUser(token);
             navigation.navigate('CadastroEndereco')
+        } catch (error) {
+            Alert.alert(error);
         }
     }
 
@@ -40,7 +98,7 @@ export default function CadastroConfSenha({ navigation }) {
                     ConfSenha: '',
                 }}
                 onSubmit={values => {
-                    setConfSenha(values);
+                    setConfSenha();
                 }}
                 validationSchema={FormSchema}
             >

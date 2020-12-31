@@ -40,7 +40,7 @@ export default function DrawerContent({ navigation }) {
                     <Image style={styles.imgItem} source={require('../Assets/images/pedidos.png')} />
                     <Text style={styles.textItem}>Pedidos</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.box2_2}>
+                <TouchableOpacity style={styles.box2_2} onPress={() => navigation.navigate('CadastroEndereco')}>
                     <Image style={styles.imgItem} source={require('../Assets/images/pedidos.png')} />
                     <Text style={styles.textItem}>Suporte</Text>
                 </TouchableOpacity>

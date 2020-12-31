@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext, useEffect, useState } from 'react';
-import { Image, Text, SafeAreaView, View, FlatList } from 'react-native';
+import { Image, Text, SafeAreaView, View, FlatList, TouchableOpacity } from 'react-native';
 import styles from './style';
 
 import AuthContext from '../../Contexts/auth';
@@ -18,30 +18,15 @@ export default function MeusPedidos({ navigation }) {
 
   const GetPedidos = () => {
     if (User) {
-      Api.get(`v1/Pedidos/FilterPedidoCliente/${User.cod_Client},${Estabelecimento.id}`, {
+      Api.get(`v1/Pedidos/FilterPedidoCliente?cod_ClientId=${User.cod_Client}&estabelecimentoId=${Estabelecimento.id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       }).then(response => {
         const { result } = response.data;
-        let filtrados = [];
-        for (let index = 0; index < result.length; index++) {
-          const element1 = result[index];
-          if (filtrados.length === 0) {
-            filtrados.push(element1)
-          }
-          for (let index = 0; index < filtrados.length; index++) {
-            const element2 = filtrados[index];
-            if (element1.cod_Pedido === element2.cod_Pedido) {
-              element2.produtos.push(element1.produtos[0])
-            } else {
-              if (!filtrados.find(item => item.cod_Pedido === element1.cod_Pedido)) {
-                filtrados.push(element1)
-              }
-            }
-          }
+        if(result){
+          setMeusPedidos(result);
         }
-        setMeusPedidos(filtrados);
       }).catch(error => {
         console.log(error);
       })
@@ -68,12 +53,12 @@ export default function MeusPedidos({ navigation }) {
 
   const renderItem = ({ item }) => {
     return (
-      <View style={styles.Item}>
+      <TouchableOpacity style={styles.Item} onPress={() => console.log('teste')}>
         <View style={styles.Pedido}>
           <Text style={styles.PedidoText}>Número do Pedido: {item.cod_Pedido}</Text>
         </View>
         <View style={styles.NomeMercantil}>
-          <Text style={styles.PedidoText}>{item.estabelecimentos._Estabelecimento}</Text>
+          <Text style={styles.PedidoText}>{item.estabelecimentos.razaoSocial}</Text>
         </View>
         <View style={styles.Pedido}>
           <Text style={styles.PedidoText}>{moment(item.dataHora_Pedido).format('DD/MM/YYYY - HH-mm')}</Text>
@@ -81,7 +66,7 @@ export default function MeusPedidos({ navigation }) {
         <View style={styles.Status}>
           <Text style={styles.StatusText}>{statusPerson(item.status_Pedido)}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 

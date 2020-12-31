@@ -46,8 +46,8 @@ export default function DescricaoProduto({ navigation, route }) {
 
     Api.post(`v1/Carrinhos`, {
       produtosId: produto.id,
-      preco: parseFloat(produto.preco.replace(',', '.')),
       quantidade: quantidade,
+      desconto: 0,
       cod_PedidoId: Pedido.cod_Pedido,
       cod_ClientId: User.cod_Client,
       estabelecimentoId: Estabelecimento.id,
@@ -56,6 +56,7 @@ export default function DescricaoProduto({ navigation, route }) {
         'Authorization': `Bearer ${token}`
       }
     }).then(response => {
+      console.log(response);
       setMsnModal('Produto Adicionado ao Carrinho !')
       setModalActive(true)
     }).catch(error => {

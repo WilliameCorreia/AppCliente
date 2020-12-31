@@ -12,7 +12,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Myloading from '../../../componentes/MyLoading';
 
-export default function CadastroEndereco() {
+export default function CadastroEndereco({ navigation }) {
 
     const { dispathCliente, cadastroEndereco } = useContext(AuthContext);
 
@@ -110,7 +110,7 @@ export default function CadastroEndereco() {
         
         const result = await cadastroEndereco(values);
         
-        navigation.navigate('CadastroConfEmail')
+        navigation.navigate('RouteButton')
     }
 
     return (
@@ -123,6 +123,7 @@ export default function CadastroEndereco() {
                         Bairro: endereco.bairro,
                         Numero: endereco.numero.toString(),
                         Cidade: endereco.cidade,
+                        Estado: endereco.estado,
                         Cep: endereco.cep,
                         Complemento: '',
                         Telefone: '',
