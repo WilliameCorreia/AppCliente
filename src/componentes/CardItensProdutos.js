@@ -60,7 +60,7 @@ export default function CardItensProdutos({ produtos }) {
                 </View>
                 <View style={styles.ContainerDescricao}>
                     <View style={styles.descricaoProduto} >
-                        <Text style={styles.NomeProduto}>{produtos.nome}</Text>
+                        <Text style={styles.NomeProduto}>{produtos._Produto}</Text>
                     </View>
                     <View style={styles.Preco}>
                         <Text style={styles.PrecoSimbolo}>R$</Text>

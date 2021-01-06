@@ -11,10 +11,12 @@ import { Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import Api from '../../../services/Api';
 import moment from 'moment';
+import EstabelecimentoContext from '../../../Contexts/Estabelecimento';
 
 export default function CadastroConfSenha({ navigation }) {
 
     const { stateCliente, token, cadastroUsuario, GetUsuario } = useContext(AuthContext);
+    const { GetPedidosAbertos } = useContext(EstabelecimentoContext)
     const [modalActive, setModalActive] = useState(false);
 
     const ConfSenha = useRef(null);
@@ -25,7 +27,7 @@ export default function CadastroConfSenha({ navigation }) {
             .createUserWithEmailAndPassword(stateCliente.email, stateCliente.senha)
             .then(response => {
                 const { uid } = response.user;
-                return uid
+                cadastrarUser(uid);
             }).catch(error => {
                 switch (error.code) {
                     case 'auth/email-already-in-use':
@@ -63,7 +65,8 @@ export default function CadastroConfSenha({ navigation }) {
         }).then(response => {
             const { result } = response.data
             GetUsuario({ email: result.email, uid: result.token_Login });
-            return result
+            GetPedidosAbertos();
+            navigation.navigate('CadastroEndereco')
         }).catch(error => {
             console.log(error);
         });
@@ -77,16 +80,17 @@ export default function CadastroConfSenha({ navigation }) {
             .oneOf([stateCliente.senha], 'As senhas digitadas são diferentes')
     })
 
-    const setConfSenha = async () => {
+   /*  const setConfSenha = async () => {
         try {
-            console.log('teste');
             const token = await cadastrarFireBase();
+            console.log(token);
             const resultApp = await cadastrarUser(token);
+            console.log(resultApp);
             navigation.navigate('CadastroEndereco')
         } catch (error) {
             Alert.alert(error);
         }
-    }
+    } */
 
     return (
         <SafeAreaView style={styles.container}>
@@ -98,7 +102,7 @@ export default function CadastroConfSenha({ navigation }) {
                     ConfSenha: '',
                 }}
                 onSubmit={values => {
-                    setConfSenha();
+                    cadastrarFireBase();
                 }}
                 validationSchema={FormSchema}
             >

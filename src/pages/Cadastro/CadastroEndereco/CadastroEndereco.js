@@ -223,7 +223,7 @@ export default function CadastroEndereco({ navigation }) {
                                             style={styles.input}
                                             onChangeText={handleChange('Telefone')}
                                             onBlur={handleBlur('Telefone')}
-                                            value={values.Cep}
+                                            value={values.Telefone}
                                             maxLength={14}
                                         />
                                         {(touched.Telefone && errors.Telefone) && <Text style={styles.Error}>{errors.Telefone}</Text>}

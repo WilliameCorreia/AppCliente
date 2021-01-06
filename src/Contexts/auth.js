@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     async function signIn(user) {
         if (token) {
             if (user) {
-                GetUsuario(user);
+               await GetUsuario(user);
             } else {
                 dispathCliente({ type: 'delUser' })
             }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     Text,
     View,
@@ -13,23 +13,25 @@ import {
 
 import auth from '@react-native-firebase/auth';
 import MyModal from '../../componentes/MyModal';
-
+import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import styles from './style';
 
 export default function login({ navigation }) {
 
+    const { GetPedidosAbertos } = useContext(EstabelecimentoContext);
     const [loading, setloading] = useState(false);
     const [usuario, setUsuario] = useState();
     const [password, setPassword] = useState();
     const [modalActive, setModalActive] = useState(false);
     const [msnModal, setMsnModal] = useState('primeira passada');
 
-    autenticar = () => {
+    const autenticar = async () => {
         setloading(true)
         if (usuario && password) {
             auth()
                 .signInWithEmailAndPassword(usuario, password)
                 .then(({ user }) => {
+                    GetPedidosAbertos();
                     setloading(false)
                     navigation.goBack();
                 })
