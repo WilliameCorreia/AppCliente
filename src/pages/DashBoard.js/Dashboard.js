@@ -19,7 +19,7 @@ export default function Dashboard({ navigation }) {
 
   useEffect(() => {
     GetPedidosAbertos();
-  }, [])
+  }, [User])
 
   return (
     <View style={styles.container}>

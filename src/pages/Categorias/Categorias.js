@@ -3,21 +3,15 @@ import { StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Dimensions
 
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 import { Image } from 'react-native-elements';
-import AuthContext from '../../Contexts/auth';
 import Api from '../../services/Api'
 
 export default function Categorias( { navigation, route } ) {
 
-    const { token } = useContext(AuthContext);
     const [categorias, setCategorias] = useState([]);
     const EstabelecimentoId = route.params;
     
     function LoadCategorias(){
-        Api.get(`v1/Estabelecimentos/FiltrarCategoriasPorEstabelecimentos/${EstabelecimentoId}`,{
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then(response => {
+        Api.get(`v1/Estabelecimentos/FiltrarCategoriasPorEstabelecimentos/${EstabelecimentoId}`).then(response => {
             const { result } =  response.data;
             let _categorias = [];
             result.map(item =>{

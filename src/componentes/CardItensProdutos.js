@@ -3,13 +3,11 @@ import { StyleSheet, Text, View, SafeAreaView, FlatList, Image, TouchableOpacity
 
 import BtnProdutoQuantidade from '../componentes/BtnProdutoQuantidade';
 import EstabelecimentoContext from '../Contexts/Estabelecimento';
-import AuthContext from '../Contexts/auth';
 import Api from '../services/Api';
 
 export default function CardItensProdutos({ produtos }) {
 
     const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
-    const { token } = useContext(AuthContext);
 
     const calculoTotal = (preco, quantidade) => {
         let valor = preco.replace(",", ".") * quantidade;

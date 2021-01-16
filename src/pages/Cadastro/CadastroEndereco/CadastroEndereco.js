@@ -24,7 +24,6 @@ export default function CadastroEndereco({ navigation }) {
     const Numero = useRef(null);
     const Bairro = useRef(null);
     const Cidade = useRef(null);
-    const Telefone = useRef(null);
     const Complemento = useRef(null);
 
     const localizacao = async () => {
@@ -101,16 +100,13 @@ export default function CadastroEndereco({ navigation }) {
         Cidade: Yup
             .string()
             .required("A Cidade é obrigatório!"),
-        Telefone: Yup
-            .string()
-            .required("Telefone é obrigatório!"),
     })
 
     const cadastrarUsuario = async (values) => {
         
         const result = await cadastroEndereco(values);
         
-        navigation.navigate('RouteButton')
+        navigation.navigate('DashBoard')
     }
 
     return (
@@ -126,7 +122,6 @@ export default function CadastroEndereco({ navigation }) {
                         Estado: endereco.estado,
                         Cep: endereco.cep,
                         Complemento: '',
-                        Telefone: '',
                         Longitude: longitude,
                         Latitude: latitude,
                     }}
@@ -214,19 +209,6 @@ export default function CadastroEndereco({ navigation }) {
                                             value={values.Complemento}
                                         />
                                         {(touched.Complemento && errors.Complemento) && <Text style={styles.Error}>{errors.Complemento}</Text>}
-                                    </View>
-                                    <View style={{ flex: 1 }}>
-                                        <Text style={styles.InputLabel}>Telefone</Text>
-                                        <TextInput
-                                            ref={Telefone}
-                                            keyboardType={'numeric'}
-                                            style={styles.input}
-                                            onChangeText={handleChange('Telefone')}
-                                            onBlur={handleBlur('Telefone')}
-                                            value={values.Telefone}
-                                            maxLength={14}
-                                        />
-                                        {(touched.Telefone && errors.Telefone) && <Text style={styles.Error}>{errors.Telefone}</Text>}
                                     </View>
                                 </View>
                             </View>

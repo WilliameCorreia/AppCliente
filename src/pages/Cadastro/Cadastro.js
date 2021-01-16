@@ -21,10 +21,6 @@ import Api from '../../services/Api';
 
 export default function Cadastro({ navigation }) {
 
-    //const [login, setLogin] = useState();
-    //const [password, setPassword] = useState();
-    //const [confPassword, setConfPassword] = useState();
-    const { token } = useContext(AuthContext);
     const [loading, setloading] = useState(false);
 
     const [modalActive, setModalActive] = useState(false);
@@ -41,10 +37,6 @@ export default function Cadastro({ navigation }) {
             data_Nascimento: "2020-11-07T18:02:24.286Z",
             email: values.email,
             token_Login: _token
-        },{
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
         }).then(response =>{
             console.log(response);
         }).catch(error =>{

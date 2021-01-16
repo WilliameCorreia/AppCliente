@@ -4,53 +4,33 @@ import auth from '@react-native-firebase/auth';
 import { credencias } from '../credenciais';
 import Api from '../services/Api';
 import { initialStateCliente, UserReducerCliente } from '../reducers/ClienteReducer';
-import moment from 'moment';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
-    const [token, setToken] = useState();
     const [stateCliente, dispathCliente] = useReducer(UserReducerCliente, initialStateCliente);
 
-    async function GetAuth() {
-        Api.post('Auth/login', credencias).then(response => {
+    const GetAuth = async () => {
+        return Api.post('Auth/login', credencias).then(response => {
             const { token } = response.data;
-            setToken(token);
+            Api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             console.log(token);
+            return token
         }).catch(error => {
             console.log(error);
         })
     }
 
-    async function GetUsuario(user) {
-
-        const { email, uid } = user;
-
-        Api.get(`v1/Clientes/FilterClientePorEmailTokenLogin?tokenLogin=${uid}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then(response => {
+    const GetUsuario = async (user) => {
+        return Api.get(`v1/Clientes/FilterClientePorEmailTokenLogin?tokenLogin=${user.uid}`).then(response => {
             const { result } = response.data;
-            dispathCliente({ type: 'AddUser', user: { email: user.email, token: user.uid, ...result[0] } })
-        }).catch(error => {
-            console.log(error);
+            return result
         })
     }
 
-    async function signIn(user) {
-        if (token) {
-            if (user) {
-               await GetUsuario(user);
-            } else {
-                dispathCliente({ type: 'delUser' })
-            }
-        }
-    }
-
-    cadastroEndereco = (values) => {
-        Api.post('v1/Enderecos', {
+    const cadastroEndereco = async (values) => {
+        return Api.post('v1/Enderecos', {
             numero: values.Numero,
             rua: values.Rua,
             cidade: values.Cidade,
@@ -61,29 +41,49 @@ export const AuthProvider = ({ children }) => {
             clienteId: stateCliente.User.cod_Client,
             latitude: values.Latitude.toString(),
             longitude: values.Longitude.toString(),
-        }, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
         }).then(response => {
             const { result } = response.data;
-            console.log(response);
-            GetUsuario({ email: stateCliente.User.email, uid: stateCliente.User.token });
+            return result
         }).catch(error => {
             console.log(error);
         });
     }
 
+    // metodo principal de validacão de acesso!
+    const signIn = async (user) => {
+        if (user) {
+            try {
+                const usuario = await GetUsuario(user);
+                if (usuario.lenght > 0) {
+                    dispathCliente({ type: 'AddUser', user: usuario })
+                } else {
+                    dispathCliente({ type: 'AddUser', user: { email: user.email, uid: user.uid } })
+                }
+
+            } catch (error) {
+                console.log(error);
+            } finally {
+
+            }
+        } else {
+            dispathCliente({ type: 'delUser' })
+        }
+    }
+
     useEffect(() => {
-        GetAuth();
+        (async () => {
+            const token = await GetAuth();
+            if(token){
+                const subscribe = auth().onAuthStateChanged(signIn);
+            }
+            return () => {
+
+            }
+        })()
     }, [])
 
-    useEffect(() => {
-        const subscriber = auth().onUserChanged(signIn)
-    }, [token])
-
     return (
-        <AuthContext.Provider value={{ token: token, stateCliente, dispathCliente, cadastroEndereco, signIn, GetUsuario }}>
+        <AuthContext.Provider value={{ stateCliente, dispathCliente, cadastroEndereco, signIn, GetUsuario }}>
             {children}
         </AuthContext.Provider>
     )

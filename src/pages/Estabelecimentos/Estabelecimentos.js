@@ -3,20 +3,14 @@ import React, { useEffect, useContext, useState } from 'react';
 import { Image, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './style';
 import Api from '../../services/Api';
-import AuthContext from '../../Contexts/auth';
 import Myloading from '../../componentes/MyLoading';
 
 export default function Estabelecimentos({ navigation }) {
 
-  const { token } = useContext(AuthContext);
   const [tipoEstabelecimentos, setTipoEstabelecimento] = useState(null);
 
   const getTipoEstabelecimentos = () => {
-    Api.get(`v1/TipoEstabelecimentos`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }).then(response => {
+    Api.get(`v1/TipoEstabelecimentos`).then(response => {
       const { result } = response.data;
       setTipoEstabelecimento(result);
       console.log(result);

@@ -33,11 +33,7 @@ export default function CardItemPedido({ produtos }) {
     const DeletarItem = (item) =>{
         
         dispathEstabelecimento({type: 'deletarProduto', carrinho: item})
-        Api.delete(`v1/Carrinhos/${item.item_Id}`,{
-            headers:{
-                'Authorization': `Bearer ${token}`
-            }
-        }).then(response =>{
+        Api.delete(`v1/Carrinhos/${item.item_Id}`).then(response =>{
             console.log(response);
         }).catch(error =>{
             console.log(error)

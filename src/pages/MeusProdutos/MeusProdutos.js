@@ -24,11 +24,7 @@ export default function MeusProdutos({ navigation, route }) {
     const LoadProdutos = () => {
         if (produtos.continue) {
             setProdutos({ ...produtos, loading: true })
-            Api.get(`v1/Produtos/${item.categoriaId}/${item.EstabelecimentoId}/${produtos.page}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }).then(response => {
+            Api.get(`v1/Produtos/${item.categoriaId}/${item.EstabelecimentoId}/${produtos.page}`).then(response => {
                 const { result } = response.data;
                 if (result && result.length > 0) {
                     setProdutos({
@@ -50,11 +46,7 @@ export default function MeusProdutos({ navigation, route }) {
 
     const pesquisar = () => {
         if (texto) {
-            Api.get(`v1/Produtos/Pesquisar/${item.EstabelecimentoId}/${item.categoriaId}/${texto}/${1}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }).then(response => {
+            Api.get(`v1/Produtos/Pesquisar/${item.EstabelecimentoId}/${item.categoriaId}/${texto}/${1}`).then(response => {
                 const { result } = response.data;
                 console.log(result);
                 setProdutos({

@@ -1,13 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 
-import AuthContext from '../Contexts/auth';
 import EstabelecimentoContext from '../Contexts/Estabelecimento';
 import Api from '../services/Api';
 
 export default function CarroselProdutos({ navigation }) {
 
-    const { token } = useContext(AuthContext);
     const { stateEstabelecimento } = useContext(EstabelecimentoContext);
     const { Estabelecimento } = stateEstabelecimento;
 
@@ -21,11 +19,7 @@ export default function CarroselProdutos({ navigation }) {
     const Add_Ofertas = () => {
         if (listOfertas.continue) {
             setListOfertas({ ...listOfertas, loading: true })
-            Api.get(`v1/Produtos/pesquisarOfertasProdutos?estabelecimentoId=${Estabelecimento.id}&oferta=${true}&pagina=${listOfertas.page}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }).then(response => {
+            Api.get(`v1/Produtos/pesquisarOfertasProdutos?estabelecimentoId=${Estabelecimento.id}&oferta=${true}&pagina=${listOfertas.page}`).then(response => {
                 const { result } = response.data;
                 if (result && result.length > 0) {
                     setListOfertas({

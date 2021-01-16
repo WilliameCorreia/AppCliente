@@ -3,6 +3,7 @@ import React, { createContext, useReducer, useState, useEffect, useContext } fro
 import { initialStateStabelecimento, UserReducerEstabelecimento } from '../reducers/EstabelecimentoReducer';
 import AuthContext from '../Contexts/auth';
 import Api from '../services/Api';
+import moment from 'moment';
 
 const EstabelecimentoContext = createContext();
 
@@ -14,16 +15,13 @@ export const EstabelecimentoProvider = ({ children }) => {
   const [stateEstabelecimento, dispathEstabelecimento] = useReducer(UserReducerEstabelecimento, initialStateStabelecimento);
   const { Estabelecimento } = stateEstabelecimento;
 
-  const GetPedidosAbertos = () => {
-    if (User) {
-      Api.get(`v1/Pedidos/FilterPedidosAbertos/${User.cod_Client},false,${Estabelecimento.id}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }).then(response => {
+  const GetPedidosAbertos = async () => {
+    if (User.cod_Client) {
+      return Api.get(`v1/Pedidos/FilterPedidosAbertos/${User.cod_Client},false,${Estabelecimento.id}`).then(response => {
         const { result } = response.data;
         if (result) {
           dispathEstabelecimento({ type: 'AddPedido', pedido: result });
+          return result;
         } else {
           gerarPedido();
         }
@@ -36,12 +34,10 @@ export const EstabelecimentoProvider = ({ children }) => {
   const gerarPedido = () => {
     Api.post(`v1/Pedidos`, {
       cod_ClientId: User.cod_Client,
+      dataHora_Pedido: moment().format('YYYY-MM-DD'),
       pedido_Concluido: false,
+      status_Pedido: 'A',
       estabelecimentoId: Estabelecimento.id,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
     }).then(response => {
       const { result } = response.data;
       GetPedidosAbertos();
@@ -49,6 +45,10 @@ export const EstabelecimentoProvider = ({ children }) => {
       console.log(error)
     });
   }
+
+  useEffect(() => {
+    GetPedidosAbertos();
+  }, [])
 
   return (
     <EstabelecimentoContext.Provider value={{ stateEstabelecimento, dispathEstabelecimento, GetPedidosAbertos }}>

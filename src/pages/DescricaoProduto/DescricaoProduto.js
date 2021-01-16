@@ -51,10 +51,6 @@ export default function DescricaoProduto({ navigation, route }) {
       cod_PedidoId: Pedido.cod_Pedido,
       cod_ClientId: User.cod_Client,
       estabelecimentoId: Estabelecimento.id,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
     }).then(response => {
       console.log(response);
       setMsnModal('Produto Adicionado ao Carrinho !')

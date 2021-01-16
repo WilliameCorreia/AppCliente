@@ -18,11 +18,7 @@ export default function MeusPedidos({ navigation }) {
 
   const GetPedidos = () => {
     if (User) {
-      Api.get(`v1/Pedidos/FilterPedidoCliente?cod_ClientId=${User.cod_Client}&estabelecimentoId=${Estabelecimento.id}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }).then(response => {
+      Api.get(`v1/Pedidos/FilterPedidoCliente?cod_ClientId=${User.cod_Client}&estabelecimentoId=${Estabelecimento.id}`).then(response => {
         const { result } = response.data;
         if (result) {
           setMeusPedidos(result);

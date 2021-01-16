@@ -15,7 +15,7 @@ export default function Carrinho({ navigation }) {
   const { Pedido } = stateEstabelecimento;
   const { Estabelecimento } = stateEstabelecimento;
   const { Carrinho } = stateEstabelecimento;
-  const { stateCliente, token } = useContext(AuthContext);
+  const { stateCliente } = useContext(AuthContext);
   const { User } = stateCliente;
   const [total, setTotal] = useState("0,00");
   const [produtos, setProdutos] = useState([]);
@@ -52,12 +52,8 @@ export default function Carrinho({ navigation }) {
   }
 
   const GetProdutosCarrinho = () => {
-    if (User) {
-      Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.cod_Client},${Estabelecimento.id},${Pedido.cod_Pedido}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }).then(response => {
+    if (User.cod_Client) {
+      Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.cod_Client},${Estabelecimento.id},${Pedido.cod_Pedido}`).then(response => {
         const { result } = response.data;
         dispathEstabelecimento({ type: 'AddCarrinho', carrinho: result });
       }).catch(error => {
@@ -75,10 +71,6 @@ export default function Carrinho({ navigation }) {
       pedido_Concluido: true,
       status_Pedido: "C",
       estabelecimentoId: Estabelecimento.id,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
     }).then(response => {
       const { result } = response.data;
       navigation.navigate('PagamentoEfetuado');
@@ -108,7 +100,7 @@ export default function Carrinho({ navigation }) {
           <Text style={styles.ResumoTotalCentavos}>{precoPersonalizado(total.toString(), false)}</Text>
         </View>
       </View>
-      {User ?
+      {User.cod_Client ?
         <View style={Carrinho.length !== 0 ? styles.boxBtn : styles.boxBtnDisabled}>
           <TouchableOpacity style={styles.BtnComprar} disabled={Carrinho.length === 0} onPress={() => setModalConfirm(true)}>
             <Text style={styles.BtnComprarText}>EFETUAR COMPRA</Text>

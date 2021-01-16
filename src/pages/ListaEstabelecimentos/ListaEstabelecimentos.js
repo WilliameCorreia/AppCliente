@@ -14,8 +14,6 @@ export default function ListaEstabelecimentos({ navigation, route }) {
 
   const { tipo } = route.params;
 
-  const { token } = useContext(AuthContext);
-
   const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
 
   const [estabelecimentos, setEstabelecimentos] = useState(null);
@@ -23,19 +21,13 @@ export default function ListaEstabelecimentos({ navigation, route }) {
   const [estabelecimentoFiltrados, setEstabelecimentoFiltrados] = useState([]);
 
   function getEstabelecimentos() {
-    if (token) {
-      console.log(tipo);
-      Api.get(`v1/Estabelecimentos/TipoEstabelecimento/${tipo}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }).then(response => {
-        const { result } = response.data;
-        setEstabelecimentos(result);
-      }).catch(error => {
-        console.log(error)
-      })
-    }
+    console.log(tipo);
+    Api.get(`v1/Estabelecimentos/TipoEstabelecimento/${tipo}`).then(response => {
+      const { result } = response.data;
+      setEstabelecimentos(result);
+    }).catch(error => {
+      console.log(error)
+    })
   }
 
   const selectedEstabelecimento = item => {

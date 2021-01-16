@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext, } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native';
+import { Text, View, SafeAreaView, TextInput } from 'react-native';
 
 import styles from './style';
 import AuthContext from '../../../Contexts/auth';
@@ -7,27 +7,26 @@ import MybackButton from '../../../componentes/MybackButton';
 import BtnProsseguir from '../../../componentes/BtnProsseguir';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import Api from '../../../services/Api';
 import moment from 'moment';
 import EstabelecimentoContext from '../../../Contexts/Estabelecimento';
+import MyModal from '../../../componentes/MyModal';
 
 export default function CadastroConfSenha({ navigation }) {
 
-    const { stateCliente, token, cadastroUsuario, GetUsuario } = useContext(AuthContext);
-    const { GetPedidosAbertos } = useContext(EstabelecimentoContext)
+    const { stateCliente, dispathCliente } = useContext(AuthContext);
     const [modalActive, setModalActive] = useState(false);
+    const [msnModal, setMsnModal] = useState('');
 
     const ConfSenha = useRef(null);
 
     const cadastrarFireBase = async () => {
-        console.log('teste');
-        return auth()
+        auth()
             .createUserWithEmailAndPassword(stateCliente.email, stateCliente.senha)
             .then(response => {
                 const { uid } = response.user;
-                cadastrarUser(uid);
+                teste(uid);
             }).catch(error => {
                 switch (error.code) {
                     case 'auth/email-already-in-use':
@@ -51,23 +50,21 @@ export default function CadastroConfSenha({ navigation }) {
     }
 
     const cadastrarUser = async (_token) => {
-        Api.post('v1/Clientes', {
+        return Api.post('v1/Clientes', {
             nome_Client: stateCliente.nome_Client,
             data_Nascimento: moment().format(),
             email: stateCliente.email,
             sms_Enviar: true,
             email_Enviar: true,
             token_Login: _token
-        }, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
         }).then(response => {
             const { result } = response.data
-            GetUsuario({ email: result.email, uid: result.token_Login });
-            GetPedidosAbertos();
-            navigation.navigate('CadastroEndereco')
+            return result
         }).catch(error => {
+            const user = auth().currentUser
+            user.delete();
+            setMsnModal(error.message)
+            setModalActive(true)
             console.log(error);
         });
     }
@@ -80,17 +77,18 @@ export default function CadastroConfSenha({ navigation }) {
             .oneOf([stateCliente.senha], 'As senhas digitadas são diferentes')
     })
 
-   /*  const setConfSenha = async () => {
+    const teste = async (token) => {
         try {
-            const token = await cadastrarFireBase();
-            console.log(token);
-            const resultApp = await cadastrarUser(token);
-            console.log(resultApp);
-            navigation.navigate('CadastroEndereco')
+            const usuarioApp = await cadastrarUser(token);
+            console.log(usuarioApp);
+            if (usuarioApp) {
+                dispathCliente({ type: 'AddUser', user: { ...usuarioApp } })
+                navigation.navigate('CadastroEndereco')
+            }
         } catch (error) {
-            Alert.alert(error);
+            console.log(error);
         }
-    } */
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -129,7 +127,7 @@ export default function CadastroConfSenha({ navigation }) {
                             />
                         </View>
                         <View style={styles.box3}>
-                            {/* <Loading activeModal={modalActive} /> */}
+                            <MyModal activeModal={modalActive} mensagem={msnModal} mudarEstado={setModalActive} />
                         </View>
                     </View>
                 )}

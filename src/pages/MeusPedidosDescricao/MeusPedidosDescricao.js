@@ -16,15 +16,6 @@ export default function MeusPedidosDescricao({ route }) {
 
     const [total, setTotal] = useState("0,00");
 
-    /* const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
-    const { Pedido } = stateEstabelecimento;
-    const { Estabelecimento } = stateEstabelecimento;
-    const { Carrinho } = stateEstabelecimento;
-    const { stateCliente, token } = useContext(AuthContext);
-    const { User } = stateCliente;
-    
-    const [modalConfim, setModalConfirm] = useState(false); */
-
     const valorTotal = () => {
         if (Carrinho) {
             let valor = 0;

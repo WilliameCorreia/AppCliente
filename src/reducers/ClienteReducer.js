@@ -1,6 +1,6 @@
 export const initialStateCliente = {
     User: {
-        cod_Client: 5,
+        cod_Client: null,
         cpf: null,
         data_Nascimento: '',
         email: '',
@@ -29,10 +29,34 @@ export const initialStateCliente = {
 export const UserReducerCliente = (state, action) => {
     switch (action.type) {
         case 'AddUser':
-            return { User: action.user }
+            return { ...state, User: action.user }
             break;
         case 'delUser':
-            return { ...state, User: null }
+            return {User : {
+                cod_Client: null,
+                cpf: null,
+                data_Nascimento: '',
+                email: '',
+                email_Enviar: false,
+                enderecos: [{
+                    numero: "",
+                    rua: "",
+                    cidade: "",
+                    bairro: "",
+                    estado: "",
+                    cep: 0,
+                    complemento: "",
+                    estabelecimentoId: 0,
+                    clienteId: 0,
+                }],
+                nome_Client: '',
+                rg: null,
+                sms_Enviar: false,
+                telefone: null,
+                uid: '',
+                token_Login: '',
+                senha: ''
+            }}
             break;
         case 'setNome':
             return { ...state, nome_Client: action.nome_Client }
@@ -47,7 +71,7 @@ export const UserReducerCliente = (state, action) => {
             return { ...state, telefone: action.telefone }
             break;
         case 'setEndereco':
-            return { ...state, enderecos: [ action.enderecos ] }
+            return { ...state, enderecos: [action.enderecos] }
             break;
         case 'setSenha':
             return { ...state, senha: action.senha }
