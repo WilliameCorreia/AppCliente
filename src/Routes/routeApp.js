@@ -16,6 +16,7 @@ import CadastroSenha from '../pages/Cadastro/CadastroSenha/CadastroSenha';
 import CadastroConfSenha from '../pages/Cadastro/CadastroConfSenha/CadastroConfSenha';
 import CadastroEndereco from '../pages/Cadastro/CadastroEndereco/CadastroEndereco';
 import MeusPedidosDescricao from '../pages/MeusPedidosDescricao/MeusPedidosDescricao';
+import CadastroTelefone from '../pages/Cadastro/CadastroTelefone/CadastroTelefone';
 
 const Stack = createStackNavigator();
 
@@ -83,27 +84,32 @@ function RouteApp({ route }) {
       <Stack.Screen
         name="CadastroNome"
         component={CadastroNome}
-        options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
       />
       <Stack.Screen
         name="CadastroEmail"
         component={CadastroEmail}
-        options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
       />
       <Stack.Screen
         name="CadastroConfEmail"
         component={CadastroConfEmail}
-        options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
       />
       <Stack.Screen
         name="CadastroSenha"
         component={CadastroSenha}
-        options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
       />
       <Stack.Screen
         name="CadastroConfSenha"
         component={CadastroConfSenha}
-        options={{ headerStyle: { backgroundColor: '#B32728' }, headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
+      />
+      <Stack.Screen
+        name="CadastroTelefone"
+        component={CadastroTelefone}
+        options={{ headerStyle: { backgroundColor: '#B32728' }, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}
       />
       <Stack.Screen
         name="CadastroEndereco"

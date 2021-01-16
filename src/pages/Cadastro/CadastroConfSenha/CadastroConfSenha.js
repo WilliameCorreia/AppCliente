@@ -54,6 +54,7 @@ export default function CadastroConfSenha({ navigation }) {
             nome_Client: stateCliente.nome_Client,
             data_Nascimento: moment().format(),
             email: stateCliente.email,
+            telefone:  stateCliente.telefone,
             sms_Enviar: true,
             email_Enviar: true,
             token_Login: _token
@@ -92,9 +93,6 @@ export default function CadastroConfSenha({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{ marginTop: 50 }}>
-                <MybackButton onPress={() => console.log('teste')} color={'#B32728'} />
-            </View>
             <Formik
                 initialValues={{
                     ConfSenha: '',

@@ -29,9 +29,6 @@ export default function CadastroSenha({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{ marginTop: 50 }}>
-                <MybackButton onPress={() => console.log('teste')} color={'#B32728'} />
-            </View>
             <Formik
                 initialValues={{
                     Senha: '',
