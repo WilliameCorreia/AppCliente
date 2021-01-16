@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
         if (user) {
             try {
                 const usuario = await GetUsuario(user);
-                if (usuario.lenght > 0) {
+                if (usuario.length > 0) {
                     dispathCliente({ type: 'AddUser', user: usuario })
                 } else {
                     dispathCliente({ type: 'AddUser', user: { email: user.email, uid: user.uid } })

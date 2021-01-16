@@ -1,11 +1,16 @@
-import React, { Component, useContext, useState, useRef } from 'react'
-import { Image, Text, View, TouchableWithoutFeedback, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import React, {  useRef, useContext } from 'react'
+import { Image, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 
 import Styles from './style'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import AuthContext from '../../Contexts/auth';
 
 export default function PerfilUsuario({ route }) {
+
+    const { User } = useContext(AuthContext)
+
+    console.log(User);
 
     const Nome = useRef(null);
     const Email = useRef(null);
