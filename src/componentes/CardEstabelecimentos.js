@@ -13,7 +13,7 @@ export default function CardEstabelecimentos({ estabelecimentos, selectedEstabel
                     <Text>{item.razaoSocial}</Text>
                 </View>
                 <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={require('../Assets/images/estrela.jpg')} />
+                    <Image style={styles.cardImg} source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/estabelecimento/${item.fotoName}` }} />
                 </View>
             </TouchableOpacity>
         )
@@ -51,9 +51,11 @@ const styles = StyleSheet.create({
     box2: {
         width: '50%',
         height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     cardImg: {
-        width: '100%',
-        height: '100%',
+        width: '80%',
+        height: '80%',
     }
 });

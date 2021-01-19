@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     const GetUsuario = async (user) => {
         return Api.get(`v1/Clientes/FilterClientePorEmailTokenLogin?tokenLogin=${user.uid}`).then(response => {
             const { result } = response.data;
-            return result
+            return result;
         })
     }
 
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
             try {
                 const usuario = await GetUsuario(user);
                 if (usuario.length > 0) {
-                    dispathCliente({ type: 'AddUser', user: usuario })
+                    dispathCliente({ type: 'AddUser', user: usuario[0] })
                 } else {
                     dispathCliente({ type: 'AddUser', user: { email: user.email, uid: user.uid } })
                 }

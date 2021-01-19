@@ -1,4 +1,4 @@
-import React, {  useRef, useContext } from 'react'
+import React, { useRef, useContext, useState } from 'react'
 import { Image, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 
 import Styles from './style'
@@ -8,9 +8,10 @@ import AuthContext from '../../Contexts/auth';
 
 export default function PerfilUsuario({ route }) {
 
-    const { User } = useContext(AuthContext)
+    const { stateCliente } = useContext(AuthContext);
+    const { User } = stateCliente;
 
-    console.log(User);
+    console.log(stateCliente);
 
     const Nome = useRef(null);
     const Email = useRef(null);
@@ -55,23 +56,21 @@ export default function PerfilUsuario({ route }) {
     return (
         <Formik
             initialValues={{
-                Nome: '',
-                Email: '',
-                Telefone: '',
-                Endereco: '',
-                Numero: '',
-                Cep: ''
+                email: User.email,
+                enderecos: User.enderecos[0].rua,
+                nome_Client: User.nome_Client,
+                telefone: User.telefone,
             }}
             onSubmit={values => {
-
+                console.log(values);
             }}
-        validationSchema={FormSchema}
+            validationSchema={FormSchema}
         >
             {({ handleChange, handleBlur, handleSubmit, values, errors, touched, isValid }) => (
                 <View style={Styles.container}>
                     <View style={Styles.box1}>
                         <Image style={Styles.img} source={require("../../Assets/images/user.png")} />
-                        <Text style={Styles.Text}>PAULO ARTUR</Text>
+                        <Text style={Styles.Text}>{values.nome_Client}</Text>
                         <Text style={Styles.linha} />
                     </View>
                     < ScrollView style={Styles.box2}>
@@ -82,7 +81,7 @@ export default function PerfilUsuario({ route }) {
                                 style={Styles.itemInput}
                                 onChangeText={handleChange('Nome')}
                                 onBlur={handleBlur('Nome')}
-                                value={values.Nome}
+                                value={values.nome_Client}
                                 placeholderTextColor="#B32728"
                             />
                             {(touched.Nome && errors.Nome) && <Text style={Styles.textError}>{errors.Nome}</Text>}
@@ -94,7 +93,7 @@ export default function PerfilUsuario({ route }) {
                                 style={Styles.itemInput}
                                 onChangeText={handleChange('Email')}
                                 onBlur={handleBlur('Email')}
-                                value={values.Email}
+                                value={values.email}
                                 placeholderTextColor="#B32728"
                             />
                             {(touched.Email && errors.Email) && <Text style={Styles.textError}>{errors.Email}</Text>}
@@ -106,7 +105,7 @@ export default function PerfilUsuario({ route }) {
                                 style={Styles.itemInput}
                                 onChangeText={handleChange('Telefone')}
                                 onBlur={handleBlur('Telefone')}
-                                value={values.Telefone}
+                                value={values.telefone}
                                 placeholderTextColor="#B32728"
                             />
                             {(touched.Telefone && errors.Telefone) && <Text style={Styles.textError}>{errors.Telefone}</Text>}
@@ -118,7 +117,7 @@ export default function PerfilUsuario({ route }) {
                                 style={Styles.itemInput}
                                 onChangeText={handleChange('Endereco')}
                                 onBlur={handleBlur('Endereco')}
-                                value={values.Endereco}
+                                value={values.enderecos}
                                 placeholderTextColor="#B32728"
                             />
                             {(touched.Endereco && errors.Endereco) && <Text style={Styles.textError}>{errors.Endereco}</Text>}
