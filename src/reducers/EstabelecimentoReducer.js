@@ -59,7 +59,18 @@ export const UserReducerEstabelecimento = (state, action) => {
             return { ...state, Pedido: action.pedido }
             break;
         case 'AddCarrinho':
-            return { ...state, Carrinho: action.carrinho }
+            // caso já exista esse produto no state ele recebe mais 1 em sua quantidade
+            if(state.Carrinho[0]){
+                if (state.Carrinho[0].produtos._Produto === action.carrinho[0].produtos._Produto) {
+                    let carrinho_ = state.Carrinho
+                    carrinho_.map(car => {
+                        car.quantidade = state.Carrinho[0].quantidade + action.carrinho[0].quantidade
+                    })
+                    return { ...state, Carrinho: carrinho_ }
+                }
+            }else{
+                return { ...state, Carrinho: [...state.Carrinho, action.carrinho[0]] }
+            }
             break;
         case 'AddQuantidade':
             state.Carrinho.map(item => {

@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
         return Api.post('Auth/login', credencias).then(response => {
             const { token } = response.data;
             Api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            console.log(token);
+            // console.log(token);
             return token
         }).catch(error => {
             console.log(error);

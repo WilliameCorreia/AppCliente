@@ -44,24 +44,55 @@ export default function DescricaoProduto({ navigation, route }) {
 
   const adicionarProduto = () => {
 
-    Api.post(`v1/Carrinhos`, {
-      produtosId: produto.id,
-      quantidade: quantidade,
-      desconto: 0,
-      cod_PedidoId: Pedido.cod_Pedido,
-      cod_ClientId: User.cod_Client,
-      estabelecimentoId: Estabelecimento.id,
-    }).then(response => {
-      console.log(response);
-      setMsnModal('Produto Adicionado ao Carrinho !')
-      setModalActive(true)
-    }).catch(error => {
-      console.log(error);
-    })
+    // console.log(produto)
+
+
+    let carro = [{
+      "desconto": 0,
+      "estabelecimentoId": 30,
+      "produtos": {
+        "_Produto": produto._Produto,
+        "categoria": null,
+        "categoriaId": produto.categoriaId,
+        "codeBar": produto.codeBar,
+        "estabelecimento": produto.estabelecimento,
+        "estabelecimentoId": produto.estabelecimentoId,
+        "fotoPng": produto.fotoPng,
+        "id": produto.id,
+        "marca": produto.marca,
+        "oferta": produto.oferta,
+        "preco": produto.preco,
+        "quantidade": quantidade,
+        "unidade": null
+      },
+      // "produtosId": produto.id,
+      "quantidade": quantidade
+    }]
+
+    dispathEstabelecimento({ type: 'AddCarrinho', carrinho: carro })
+    setMsnModal('Produto Adicionado ao Carrinho !')
+    setModalActive(true)
+
+    //  dispathEstabelecimento({ type: 'AddCarrinho', carrinho: [ {"produtosId" : produto.id, "quantidade": quantidade, "desconto": 0, "estabelecimentoId": Estabelecimento.id }] });
+
+    // Api.post(`v1/Carrinhos`, {
+    //   produtosId: produto.id,
+    //   quantidade: quantidade,
+    //   desconto: 0,
+    //   cod_PedidoId: Pedido.cod_Pedido,
+    //   cod_ClientId: User.cod_Client,
+    //   estabelecimentoId: Estabelecimento.id,
+    // }).then(response => {
+    //   // console.log(response);
+    //   setMsnModal('Produto Adicionado ao Carrinho !')
+    //   setModalActive(true)
+    // }).catch(error => {
+    //   console.log(error);
+    // })
   }
 
   const Comprar = () => {
-    console.log(stateEstabelecimento.Produtos);
+    // console.log(stateEstabelecimento.Produtos);
   }
 
   return (

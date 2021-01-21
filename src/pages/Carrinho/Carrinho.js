@@ -52,14 +52,17 @@ export default function Carrinho({ navigation }) {
   }
 
   const GetProdutosCarrinho = () => {
-    if (User.cod_Client) {
-      Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.cod_Client},${Estabelecimento.id},${Pedido.cod_Pedido}`).then(response => {
-        const { result } = response.data;
-        dispathEstabelecimento({ type: 'AddCarrinho', carrinho: result });
-      }).catch(error => {
-        console.log(error);
-      })
-    }
+
+    // if (User.cod_Client) {
+    //   Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.cod_Client},${Estabelecimento.id},${Pedido.cod_Pedido}`).then(response => {
+    //     const { result } = response.data;
+    //     // dispathEstabelecimento({ type: 'AddCarrinho', carrinho: result });
+    //     // console.log("esse é o resultado")
+    //     // console.log(result)
+    //   }).catch(error => {
+    //     console.log(error);
+    //   })
+    // }
   }
 
   const FinalizarCompra = () => {
@@ -89,6 +92,8 @@ export default function Carrinho({ navigation }) {
 
   return (
     <View style={styles.container1}>
+      {/* {console.log("*************************************")}
+      {console.log(Carrinho)} */}
       <View style={styles.container}>
         <CardItensProdutos produtos={Carrinho} />
       </View>
