@@ -65,7 +65,7 @@ export default function DescricaoProduto({ navigation, route }) {
         "quantidade": quantidade,
         "unidade": null
       },
-      // "produtosId": produto.id,
+      "produtosId": produto.id,
       "quantidade": quantidade
     }]
 

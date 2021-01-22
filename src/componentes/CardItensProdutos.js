@@ -36,6 +36,8 @@ export default function CardItensProdutos({ produtos }) {
 
     const DeletarItem = (item) =>{
         
+        console.log(`*********${item.produtosId}***************`)
+        console.log(item)
         dispathEstabelecimento({type: 'deletarProduto', carrinho: item})
         // Api.delete(`v1/Carrinhos/${item.item_Id}`,{
         //     headers:{
