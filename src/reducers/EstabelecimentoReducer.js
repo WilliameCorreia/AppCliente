@@ -1,3 +1,5 @@
+import { act } from "react-test-renderer";
+
 export const initialStateStabelecimento = {
     Estabelecimento: '',
     Produtos: [],
@@ -60,22 +62,56 @@ export const UserReducerEstabelecimento = (state, action) => {
             return { ...state, Pedido: action.pedido }
             break;
         case 'AddCarrinho':
-            // caso já exista esse produto no state ele recebe mais 1 em sua quantidade
-            if (state.Carrinho.length > 0) {
-                let opcao = false
-                state.Carrinho.map(carrinho => {
-                    if(carrinho.produtos._Produto === action.carrinho[0].produtos._Produto){
-                        opcao = true
-                        carrinho.quantidade = carrinho.quantidade + action.carrinho[0].quantidade
-                    }
-                })
-               if(opcao){
-                   return { ...state, Carrinho: state.Carrinho }
-               }else{
-                return { ...state, Carrinho: [...state.Carrinho, action.carrinho[0]] }
-               }
+            if (action.logado && action.Carrinho) {
+                let list = action.Carrinho
+                // if(action.Carrinho.length > 0){
+                    state.Carrinho.map(produto_ => {
+                        if(!produto_.clientes.cod_Client){
+                            let adicionar = true
+                            list.map(carrinho => {
+                                if (carrinho.produtos._Produto === produto_.produtos._Produto) {
+                                    carrinho.quantidade = carrinho.quantidade + produto_.quantidade
+                                    adicionar = false
+                                }
+                            })
+                            if(adicionar){
+                                list.push(produto_)
+                            }
+                        }
+                    })
+                // }
+                // else{
+                //     // let adiciona = true
+                //     // state.Carrinho.map(produto_ => {
+                //     //     if(produto_.produtos._Produto === action.Carrinho.produtos._Produto){
+                //     //         state.Carrinho.quantidade = state.Carrinho.quantidade + action.Carrinho.quantidade
+                //     //         adiciona = false
+                //     //     }
+                //     // })
+                //     list = state.Carrinho
+                //     list.push(action.Carrinho)
+                //     // if(adiciona){
+                //     //     // list.push(action.Carrinho)
+                //     // }
+                // }
+                return { ...state, Carrinho: list }
             } else {
-                return { ...state, Carrinho: [...state.Carrinho, action.carrinho[0]] }
+                if (state.Carrinho.length > 0) {
+                    let opcao = false
+                    state.Carrinho.map(carrinho => {
+                        if (carrinho.produtos._Produto === action.carrinho[0].produtos._Produto) {
+                            opcao = true
+                            carrinho.quantidade = carrinho.quantidade + action.carrinho[0].quantidade
+                        }
+                    })
+                    if (opcao) {
+                        return { ...state, Carrinho: state.Carrinho }
+                    } else {
+                        return { ...state, Carrinho: [...state.Carrinho, action.carrinho[0]] }
+                    }
+                } else {
+                    return { ...state, Carrinho: [...state.Carrinho, action.carrinho[0]] }
+                }
             }
             break;
         case 'AddQuantidade':

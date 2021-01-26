@@ -10,23 +10,31 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 
     const [stateCliente, dispathCliente] = useReducer(UserReducerCliente, initialStateCliente);
-
+    // console.log(token)
+    // const token = Api.defaults.headers.common.Authorization.replace("Bearer ", "");
+    const [token_, setToken] = useState()
+    
     const GetAuth = async () => {
         return Api.post('Auth/login', credencias).then(response => {
             const { token } = response.data;
             Api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            // token_ = token;
             // console.log(token);
             return token
         }).catch(error => {
             console.log(error);
         })
     }
-
+    
     const GetUsuario = async (user) => {
         return Api.get(`v1/Clientes/FilterClientePorEmailTokenLogin?tokenLogin=${user.uid}`).then(response => {
             const { result } = response.data;
             return result;
         })
+    }
+
+    const GetToken = async () => {
+
     }
 
     const cadastroEndereco = async (values) => {
@@ -71,7 +79,9 @@ export const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        // GetAuth();
         (async () => {
+            setToken(await GetAuth());
             const token = await GetAuth();
             if(token){
                 const subscribe = auth().onAuthStateChanged(signIn);
@@ -83,7 +93,7 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ stateCliente, dispathCliente, cadastroEndereco, signIn, GetUsuario }}>
+        <AuthContext.Provider value={{ stateCliente, dispathCliente, cadastroEndereco, signIn, GetUsuario, token_ }}>
             {children}
         </AuthContext.Provider>
     )

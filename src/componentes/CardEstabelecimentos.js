@@ -13,7 +13,7 @@ export default function CardEstabelecimentos({ estabelecimentos, selectedEstabel
                     <Text>{item.razaoSocial}</Text>
                 </View>
                 <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/estabelecimento/${item.fotoName}` }} />
+                    <Image style={styles.cardImg} source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/estabelecimento/${item.fotoName}?${new Date}` }} />
                 </View>
             </TouchableOpacity>
         )

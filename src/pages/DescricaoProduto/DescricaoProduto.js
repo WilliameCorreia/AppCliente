@@ -12,6 +12,7 @@ export default function DescricaoProduto({ navigation, route }) {
 
   const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
   const { Estabelecimento } = stateEstabelecimento;
+  const { Carrinho } = stateEstabelecimento;
   const { Pedido } = stateEstabelecimento;
   const { stateCliente, token } = useContext(AuthContext);
   const { User } = stateCliente;
@@ -43,52 +44,79 @@ export default function DescricaoProduto({ navigation, route }) {
   }
 
   const adicionarProduto = () => {
+    // console.log(User)
 
-    // console.log(produto)
 
 
-    let carro = [{
-      "desconto": 0,
-      "estabelecimentoId": 30,
-      "produtos": {
-        "_Produto": produto._Produto,
-        "categoria": null,
-        "categoriaId": produto.categoriaId,
-        "codeBar": produto.codeBar,
-        "estabelecimento": produto.estabelecimento,
-        "estabelecimentoId": produto.estabelecimentoId,
-        "fotoPng": produto.fotoPng,
-        "id": produto.id,
-        "marca": produto.marca,
-        "oferta": produto.oferta,
-        "preco": produto.preco,
-        "quantidade": quantidade,
-        "unidade": null
-      },
-      "produtosId": produto.id,
-      "quantidade": quantidade
-    }]
+    if (!User.cod_Client) {
+      let carro = [{
+        "clientes": User,
+        "cod_ClientId": User.cod_ClientId,
+        "desconto": 0,
+        "estabelecimentoId": Estabelecimento.id,
+        "estabelecimentos": Estabelecimento,
+        "produtos": {
+          "_Produto": produto._Produto,
+          "categoria": null,
+          "categoriaId": produto.categoriaId,
+          "codeBar": produto.codeBar,
+          "estabelecimento": produto.estabelecimento,
+          "estabelecimentoId": produto.estabelecimentoId,
+          "fotoPng": produto.fotoPng,
+          "id": produto.id,
+          "marca": produto.marca,
+          "oferta": produto.oferta,
+          "preco": produto.preco,
+          "quantidade": quantidade,
+          "unidade": null
+        },
+        "produtosId": produto.id,
+        "quantidade": quantidade
+      }]
 
-    dispathEstabelecimento({ type: 'AddCarrinho', carrinho: carro })
-    setMsnModal('Produto Adicionado ao Carrinho !')
-    setModalActive(true)
+      dispathEstabelecimento({ type: 'AddCarrinho', carrinho: carro })
+      setMsnModal('Produto Adicionado ao Carrinho !')
+      setModalActive(true)
+    } else {
+      let quantidadeFinal = quantidade;
+      // Carrinho.map(carrinho => {
+      //   if (carrinho.produtos._Produto === produto.produtos._Produto) {
+      //     quantidadeFinal = quantidadeFinal + carrinho.quantidade
+      //   }
+      // })
+      // console.log(quantidadeFinal)
+      // console.log(produto._Produto, Carrinho[0].produtos._Produto)
+      console.log(Carrinho)
+
+      Api.post(`v1/Carrinhos`, {
+        produtosId: produto.id,
+        quantidade: quantidade,
+        desconto: 0,
+        cod_PedidoId: Pedido.cod_Pedido,
+        cod_ClientId: User.cod_Client,
+        estabelecimentoId: Estabelecimento.id,
+      }).then(response => {
+        const { result } = response.data;
+        console.log({
+          produtosId: produto.id,
+          quantidade: quantidade,
+          desconto: 0,
+          cod_PedidoId: Pedido.cod_Pedido,
+          cod_ClientId: User.cod_Client,
+          estabelecimentoId: Estabelecimento.id,
+        })
+        // dispathEstabelecimento({ type: 'AddCarrinho', Carrinho: result, logado: true });
+        setMsnModal('Produto Adicionado ao Carrinho !')
+        setModalActive(true)
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+
+
+
 
     //  dispathEstabelecimento({ type: 'AddCarrinho', carrinho: [ {"produtosId" : produto.id, "quantidade": quantidade, "desconto": 0, "estabelecimentoId": Estabelecimento.id }] });
-
-    // Api.post(`v1/Carrinhos`, {
-    //   produtosId: produto.id,
-    //   quantidade: quantidade,
-    //   desconto: 0,
-    //   cod_PedidoId: Pedido.cod_Pedido,
-    //   cod_ClientId: User.cod_Client,
-    //   estabelecimentoId: Estabelecimento.id,
-    // }).then(response => {
-    //   // console.log(response);
-    //   setMsnModal('Produto Adicionado ao Carrinho !')
-    //   setModalActive(true)
-    // }).catch(error => {
-    //   console.log(error);
-    // })
   }
 
   const Comprar = () => {
@@ -99,7 +127,7 @@ export default function DescricaoProduto({ navigation, route }) {
     <View style={styles.container1}>
       <View style={styles.container}>
         <View style={styles.ContainerImg}>
-          <Image style={styles.img} source={{ uri: 'https://appmercantilimagens.s3.us-east-2.amazonaws.com/ImagensPng/png/' + produto.fotoPng }} />
+          <Image style={styles.img} source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/ImagensPng/png/${produto.fotoPng}?${new Date}` }} />
         </View>
         <View style={styles.bntQuantidade}>
           <BtnProdutoQuantidade setQuantidade={setQuantidade} quantidade={quantidade} />

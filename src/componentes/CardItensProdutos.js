@@ -4,10 +4,13 @@ import { StyleSheet, Text, View, SafeAreaView, FlatList, Image, TouchableOpacity
 import BtnProdutoQuantidade from '../componentes/BtnProdutoQuantidade';
 import EstabelecimentoContext from '../Contexts/Estabelecimento';
 import Api from '../services/Api';
+import AuthContext from '../Contexts/auth';
 
 export default function CardItensProdutos({ produtos }) {
 
     const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
+    const { stateCliente, token_ } = useContext(AuthContext);
+    const { User } = stateCliente;
 
     const calculoTotal = (preco, quantidade) => {
         let valor = preco.replace(",", ".") * quantidade;
@@ -35,19 +38,25 @@ export default function CardItensProdutos({ produtos }) {
     }
 
     const DeletarItem = (item) =>{
+        if(User.cod_Client){
+            console.log(item.item_Id)
+            Api.delete(`v1/Carrinhos/${item.item_Id}`,{
+            headers:{
+                'Authorization': `Bearer ${token_}`
+            }
+        }).then(response =>{
+            // console.log(response);
+            dispathEstabelecimento({type: 'deletarProduto', carrinho: item})
+        }).catch(error =>{
+            console.log(error)
+        });
+        }else{
+            dispathEstabelecimento({type: 'deletarProduto', carrinho: item})
+        }
         
-        console.log(`*********${item.produtosId}***************`)
-        console.log(item)
-        dispathEstabelecimento({type: 'deletarProduto', carrinho: item})
-        // Api.delete(`v1/Carrinhos/${item.item_Id}`,{
-        //     headers:{
-        //         'Authorization': `Bearer ${token}`
-        //     }
-        // }).then(response =>{
-        //     console.log(response);
-        // }).catch(error =>{
-        //     console.log(error)
-        // });
+        // console.log(`*********${item.produtosId}***************`)
+        // console.log(item)
+        
     }
 
     const renderItem = ({ item }) => {

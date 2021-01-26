@@ -33,8 +33,8 @@ export const UserReducerCliente = (state, action) => {
             break;
         case 'delUser':
             return {User : {
-                cod_Client: null,
-                cpf: null,
+                cod_Client: "",
+                cpf: "",
                 data_Nascimento: '',
                 email: '',
                 email_Enviar: false,

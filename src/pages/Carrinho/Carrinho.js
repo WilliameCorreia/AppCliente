@@ -52,17 +52,43 @@ export default function Carrinho({ navigation }) {
   }
 
   const GetProdutosCarrinho = () => {
+    if (Pedido) {
 
-    // if (User.cod_Client) {
-    //   Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.cod_Client},${Estabelecimento.id},${Pedido.cod_Pedido}`).then(response => {
-    //     const { result } = response.data;
-    //     // dispathEstabelecimento({ type: 'AddCarrinho', carrinho: result });
-    //     // console.log("esse é o resultado")
-    //     // console.log(result)
-    //   }).catch(error => {
-    //     console.log(error);
-    //   })
-    // }
+      Carrinho.map(carro => {
+        if (!carro.clientes.cod_Client) {
+          // dispathEstabelecimento({ type: 'deletarProduto', carrinho: carro })
+          Api.post(`v1/Carrinhos`, {
+            produtosId: carro.produtos.id,
+            quantidade: carro.quantidade,
+            desconto: 0,
+            cod_PedidoId: Pedido.cod_Pedido,
+            cod_ClientId: User.cod_Client,
+            estabelecimentoId: Estabelecimento.id,
+          }).then(response => {
+            const { result } = response.data;
+            // console.log(carro.produtos.id , carro.id, carro.produtos);
+            dispathEstabelecimento({ type: 'deletarProduto', carrinho: carro })
+            // dispathEstabelecimento({ type: 'AddCarrinho', Carrinho: result, logado: true });
+            // setMsnModal('Produto Adicionado ao Carrinho !')
+            // setModalActive(true)
+          }).catch(error => {
+            console.log(error);
+          })
+        }
+      })
+
+      if (User.cod_Client) {
+        Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.cod_Client},${Estabelecimento.id},${Pedido.cod_Pedido}`).then(response => {
+          const { result } = response.data;
+          // console.log(result)
+          dispathEstabelecimento({ type: 'AddCarrinho', Carrinho: result, logado: true });
+          // console.log("esse é o resultado")
+          // console.log(result)
+        }).catch(error => {
+          console.log(error);
+        })
+      }
+    }
   }
 
   const FinalizarCompra = () => {
@@ -84,7 +110,7 @@ export default function Carrinho({ navigation }) {
 
   useEffect(() => {
     GetProdutosCarrinho();
-  }, [])
+  }, [User, Pedido])
 
   useEffect(() => {
     valorTotal();
@@ -125,6 +151,15 @@ export default function Carrinho({ navigation }) {
       <View>
         <MyModalConfimation activeModal={modalConfim} setActiveModal={setModalConfirm} action={FinalizarCompra} mensagem={"Deseja Finalizar seu Pedido ?"} />
       </View>
+      {/* <View style={{ flex: 1.1, backgroundColor: '#F23132', alignItems: 'center' }}>
+          <View style={{ width: '60%', justifyContent: 'flex-start', marginVertical: 5 }}>
+            <Text style={{ fontSize: 14, marginVertical: 5, color: '#fff' }}>Falta pouco!</Text>
+            <Text style={{ fontSize: 12, color: '#fff' }}>Para concluir seu pedido, precisamos que você se identifique. Como quer continuar ?</Text>
+          </View>
+          <TouchableOpacity style={{ backgroundColor: '#fff', padding: 5, borderRadius: 30, paddingHorizontal: 10 }} onPress={() => navigation.navigate('Login')}>
+            <Text style={{ color: '#b32728', fontWeight: 'bold' }}>Entrar ou Cadastrar</Text>
+          </TouchableOpacity>
+        </View> */}
     </View>
   );
 }
