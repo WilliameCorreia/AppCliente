@@ -15,6 +15,7 @@ import auth from '@react-native-firebase/auth';
 import MyModal from '../../componentes/MyModal';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import styles from './style';
+import { Input } from 'react-native-elements';
 
 export default function login({ navigation }) {
 
@@ -73,6 +74,7 @@ export default function login({ navigation }) {
 
     return (
         <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={40} behavior={"position"}>
+            <TextInput  editable={false} style={{width:0, height:0}}/>
             <View style={styles.box1}>
                 <Image source={require('../../Assets/images/logoInicio1.png')} style={styles.image_logo} />
             </View>

@@ -98,7 +98,7 @@ export default function Carrinho({ navigation }) {
       valor_Total: parseFloat(total.replace(',', '.')),
       dataHora_Pedido: moment().format(),
       pedido_Concluido: true,
-      status_Pedido: "C",
+      status_Pedido: "A",
       estabelecimentoId: Estabelecimento.id,
     }).then(response => {
       const { result } = response.data;

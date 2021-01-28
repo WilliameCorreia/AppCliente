@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "924698824532",
+    "firebase_url": "https://planetaentregascliente.firebaseio.com",
+    "project_id": "planetaentregascliente",
+    "storage_bucket": "planetaentregascliente.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924698824532:android:1d6fd1e8e3866940e382c1",
+        "android_client_info": {
+          "package_name": "com.planetaentregascliente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "924698824532-vpqr47g70hcti18655l44giab5cvqbvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSTXknZS8kKmR8TLTPchd3EW0stMXlVfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924698824532-vpqr47g70hcti18655l44giab5cvqbvh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

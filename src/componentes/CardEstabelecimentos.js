@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View, Image, Dimensions, ScrollView, SafeAreaView } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Dimensions, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import { Image } from 'react-native-elements';
 
 export default function CardEstabelecimentos({ estabelecimentos, selectedEstabelecimento, filtrados }) {
 
-    const renderItem = ({item}) => {
+    const renderItem = ({ item }) => {
         return (
             <TouchableOpacity key={item.id} style={styles.card} onPress={() => selectedEstabelecimento(item)}>
                 <View style={styles.box1}>
@@ -13,7 +14,13 @@ export default function CardEstabelecimentos({ estabelecimentos, selectedEstabel
                     <Text>{item.razaoSocial}</Text>
                 </View>
                 <View style={styles.box2}>
-                    <Image style={styles.cardImg} source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/estabelecimento/${item.fotoName}?${new Date}` }} />
+                    <Image
+                        key={item.id.toString()}
+                        style={styles.uriImg}
+                        source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/estabelecimento/${item.fotoName}?${new Date().getMinutes()}` }}
+                        PlaceholderContent={<ActivityIndicator style={styles.Indicator} color={'red'} size={80} />}
+                        transition={true}
+                    />
                 </View>
             </TouchableOpacity>
         )
@@ -57,5 +64,16 @@ const styles = StyleSheet.create({
     cardImg: {
         width: '80%',
         height: '80%',
-    }
+    },
+    Indicator: {
+        width: (Dimensions.get('window').width ),
+        // height: (Dimensions.get('window').height / 20 * 3),
+        height: "100%",
+        backgroundColor: '#fff'
+    },
+    uriImg: {
+        width: (Dimensions.get('window').width / 100 * 45),
+        height: "95%",
+        //resizeMode: 'center'
+    },
 });

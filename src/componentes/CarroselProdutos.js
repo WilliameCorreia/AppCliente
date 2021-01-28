@@ -99,6 +99,7 @@ export default function CarroselProdutos({ navigation }) {
 
     return (
         <View>
+            <Text style={styles.Label}>Produtos em Oferta</Text>
             <FlatList
                 horizontal={true}
                 data={listOfertas.data}
@@ -160,5 +161,10 @@ const styles = StyleSheet.create({
     precoG: {
         fontSize: 22,
         fontWeight: 'bold'
+    },
+    Label: {
+        color: '#B32728',
+        fontSize:20,
+        marginHorizontal:15
     }
 })

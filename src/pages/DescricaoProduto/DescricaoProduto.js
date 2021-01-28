@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext, useState } from 'react';
-import { Image, Text, TouchableOpacity, ScrollView, View, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { Image } from 'react-native-elements';
 import styles from './style';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import BtnProdutoQuantidade from '../../componentes/BtnProdutoQuantidade';
@@ -127,7 +128,15 @@ export default function DescricaoProduto({ navigation, route }) {
     <View style={styles.container1}>
       <View style={styles.container}>
         <View style={styles.ContainerImg}>
-          <Image style={styles.img} source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/ImagensPng/png/${produto.fotoPng}?${new Date}` }} />
+          <Image
+            // style={styles.img}
+            source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/ImagensPng/png/${produto.fotoPng}?${new Date().getMinutes()}` }}
+            // PlaceholderContent={<ActivityIndicator style={styles.Indicator} color={'red'} />}
+            transition={true}
+            style={styles.uriImg}
+            PlaceholderContent={<ActivityIndicator style={styles.Indicator} color={'red'} size={80} />}
+            // transition={true}
+          />
         </View>
         <View style={styles.bntQuantidade}>
           <BtnProdutoQuantidade setQuantidade={setQuantidade} quantidade={quantidade} />

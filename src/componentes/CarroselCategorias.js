@@ -1,24 +1,48 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native'
+import React, {useState, useEffect} from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, FlatList } from 'react-native'
+import api from '../services/Api';
 
 const CarroselCategorias = ({ navigation, EstabelecimentoId }) => {
-    return (
+    const [Categorias, setCategorias] = useState(null);
+    function LoadCategorias(){
+        api.get(`v1/Estabelecimentos/FiltrarCategoriasPorEstabelecimentos/${EstabelecimentoId}`).then(response => {
+            const { result } =  response.data;
+            setCategorias(result[0].tipo_Estabelecimento.categorias)
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+    useEffect(() => {
+        LoadCategorias();
+    }, [])
+    const _renderItem = ({ item }) => (
         <View style={styles.container}>
-            <View style={styles.box1}>
-                <TouchableOpacity style={styles.btnCat} onPress={() => navigation.navigate('Categorias', EstabelecimentoId)}>
-                    <Text style={styles.textHeader}>CATEGORIAS</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.box2}>
-                {Array(4).fill(
-                    <View style={styles.box2_1}>
-                        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', { EstabelecimentoId: EstabelecimentoId, categoriaId: 1 })}>
-                            <Image style={styles.img} source={require('../Assets/images/açougue.png')} />
-                        </TouchableOpacity>
-                        <Text style={styles.textBtn}>Açougue</Text>
-                    </View>
-                )}
-            </View>
+        <View style={styles.box2}>
+                <View style={styles.box2_1}>
+                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {categoriaId: item.id, EstabelecimentoId: EstabelecimentoId})}>
+                        <Image 
+                        style={styles.img} 
+                        source={{ uri: 'https://planetaentregas.blob.core.windows.net/planeta-produtos/categorias/' + item.categoriaPng }}
+                        />
+                    </TouchableOpacity>
+            <Text style={styles.textBtn}>{item.nome}</Text>
+                </View>
+        </View>
+    </View>
+    )
+    return (
+        <View>
+            <Text style={styles.Label}>Categorias de produto</Text>
+            <FlatList
+                horizontal={true}
+                data={Categorias}
+                renderItem={_renderItem}
+                // keyExtractor={item => item.codeBar}
+                // onEndReached={() => Add_Ofertas()}
+                // onEndReachedThreshold={0.5}
+                // ListFooterComponent={renderFooter}
+                // ListEmptyComponent={RenderEmpty}
+            />
         </View>
     )
 }
@@ -40,7 +64,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     box2_1: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
     textHeader: {
         width: '25%',
@@ -66,10 +90,16 @@ const styles = StyleSheet.create({
     textBtn: {
         color: '#B32728'
     },
+    Label: {
+        color: '#B32728',
+        fontSize:20,
+        marginHorizontal:15
+    },
     img: {
-        width: 60,
-        height: 60,
+        width: Dimensions.get('window').width / 100 * 45,
+        height: Dimensions.get('window').height / 100 * 13,
         margin: 5,
         borderRadius: 10,
+        // resizeMode:"center"
     }
 })

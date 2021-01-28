@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
     container1: {
@@ -118,6 +118,17 @@ const styles = StyleSheet.create({
     bntQuantidade: {
         flex: 1,
         marginHorizontal: 10
+    },
+    Indicator: {
+        width: (Dimensions.get('window').width ),
+        // height: (Dimensions.get('window').height / 20 * 3),
+        height: "100%",
+        backgroundColor: '#fff'
+    },
+    uriImg: {
+        width: (Dimensions.get('window').width /100 * 80),
+        height: "95%",
+        //resizeMode: 'center'
     }
 });
 

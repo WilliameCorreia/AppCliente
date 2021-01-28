@@ -1,8 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native'
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import storage from '@react-native-firebase/storage';
+import CarroselImage from './CarroselImage';
 
-const ENTRIES1 = [
+
+
+let ENTRIES1 = [
+    {
+        nome: 'https://firebasestorage.googleapis.com/v0/b/planetaentregascliente.appspot.com/o/Propagandas%2Fodonto.jpeg?alt=media&token=774c3a11-943e-4c6d-8fc9-3e29d60de819',
+    },
     {
         nome: 'https://www.gbarbosa.com.br/wp-content/uploads/2018/02/19731-2-CARD-695x410px-1A-SEMANA-DE-MARCO-GB-2018_1.png',
     },
@@ -22,21 +29,44 @@ const ENTRIES1 = [
 ];
 
 const { width: screenWidth } = Dimensions.get('window');
+const reference = storage().ref('/Propagandas');
 
 const CarroselOfetas = ({  }) => {
     
     const [entries, setEntries] = useState([]);
     const carouselRef = useRef(null);
+    // let teste = listFilesAndDirectories(reference)
+    
+    
+    async function listFilesAndDirectories(reference, pageToken) {
+        const ImgSlide = await reference.list({ pageToken }).then(result => {
+            let listaImg = []
+            // Loop over each item
+            result.items.forEach(ref => {
+                ref.getDownloadURL().then(dados => {
+                    listaImg.push(dados)
+                })
+            });
+            return listaImg
+        });
+        return ImgSlide
+    }
 
     useEffect(() => {
-        setEntries(ENTRIES1)
+        listFilesAndDirectories(reference).then(dados => {
+            setEntries(dados)
+        });
+        return () => {
+            console.log('error DashBoard')
+        }
     }, [])
 
     const renderItem = ({ item, index }, parallaxProps) => {
         return (
-            <TouchableOpacity style={styles.item} /* onPress={() => mudarState(true)} */>
+            <TouchableOpacity style={styles.item} key={index} /* onPress={() => mudarState(true)} */>
                 <ParallaxImage
                     source={{uri: item.nome}}
+                    // containerStyle={{flex:1}}
                     containerStyle={styles.imageContainer}
                     style={styles.image}
                     parallaxFactor={0.1}
@@ -47,19 +77,20 @@ const CarroselOfetas = ({  }) => {
     };
 
     return (
-        <View style={styles.container}>
-            <Carousel
-                ref={carouselRef}
-                sliderWidth={screenWidth}
-                sliderHeight={screenWidth}
-                itemWidth={screenWidth - 60}
-                data={entries}
-                renderItem={renderItem}
-                hasParallaxImages={true}
-                autoplay={true}
-                enableMomentum={false}
-            />
-        </View>
+        <CarroselImage images={entries} />
+        // <View style={styles.container}>
+        //     <Carousel
+        //         ref={carouselRef}
+        //         sliderWidth={screenWidth}
+        //         sliderHeight={screenWidth}
+        //         itemWidth={screenWidth - 60}
+        //         data={ENTRIES1}
+        //         renderItem={renderItem}
+        //         hasParallaxImages={true}
+        //         autoplay={true}
+        //         enableMomentum={false}
+        //     />
+        // </View>
     )
 }
 
@@ -71,8 +102,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     item: {
-        //width: screenWidth - 60,
-        //height: screenWidth - 60,
+        width: screenWidth - 60,
+        height: screenWidth - 60,
     },
     imageContainer: {
         width: '100%',
@@ -82,7 +113,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
     },
     image: {
-        ...StyleSheet.absoluteFillObject,
+        // ...StyleSheet.absoluteFillObject,
         width: '100%',
         resizeMode: 'contain'
     },
