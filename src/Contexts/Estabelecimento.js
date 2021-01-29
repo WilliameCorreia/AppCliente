@@ -19,6 +19,8 @@ export const EstabelecimentoProvider = ({ children }) => {
     if (User.cod_Client) {
       return Api.get(`v1/Pedidos/FilterPedidosAbertos/${User.cod_Client},false,${Estabelecimento.id}`).then(response => {
         const { result } = response.data;
+        // console.log("***********************")
+        // console.log(result)
         if (result) {
           dispathEstabelecimento({ type: 'AddPedido', pedido: result });
           return result;

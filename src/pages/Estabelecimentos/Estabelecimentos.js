@@ -32,7 +32,7 @@ export default function Estabelecimentos({ navigation }) {
         tipoEstabelecimentos.map(item => {
           return (
             <TouchableOpacity key={item.tipoEstab_Id} style={styles.cardBtn} onPress={() => navigation.navigate('ListaEstabelecimentos', { tipo: item.tipoEstab_Id })}>
-              <Image style={styles.img} source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/TipoEstabelecimentos/${item.fotoTipoEstab}` }} />
+              <Image style={styles.img} source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/TipoEstabelecimentos/${item.fotoTipoEstab}?${new Date().getHours()}` }} />
             </TouchableOpacity>
           )
         })

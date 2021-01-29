@@ -102,7 +102,7 @@ export default function CarroselProdutos({ navigation }) {
             <Text style={styles.Label}>Produtos em Oferta</Text>
             <FlatList
                 horizontal={true}
-                data={listOfertas.data}
+                data={listOfertas.data.filter(dat=>dat.quantidade>0)}
                 renderItem={_renderItem}
                 keyExtractor={item => item.codeBar}
                 onEndReached={() => Add_Ofertas()}

@@ -2,12 +2,14 @@ import React, { useState, useEffect, Component } from 'react'
 import {
     Text,
     View,
-    Image,
     TouchableOpacity,
     ActivityIndicator,
     StyleSheet,
-    FlatList
+    FlatList,
+    Dimensions
 } from 'react-native'
+import { Image } from 'react-native-elements';
+import AjusteCasasDecimaisPreco from '../services/AjusteCasasDecimaisPreco';
 
 export default function listaProdutos({ Produtos, navigation, LoadProdutos }) {
 
@@ -46,15 +48,21 @@ export default function listaProdutos({ Produtos, navigation, LoadProdutos }) {
                         </View>
                         <View style={styles.box1_2}>
                             <Text style={styles.PrecoSimbolo}>R$</Text>
-                            <Text style={styles.PrecoDecimais}>{precoPersonalizado(item.preco, true)},</Text>
-                            <Text style={styles.PrecoCentavos}>{precoPersonalizado(item.preco, false)}</Text>
+                            <Text style={styles.PrecoDecimais}>{AjusteCasasDecimaisPreco(item.preco)}</Text>
                         </View>
                     </View>
                     <View style={styles.box2}>
                         <Image
+                            style={styles.uriImg}
+                            source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/ImagensPng/png/${item.fotoPng}?${new Date}` }}
+                            PlaceholderContent={<ActivityIndicator style={styles.loading} color={'red'} size={80} />}
+                            transition={true}
+                            transitionDuration={1}
+                        />
+                        {/* <Image
                             style={styles.prodImg} source={{ uri: 'https://planetaentregas.blob.core.windows.net/planeta-produtos/ImagensPng/png/' + item.fotoPng }}
                             PlaceholderContent={<ActivityIndicator />}
-                        />
+                        /> */}
                     </View>
                 </View>
             </TouchableOpacity>
@@ -81,7 +89,7 @@ export default function listaProdutos({ Produtos, navigation, LoadProdutos }) {
     return (
         <View>
             {<FlatList
-                data={data}
+                data={data.filter(dat=>dat.quantidade>0)}
                 renderItem={_renderItem}
                 keyExtractor={(item, index) => index.toString()}
                 onEndReached={() => LoadProdutos()}
@@ -118,7 +126,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     box2: {
-        flex: 1.2,
+        flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -126,6 +134,11 @@ const styles = StyleSheet.create({
         height: '80%',
         width: '100%',
         marginBottom: 5,
+    },
+    uriImg: {
+        width: (Dimensions.get('window').width / 100 * 30),
+        height: "90%",
+        //resizeMode: 'center'
     },
     nomeProduto: {
         fontSize: 20,
@@ -160,9 +173,10 @@ const styles = StyleSheet.create({
         marginTop: 250
     },
     loading: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        width: (Dimensions.get('window').width ),
+        // height: (Dimensions.get('window').height / 20 * 3),
+        height: "100%",
+        backgroundColor: '#fff'
     },
     msn: {
         flex: 1,

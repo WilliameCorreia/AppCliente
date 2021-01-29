@@ -8,6 +8,7 @@ import BtnProdutoQuantidade from '../../componentes/BtnProdutoQuantidade';
 import MyModal from '../../componentes/MyModal';
 import AuthContext from '../../Contexts/auth';
 import Api from '../../services/Api';
+import AjusteCasasDecimaisPreco from '../../services/AjusteCasasDecimaisPreco';
 
 export default function DescricaoProduto({ navigation, route }) {
 
@@ -24,28 +25,9 @@ export default function DescricaoProduto({ navigation, route }) {
   const [modalActive, setModalActive] = useState(false);
   const [msnModal, setMsnModal] = useState('primeira passada');
 
-  const precoPersonalizado = (preco, initial) => {
-
-    if (preco.includes('.')) {
-      let valor = preco.split('.');
-      if (initial) {
-        return valor[0]
-      } else {
-        return valor[1]
-      }
-    } else {
-      let valor = preco.split(',');
-      if (initial) {
-        return valor[0]
-      } else {
-        return valor[1]
-      }
-    }
-
-  }
+  
 
   const adicionarProduto = () => {
-    // console.log(User)
 
 
 
@@ -80,13 +62,6 @@ export default function DescricaoProduto({ navigation, route }) {
       setModalActive(true)
     } else {
       let quantidadeFinal = quantidade;
-      // Carrinho.map(carrinho => {
-      //   if (carrinho.produtos._Produto === produto.produtos._Produto) {
-      //     quantidadeFinal = quantidadeFinal + carrinho.quantidade
-      //   }
-      // })
-      // console.log(quantidadeFinal)
-      // console.log(produto._Produto, Carrinho[0].produtos._Produto)
       console.log(Carrinho)
 
       Api.post(`v1/Carrinhos`, {
@@ -106,7 +81,6 @@ export default function DescricaoProduto({ navigation, route }) {
           cod_ClientId: User.cod_Client,
           estabelecimentoId: Estabelecimento.id,
         })
-        // dispathEstabelecimento({ type: 'AddCarrinho', Carrinho: result, logado: true });
         setMsnModal('Produto Adicionado ao Carrinho !')
         setModalActive(true)
       }).catch(error => {
@@ -121,7 +95,6 @@ export default function DescricaoProduto({ navigation, route }) {
   }
 
   const Comprar = () => {
-    // console.log(stateEstabelecimento.Produtos);
   }
 
   return (
@@ -145,9 +118,8 @@ export default function DescricaoProduto({ navigation, route }) {
           <Text style={styles.NomeProdutoText}>{produto._Produto}</Text>
         </View>
         <View style={styles.ResumoTotal}>
-          <Text style={styles.ResumoTotalSimbolo}>R$ </Text>
-          <Text style={styles.ResumoTotalDecimal}>{precoPersonalizado(produto.preco, true)},</Text>
-          <Text style={styles.ResumoTotalSimbolo}>{precoPersonalizado(produto.preco, false)}</Text>
+          <Text style={styles.ResumoTotalSimbolo}>R$ </Text>          
+          <Text style={styles.ResumoTotalDecimal}>{AjusteCasasDecimaisPreco(produto.preco)}</Text>
         </View>
       </View>
       {User ?

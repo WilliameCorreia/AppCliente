@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     // console.log(token)
     // const token = Api.defaults.headers.common.Authorization.replace("Bearer ", "");
     const [token_, setToken] = useState()
-    
+
     const GetAuth = async () => {
         return Api.post('Auth/login', credencias).then(response => {
             const { token } = response.data;
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
             console.log(error);
         })
     }
-    
+
     const GetUsuario = async (user) => {
         return Api.get(`v1/Clientes/FilterClientePorEmailTokenLogin?tokenLogin=${user.uid}`).then(response => {
             const { result } = response.data;
@@ -58,6 +58,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     // metodo principal de validacão de acesso!
+
     const signIn = async (user) => {
         if (user) {
             try {
@@ -74,7 +75,18 @@ export const AuthProvider = ({ children }) => {
 
             }
         } else {
-            dispathCliente({ type: 'delUser' })
+            console.log("*********************/////")
+            auth().signInAnonymously()
+                .then(() => {
+                    // Signed in..
+                    dispathCliente({ type: 'delUser' })
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // ...
+                });
+            console.log(user)
         }
     }
 
@@ -83,9 +95,12 @@ export const AuthProvider = ({ children }) => {
         (async () => {
             setToken(await GetAuth());
             const token = await GetAuth();
-            if(token){
+            if (token) {
                 const subscribe = auth().onAuthStateChanged(signIn);
             }
+            // else{
+            //     console.log("hora de logar como anonimo")
+            // }
             return () => {
 
             }

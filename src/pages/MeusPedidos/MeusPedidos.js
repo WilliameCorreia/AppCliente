@@ -68,8 +68,9 @@ export default function MeusPedidos({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={meusPedidos && meusPedidos}
+      <FlatList 
+      //ordena para exibir os mais rescentes
+        data={meusPedidos.sort().reverse() }
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />

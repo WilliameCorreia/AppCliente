@@ -22,7 +22,7 @@ const CarroselCategorias = ({ navigation, EstabelecimentoId }) => {
                     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('MeusProdutos', {categoriaId: item.id, EstabelecimentoId: EstabelecimentoId})}>
                         <Image 
                         style={styles.img} 
-                        source={{ uri: 'https://planetaentregas.blob.core.windows.net/planeta-produtos/categorias/' + item.categoriaPng }}
+                        source={{ uri: 'https://planetaentregas.blob.core.windows.net/planeta-produtos/categorias/' + item.categoriaPng + '?' + new Date().getHours() }}
                         />
                     </TouchableOpacity>
             <Text style={styles.textBtn}>{item.nome}</Text>
@@ -52,16 +52,19 @@ export default CarroselCategorias
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        // borderRadius: 24
     },
     box1: {
         height: 30,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        // borderRadius: 24
     },
     box2: {
         backgroundColor: '#fff',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        // borderRadius: 24
     },
     box2_1: {
         alignItems: 'center',
@@ -77,11 +80,12 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     btn: {
-        backgroundColor: '#fff',
-        elevation: 5,
+        // backgroundColor: '#fff',
+        // elevation: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 10
+        margin: 10,
+        // borderRadius: 24
     },
     btnCat: {
         width: (Dimensions.get('screen').width * 1.5),
@@ -96,10 +100,11 @@ const styles = StyleSheet.create({
         marginHorizontal:15
     },
     img: {
+        // width: Dimensions.get('window').width / 100 * 30,
         width: Dimensions.get('window').width / 100 * 45,
         height: Dimensions.get('window').height / 100 * 13,
-        margin: 5,
-        borderRadius: 10,
-        // resizeMode:"center"
+        // margin: 5,
+        borderRadius: 3,
+        resizeMode:"stretch"
     }
 })
