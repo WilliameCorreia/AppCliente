@@ -13,7 +13,7 @@ import AjusteCasasDecimaisPreco from '../../services/AjusteCasasDecimaisPreco';
 
 export default function Carrinho({ navigation }) {
 
-  const { stateEstabelecimento, dispathEstabelecimento } = useContext(EstabelecimentoContext);
+  const { stateEstabelecimento, dispathEstabelecimento, GetPedidosAbertos } = useContext(EstabelecimentoContext);
   const { Pedido } = stateEstabelecimento;
   const { Estabelecimento } = stateEstabelecimento;
   const { Carrinho } = stateEstabelecimento;
@@ -55,35 +55,41 @@ export default function Carrinho({ navigation }) {
   }
 
   const GetProdutosCarrinho = () => {
-    if (Pedido) {     
+    if (!Pedido) {
+      GetPedidosAbertos();
+    }else{
 
-      Carrinho.map(carro => {
-        if (!carro.clientes.cod_Client) {
-          // dispathEstabelecimento({ type: 'deletarProduto', carrinho: carro })
-          Api.post(`v1/Carrinhos`, {
-            produtosId: carro.produtos.id,
-            quantidade: carro.quantidade,
-            desconto: 0,
-            cod_PedidoId: Pedido.cod_Pedido,
-            cod_ClientId: User.cod_Client,
-            estabelecimentoId: Estabelecimento.id,
-          }).then(response => {
-            const { result } = response.data;
-            // console.log(carro.produtos.id , carro.id, carro.produtos);
-            dispathEstabelecimento({ type: 'deletarProduto', carrinho: carro })
-            setTimeout(() => {
-              setLoad(false)
-            }, 2000);
-            // dispathEstabelecimento({ type: 'AddCarrinho', Carrinho: result, logado: true });
-            // setMsnModal('Produto Adicionado ao Carrinho !')
-            // setModalActive(true)
-          }).catch(error => {
-            console.log(error);
-          })
-        }
-      })
+    
+
 
       if (User.cod_Client) {
+        // setLoad(true)
+        Carrinho.map(carro => {
+          if (!carro.clientes.cod_Client) {
+            // dispathEstabelecimento({ type: 'deletarProduto', carrinho: carro })
+            Api.post(`v1/Carrinhos`, {
+              produtosId: carro.produtos.id,
+              quantidade: carro.quantidade,
+              desconto: 0,
+              cod_PedidoId: Pedido.cod_Pedido,
+              cod_ClientId: User.cod_Client,
+              estabelecimentoId: Estabelecimento.id,
+            }).then(response => {
+              const { result } = response.data;
+              // console.log(carro.produtos.id , carro.id, carro.produtos);
+              dispathEstabelecimento({ type: 'deletarProduto', carrinho: carro })
+              // setTimeout(() => {
+              //   setLoad(false)
+              // }, 3000);
+              // dispathEstabelecimento({ type: 'AddCarrinho', Carrinho: result, logado: true });
+              // setMsnModal('Produto Adicionado ao Carrinho !')
+              // setModalActive(true)
+            }).catch(error => {
+              console.log(error);
+            })
+          }
+        })
+
         setLoad(true)
         Api.get(`v1/Carrinhos/FilterCarrinhoCliente/${User.cod_Client},${Estabelecimento.id},${Pedido.cod_Pedido}`).then(response => {
           const { result } = response.data;
@@ -91,7 +97,7 @@ export default function Carrinho({ navigation }) {
           dispathEstabelecimento({ type: 'AddCarrinho', Carrinho: result, logado: true });
           setTimeout(() => {
             setLoad(false)
-          }, 2000);
+          }, 3000);
           // console.log("esse é o resultado")
           // console.log(result)
         }).catch(error => {
@@ -119,7 +125,7 @@ export default function Carrinho({ navigation }) {
   }
 
   useEffect(() => {
-    GetProdutosCarrinho();
+    GetProdutosCarrinho();    
   }, [User, Pedido])
 
   useEffect(() => {
