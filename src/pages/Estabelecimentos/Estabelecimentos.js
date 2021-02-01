@@ -13,7 +13,7 @@ export default function Estabelecimentos({ navigation }) {
     Api.get(`v1/TipoEstabelecimentos`).then(response => {
       const { result } = response.data;
       setTipoEstabelecimento(result);
-      console.log(result);
+      // console.log(result);
     }).catch(error => {
       console.log(error)
     });

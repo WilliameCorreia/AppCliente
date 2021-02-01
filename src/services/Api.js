@@ -68,7 +68,7 @@ api.interceptors.response.use(
 
 api.interceptors.request.use(
     config => {
-        console.log(config);
+        console.log(config.headers.common.Authorization);
         return config
        /*  return getUser().then(token => {
             if (token) {

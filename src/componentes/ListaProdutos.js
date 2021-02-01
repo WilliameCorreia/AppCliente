@@ -54,7 +54,7 @@ export default function listaProdutos({ Produtos, navigation, LoadProdutos }) {
                     <View style={styles.box2}>
                         <Image
                             style={styles.uriImg}
-                            source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/ImagensPng/png/${item.fotoPng}?${new Date}` }}
+                            source={{ uri: `https://planetaentregas.blob.core.windows.net/planeta-produtos/ImagensPng/png/${item.fotoPng}?${new Date().getHours()}` }}
                             PlaceholderContent={<ActivityIndicator style={styles.loading} color={'red'} size={80} />}
                             transition={true}
                             transitionDuration={1}

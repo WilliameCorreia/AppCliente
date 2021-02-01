@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native'
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 import storage from '@react-native-firebase/storage';
 import CarroselImage from './CarroselImage';
+// import AuthContext from '../Contexts/auth';
 
 
 
@@ -25,19 +26,21 @@ let ENTRIES1 = [
     {
         nome: 'https://www.ofertaosupermercado.com.br/gallery/1.png',
     },
-    
+
 ];
 
 const { width: screenWidth } = Dimensions.get('window');
 const reference = storage().ref('/Propagandas');
 
-const CarroselOfetas = ({  }) => {
-    
+const CarroselOfetas = ({ }) => {
+    // const { stateCliente } = useContext(AuthContext);
+    // const { User } = stateCliente;
+
     const [entries, setEntries] = useState([]);
     const carouselRef = useRef(null);
     // let teste = listFilesAndDirectories(reference)
-    
-    
+
+
     async function listFilesAndDirectories(reference, pageToken) {
         const ImgSlide = await reference.list({ pageToken }).then(result => {
             let listaImg = []
@@ -53,6 +56,7 @@ const CarroselOfetas = ({  }) => {
     }
 
     useEffect(() => {
+        // console.log(User)
         listFilesAndDirectories(reference).then(dados => {
             setEntries(dados)
         });
@@ -65,7 +69,7 @@ const CarroselOfetas = ({  }) => {
         return (
             <TouchableOpacity style={styles.item} key={index} /* onPress={() => mudarState(true)} */>
                 <ParallaxImage
-                    source={{uri: item.nome}}
+                    source={{ uri: item.nome }}
                     // containerStyle={{flex:1}}
                     containerStyle={styles.imageContainer}
                     style={styles.image}

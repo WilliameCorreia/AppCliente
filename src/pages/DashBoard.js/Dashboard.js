@@ -24,7 +24,11 @@ export default function Dashboard({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.box1}>
-        <CarroselOfetas />
+        {User.cod_Client ?
+          <CarroselOfetas /> :
+          <View></View>
+        }
+        {/* <CarroselOfetas /> */}
       </View>
       <View style={styles.box2}>
         <CarroselCategorias EstabelecimentoId={Estabelecimento.id} navigation={navigation} />

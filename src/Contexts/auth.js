@@ -75,18 +75,18 @@ export const AuthProvider = ({ children }) => {
 
             }
         } else {
-            console.log("*********************/////")
-            auth().signInAnonymously()
-                .then(() => {
-                    // Signed in..
-                    dispathCliente({ type: 'delUser' })
-                })
-                .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // ...
-                });
-            console.log(user)
+            dispathCliente({ type: 'delUser' })
+            // console.log("*********************/////")
+            // auth().signInAnonymously()
+            //     .then(() => {
+            //         // Signed in..
+            //     })
+            //     .catch((error) => {
+            //         var errorCode = error.code;
+            //         var errorMessage = error.message;
+            //         // ...
+            //     });
+            // console.log(user)
         }
     }
 

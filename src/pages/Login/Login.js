@@ -26,6 +26,14 @@ export default function login({ navigation }) {
     const [modalActive, setModalActive] = useState(false);
     const [msnModal, setMsnModal] = useState('primeira passada');
 
+    // const sairAnonimo = () => {
+    //     auth().signOut().then(() => {
+    //         autenticar()
+    //     }).catch(error => {
+    //         Alert.alert('Erro', toString(error.code))
+    //     })
+    // }
+
     const autenticar = async () => {
         setloading(true)
         if (usuario && password) {
