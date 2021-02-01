@@ -63,7 +63,7 @@ export default function Carrinho({ navigation }) {
 
 
       if (User.cod_Client) {
-        // setLoad(true)
+        setLoad(true)
         Carrinho.map(carro => {
           if (!carro.clientes.cod_Client) {
             // dispathEstabelecimento({ type: 'deletarProduto', carrinho: carro })
@@ -78,9 +78,9 @@ export default function Carrinho({ navigation }) {
               const { result } = response.data;
               // console.log(carro.produtos.id , carro.id, carro.produtos);
               dispathEstabelecimento({ type: 'deletarProduto', carrinho: carro })
-              // setTimeout(() => {
-              //   setLoad(false)
-              // }, 3000);
+              setTimeout(() => {
+                setLoad(false)
+              }, 3000);
               // dispathEstabelecimento({ type: 'AddCarrinho', Carrinho: result, logado: true });
               // setMsnModal('Produto Adicionado ao Carrinho !')
               // setModalActive(true)
