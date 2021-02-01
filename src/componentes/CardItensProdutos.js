@@ -5,6 +5,7 @@ import BtnProdutoQuantidade from '../componentes/BtnProdutoQuantidade';
 import EstabelecimentoContext from '../Contexts/Estabelecimento';
 import Api from '../services/Api';
 import AuthContext from '../Contexts/auth';
+import AjusteCasasDecimaisPreco from '../services/AjusteCasasDecimaisPreco';
 
 export default function CardItensProdutos({ produtos }) {
 
@@ -69,12 +70,11 @@ export default function CardItensProdutos({ produtos }) {
                 </View>
                 <View style={styles.ContainerDescricao}>
                     <View style={styles.descricaoProduto} >
-                        <Text style={styles.NomeProduto}>{produtos._Produto}</Text>
+                        <Text style={styles.NomeProduto}>{produtos._Produto.length> 55? produtos._Produto.substr(0, 55) + "...": produtos._Produto }</Text>
                     </View>
                     <View style={styles.Preco}>
                         <Text style={styles.PrecoSimbolo}>R$</Text>
-                        <Text style={styles.PrecoDecimais}>{precoPersonalizado(produtos.preco, true)},</Text>
-                        <Text style={styles.PrecoCentavos}>{precoPersonalizado(produtos.preco, false)}</Text>
+                        <Text style={styles.PrecoDecimais}>{AjusteCasasDecimaisPreco(produtos.preco)}</Text>
                     </View>
                     <View style={styles.qnt}>
                         <View style={styles.quantidade}>

@@ -9,6 +9,7 @@ import AuthContext from '../../Contexts/auth';
 import Api from '../../services/Api';
 import moment from 'moment';
 import ProcessaRequisicao from '../../services/ProcessaRequisicao';
+import AjusteCasasDecimaisPreco from '../../services/AjusteCasasDecimaisPreco';
 
 export default function Carrinho({ navigation }) {
 
@@ -137,8 +138,7 @@ export default function Carrinho({ navigation }) {
           <Text style={styles.ResumoTotalText}>TOTAL</Text>
           <View style={styles.ResumoTotalValor}>
             <Text style={styles.ResumoTotalSimbolo}>R$</Text>
-            <Text style={styles.ResumoTotalDecimal}>{precoPersonalizado(total.toString(), true)},</Text>
-            <Text style={styles.ResumoTotalCentavos}>{precoPersonalizado(total.toString(), false)}</Text>
+            <Text style={styles.ResumoTotalDecimal}>{AjusteCasasDecimaisPreco(total)}</Text>
           </View>
         </View>
         {User.cod_Client ?

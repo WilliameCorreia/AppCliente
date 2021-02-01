@@ -35,16 +35,16 @@ export default function listaProdutos({ Produtos, navigation, LoadProdutos }) {
 
     }
 
-    const _renderItem = ({ item }) => (
+    const _renderItem = ({ item, index }) => (
         <View>
             <TouchableOpacity
-                style={styles.cards}
+                style={index+1 === data.filter(dat=>dat.quantidade>0).length ? styles.cardsLast: styles.cards }
                 onPress={() => navigation.navigate('Descricao', item)}
             >
                 <View style={styles.box}>
                     <View style={styles.box1}>
                         <View style={styles.box1_1}>
-                            <Text style={styles.nomeProduto}>{item._Produto}</Text>
+                            <Text style={styles.nomeProduto}>{item._Produto.length> 55? item._Produto.substr(0, 55) + "...": item._Produto}</Text>
                         </View>
                         <View style={styles.box1_2}>
                             <Text style={styles.PrecoSimbolo}>R$</Text>
@@ -90,7 +90,7 @@ export default function listaProdutos({ Produtos, navigation, LoadProdutos }) {
         <View>
             {<FlatList
                 data={data.filter(dat=>dat.quantidade>0)}
-                renderItem={_renderItem}
+                renderItem={e => _renderItem(e)}
                 keyExtractor={(item, index) => index.toString()}
                 onEndReached={() => LoadProdutos()}
                 onEndReachedThreshold={0.9}
@@ -112,14 +112,23 @@ const styles = StyleSheet.create({
     },
     cards: {
         backgroundColor: '#ffff',
-        margin: 15,
+        margin: 10,
+        // marginBottom:25,
+        height: 160,
+        elevation: 6
+    },
+    cardsLast: {
+        backgroundColor: '#ffff',
+        margin: 10,
+        marginBottom:60,
         height: 160,
         elevation: 6
     },
     box1: {
-        flex: 2,
+        
+        flex: 3,
         padding: 10,
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
     },
     box1_2: {
         flexDirection: 'row',

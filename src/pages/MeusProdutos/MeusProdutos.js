@@ -40,7 +40,7 @@ export default function MeusProdutos({ navigation, route }) {
                 console.log(error);
             })
         }else{
-            console.log('fim da lista');
+            // console.log('fim da lista');
         }
     }
 
