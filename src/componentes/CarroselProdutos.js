@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, Dimensions, FlatList, TouchableOpacity, 
 
 import EstabelecimentoContext from '../Contexts/Estabelecimento';
 import Api from '../services/Api';
+import AjusteCasasDecimaisPreco from '../services/AjusteCasasDecimaisPreco';
 
 export default function CarroselProdutos({ navigation }) {
 
@@ -73,8 +74,10 @@ export default function CarroselProdutos({ navigation }) {
                     <Text style={styles.nomePr}>{item._Produto.substring(0, 30)}</Text>
                 </View>
                 <View style={styles.box2}>
-                    <Text style={[styles.precoPr, styles.precoG]}>R$ {precoPersonalizado(item.preco, true)},</Text>
-                    <Text style={styles.precoPr}>{precoPersonalizado(item.preco, false)}</Text>
+                    {/* <Text style={[styles.precoPr, styles.precoG]}>R$ { AjusteCasasDecimaisPreco(item.preco) }</Text> */}
+                    {/* <Text style={[styles.precoPr, styles.precoG]}>R$ { AjusteCasasDecimaisPreco(item.preco) }</Text> */}
+                    {/* <Text style={styles.precoPr}>{precoPersonalizado(item.preco, false)}</Text> */}
+                    <Text style={[styles.precoPr, styles.precoG]}>R$ { AjusteCasasDecimaisPreco(item.preco)}</Text>
                 </View>
             </View>
         </TouchableOpacity>
@@ -144,7 +147,7 @@ const styles = StyleSheet.create({
     },
     box2: {
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
         padding: 5
@@ -159,7 +162,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     precoG: {
-        fontSize: 22,
+        fontSize: 18,
         fontWeight: 'bold'
     },
     Label: {

@@ -24,7 +24,7 @@ export default function ListaEstabelecimentos({ navigation, route }) {
     // console.log(tipo);
     Api.get(`v1/Estabelecimentos/TipoEstabelecimento/${tipo}`).then(response => {
       const { result } = response.data;
-      setEstabelecimentos(result);
+      setEstabelecimentos(result.filter(e => e.estabelecimentoFechado === 'n'));
     }).catch(error => {
       console.log(error)
     })
