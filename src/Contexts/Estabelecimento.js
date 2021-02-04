@@ -11,6 +11,7 @@ export const EstabelecimentoProvider = ({ children }) => {
 
   const { token, stateCliente } = useContext(AuthContext);
   const { User } = stateCliente;
+  const [clienteLocation, setClienteLocation] = useState(null);
 
   const [stateEstabelecimento, dispathEstabelecimento] = useReducer(UserReducerEstabelecimento, initialStateStabelecimento);
   const { Estabelecimento } = stateEstabelecimento;
@@ -47,6 +48,7 @@ export const EstabelecimentoProvider = ({ children }) => {
       console.log(error)
     });
   }
+
 
   useEffect(() => {
     GetPedidosAbertos();
