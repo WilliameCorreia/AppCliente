@@ -10,7 +10,6 @@ import AuthContext from '../../Contexts/auth';
 import EstabelecimentoContext from '../../Contexts/Estabelecimento';
 import MyLoading from '../../componentes/MyLoading';
 import Geolocation from '@react-native-community/geolocation';
-import AsyncStorage from '@react-native-community/async-storage';
 import verificaDistancia from '../../services/verificaDistancia';
 export default function ListaEstabelecimentos({ navigation, route }) {
 

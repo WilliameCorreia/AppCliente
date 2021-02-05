@@ -108,10 +108,11 @@ export default function Carrinho({ navigation }) {
   }
 
   const FinalizarCompra = () => {
+    // console.log(parseFloat( total))
     Api.put(`v1/Pedidos/${Pedido.cod_Pedido}`, {
       cod_Pedido: Pedido.cod_Pedido,
       cod_ClientId: User.cod_Client,
-      valor_Total: parseFloat(total.replace(',', '.')),
+      valor_Total: parseFloat( total),
       dataHora_Pedido: moment().format(),
       pedido_Concluido: true,
       status_Pedido: "A",

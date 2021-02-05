@@ -112,7 +112,7 @@ export default function DescricaoProduto({ navigation, route }) {
           />
         </View>
         <View style={styles.bntQuantidade}>
-          <BtnProdutoQuantidade setQuantidade={setQuantidade} quantidade={quantidade} />
+          <BtnProdutoQuantidade setQuantidade={setQuantidade} quantidade={quantidade} produto={produto} pedido={Pedido}/>
         </View>
         <View style={styles.NomeProduto}>
           <Text style={styles.NomeProdutoText}>{produto._Produto}</Text>
