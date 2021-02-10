@@ -10,6 +10,7 @@ import Api from '../../services/Api';
 import moment from 'moment';
 import ProcessaRequisicao from '../../services/ProcessaRequisicao';
 import AjusteCasasDecimaisPreco from '../../services/AjusteCasasDecimaisPreco';
+import EnviaNotificacaoMercantil from '../../services/EnviaNotificacaoMercantil';
 
 export default function Carrinho({ navigation }) {
 
@@ -119,6 +120,7 @@ export default function Carrinho({ navigation }) {
       estabelecimentoId: Estabelecimento.id,
     }).then(response => {
       const { result } = response.data;
+      EnviaNotificacaoMercantil(Estabelecimento.id.toString());
       navigation.navigate('PagamentoEfetuado');
     }).catch(error => {
       console.log(error);
